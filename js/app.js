@@ -83,7 +83,11 @@ function startQuiz(chapter, type) {
         'ch3': 'Chapitre 3 - La formation du contrat',
         'ch4': 'Chapitre 4 - La mise en oeuvre du contrat',
         'ch5': 'Chapitre 5 - L\'environnement de l\'entreprise',
-        'theme1': 'Theme 1 - Grand Quiz 100 Questions'
+        'theme1': 'Theme 1 - Grand Quiz 100 Questions',
+        'ch6': 'Chapitre 6 - Les fonctions economiques de l\'Etat',
+        'ch7': 'Chapitre 7 - La regulation par le droit',
+        'ch8': 'Chapitre 8 - L\'environnement et les decisions',
+        'theme2': 'Theme 2 - Grand Quiz 100 Questions'
     };
 
     const typeLabels = {
@@ -92,7 +96,7 @@ function startQuiz(chapter, type) {
     };
 
     document.getElementById('quiz-title').textContent =
-        (titles[chapter] || chapter) + (chapter !== 'theme1' ? (typeLabels[type] || '') : '');
+        (titles[chapter] || chapter) + (!chapter.startsWith('theme') ? (typeLabels[type] || '') : '');
 
     document.getElementById('score-total').textContent = currentQuiz.length;
     document.getElementById('score-correct').textContent = '0';
@@ -298,6 +302,26 @@ function shuffleArray(arr) {
     return arr;
 }
 
+// ========== THEME SWITCHING ==========
+
+function switchTheme(themeNum) {
+    // Hide all theme sections
+    document.querySelectorAll('.theme-card').forEach(el => el.style.display = 'none');
+
+    // Show selected theme
+    if (themeNum === 1) {
+        document.querySelector('.theme-card:not(.theme-section)').style.display = '';
+    } else {
+        const section = document.getElementById(`theme-${themeNum}`);
+        if (section) section.style.display = '';
+    }
+
+    // Update nav pills
+    document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+    const pill = document.querySelector(`.nav-pill[data-theme="${themeNum}"]`);
+    if (pill) pill.classList.add('active');
+}
+
 // ========== PWA INSTALL ==========
 
 let deferredPrompt = null;
@@ -344,6 +368,16 @@ document.addEventListener('DOMContentLoaded', () => {
     showPage('home-page');
     updateAllProgressBadges();
     checkIOSInstall();
+
+    // Nav pill theme switching
+    document.querySelectorAll('.nav-pill:not(.locked)').forEach(pill => {
+        pill.addEventListener('click', (e) => {
+            e.preventDefault();
+            const themeNum = parseInt(pill.getAttribute('data-theme'));
+            switchTheme(themeNum);
+            showPage('home-page');
+        });
+    });
 
     // Register Service Worker for PWA
     if ('serviceWorker' in navigator) {

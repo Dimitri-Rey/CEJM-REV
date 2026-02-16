@@ -30,7 +30,7 @@
             </div>
             <div class="nav-pills">
                 <a href="#" class="nav-pill active" data-theme="1">T1</a>
-                <a href="#" class="nav-pill locked" data-theme="2">T2</a>
+                <a href="#" class="nav-pill" data-theme="2">T2</a>
                 <a href="#" class="nav-pill locked" data-theme="3">T3</a>
                 <a href="#" class="nav-pill locked" data-theme="4">T4</a>
                 <a href="#" class="nav-pill locked" data-theme="5">T5</a>
@@ -43,7 +43,7 @@
             <header class="hero">
                 <h1>CEJM <span>BTS</span></h1>
                 <p class="subtitle">Culture Economique, Juridique et Manageriale</p>
-                <p class="description">Plateforme de revision interactive - Theme 1</p>
+                <p class="description" id="hero-description">Plateforme de revision interactive</p>
             </header>
 
             <div class="theme-card">
@@ -164,6 +164,86 @@
                     </button>
                 </div>
             </div>
+
+            <!-- THEME 2 -->
+            <div class="theme-card theme-section" id="theme-2" style="display:none">
+                <div class="theme-header">
+                    <span class="theme-badge">1re annee</span>
+                    <h2>Theme 2</h2>
+                    <p>La regulation de l'activite economique</p>
+                </div>
+
+                <div class="chapters-grid">
+                    <!-- Chapter 6 -->
+                    <div class="chapter-card chapter-eco" data-chapter="6">
+                        <span class="chapter-tag tag-eco">Economie</span>
+                        <div class="chapter-number">06</div>
+                        <h3>Les fonctions economiques de l'Etat</h3>
+                        <p>Fonctions de l'Etat, croissance, politiques economiques</p>
+                        <div class="chapter-actions">
+                            <button class="btn btn-knowledge" data-quiz="ch6_knowledge" onclick="startQuiz('ch6', 'knowledge')">
+                                Quiz Connaissances
+                                <span class="q-count" id="ch6-knowledge-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                            <button class="btn btn-practical" data-quiz="ch6_practical" onclick="startQuiz('ch6', 'practical')">
+                                Cas Pratiques / BTS
+                                <span class="q-count" id="ch6-practical-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 7 -->
+                    <div class="chapter-card chapter-droit" data-chapter="7">
+                        <span class="chapter-tag tag-droit">Droit</span>
+                        <div class="chapter-number">07</div>
+                        <h3>La regulation par le droit</h3>
+                        <p>Liberte d'entreprendre, concurrence, propriete industrielle</p>
+                        <div class="chapter-actions">
+                            <button class="btn btn-knowledge" data-quiz="ch7_knowledge" onclick="startQuiz('ch7', 'knowledge')">
+                                Quiz Connaissances
+                                <span class="q-count" id="ch7-knowledge-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                            <button class="btn btn-practical" data-quiz="ch7_practical" onclick="startQuiz('ch7', 'practical')">
+                                Cas Pratiques / BTS
+                                <span class="q-count" id="ch7-practical-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 8 -->
+                    <div class="chapter-card chapter-management" data-chapter="8">
+                        <span class="chapter-tag tag-management">Management</span>
+                        <div class="chapter-number">08</div>
+                        <h3>L'environnement et les decisions</h3>
+                        <p>Macro/micro-environnement, PESTEL, Porter, innovation</p>
+                        <div class="chapter-actions">
+                            <button class="btn btn-knowledge" data-quiz="ch8_knowledge" onclick="startQuiz('ch8', 'knowledge')">
+                                Quiz Connaissances
+                                <span class="q-count" id="ch8-knowledge-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                            <button class="btn btn-practical" data-quiz="ch8_practical" onclick="startQuiz('ch8', 'practical')">
+                                Cas Pratiques / BTS
+                                <span class="q-count" id="ch8-practical-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme 2 Quiz -->
+                <div class="theme-quiz-section">
+                    <button class="btn btn-theme-quiz" data-quiz="theme2_knowledge" onclick="startQuiz('theme2', 'knowledge')">
+                        Grand Quiz Theme 2 - 100 Questions
+                        <span class="q-count" id="theme2-knowledge-count"></span>
+                        <span class="score-badge"></span>
+                    </button>
+                </div>
+            </div>
         </section>
 
         <!-- QUIZ PAGE -->
@@ -232,5 +312,9 @@
     <script src="js/data-ch4.js"></script>
     <script src="js/data-ch5.js"></script>
     <script src="js/data-theme1.js"></script>
+    <script src="js/data-ch6.js"></script>
+    <script src="js/data-ch7.js"></script>
+    <script src="js/data-ch8.js"></script>
+    <script src="js/data-theme2.js"></script>
 </body>
 </html>
