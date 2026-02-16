@@ -10,7 +10,8 @@
       "Bash(node:*)",
       "Bash(convert:*)",
       "Bash(ls:*)",
-      "Bash(python3 -m json.tool:*)"
+      "Bash(python3 -m json.tool:*)",
+      "WebFetch(domain:dimitri-rey.github.io)"
     ]
   }
 }

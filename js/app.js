@@ -298,10 +298,52 @@ function shuffleArray(arr) {
     return arr;
 }
 
+// ========== PWA INSTALL ==========
+
+let deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const btn = document.getElementById('install-btn');
+    if (btn) btn.style.display = 'block';
+});
+
+function installApp() {
+    if (!deferredPrompt) {
+        // Fallback for iOS / browsers that don't fire beforeinstallprompt
+        alert('Pour installer : ouvre le menu de ton navigateur puis "Ajouter a l\'ecran d\'accueil"');
+        return;
+    }
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+        deferredPrompt = null;
+        const btn = document.getElementById('install-btn');
+        if (btn) btn.style.display = 'none';
+    });
+}
+
+window.addEventListener('appinstalled', () => {
+    const btn = document.getElementById('install-btn');
+    if (btn) btn.style.display = 'none';
+    deferredPrompt = null;
+});
+
+// Show install button on iOS (no beforeinstallprompt)
+function checkIOSInstall() {
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+    if (isIOS && !isStandalone) {
+        const btn = document.getElementById('install-btn');
+        if (btn) btn.style.display = 'block';
+    }
+}
+
 // Init
 document.addEventListener('DOMContentLoaded', () => {
     showPage('home-page');
     updateAllProgressBadges();
+    checkIOSInstall();
 
     // Register Service Worker for PWA
     if ('serviceWorker' in navigator) {

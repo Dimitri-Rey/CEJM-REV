@@ -25,33 +25,17 @@
     <div id="app">
         <!-- NAV MENU -->
         <nav class="theme-nav">
-            <div class="nav-brand">CEJM <span>REV</span></div>
-            <div class="nav-themes">
-                <a href="#" class="nav-theme active" data-theme="1">
-                    <span class="nav-number">1</span>
-                    <span class="nav-label">Theme 1</span>
-                </a>
-                <a href="#" class="nav-theme locked" data-theme="2">
-                    <span class="nav-number">2</span>
-                    <span class="nav-label">Theme 2</span>
-                    <span class="nav-lock">Bientot</span>
-                </a>
-                <a href="#" class="nav-theme locked" data-theme="3">
-                    <span class="nav-number">3</span>
-                    <span class="nav-label">Theme 3</span>
-                    <span class="nav-lock">Bientot</span>
-                </a>
-                <a href="#" class="nav-theme locked" data-theme="4">
-                    <span class="nav-number">4</span>
-                    <span class="nav-label">Theme 4</span>
-                    <span class="nav-lock">Bientot</span>
-                </a>
-                <a href="#" class="nav-theme locked" data-theme="5">
-                    <span class="nav-number">5</span>
-                    <span class="nav-label">Theme 5</span>
-                    <span class="nav-lock">Bientot</span>
-                </a>
+            <div class="nav-left">
+                <div class="nav-brand">CEJM <span>REV</span></div>
             </div>
+            <div class="nav-pills">
+                <a href="#" class="nav-pill active" data-theme="1">T1</a>
+                <a href="#" class="nav-pill locked" data-theme="2">T2</a>
+                <a href="#" class="nav-pill locked" data-theme="3">T3</a>
+                <a href="#" class="nav-pill locked" data-theme="4">T4</a>
+                <a href="#" class="nav-pill locked" data-theme="5">T5</a>
+            </div>
+            <button class="nav-install" id="install-btn" style="display:none" onclick="installApp()">Installer</button>
         </nav>
 
         <!-- HOME PAGE -->
