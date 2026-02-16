@@ -467,6 +467,38 @@ body {
     opacity: 0.7;
 }
 
+/* Progress badges */
+.score-badge {
+    display: none;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 4px;
+}
+
+.score-badge.visible {
+    display: inline-block;
+}
+
+.score-badge.badge-gold {
+    background: rgba(253, 203, 110, 0.2);
+    color: var(--warning);
+    border: 1px solid rgba(253, 203, 110, 0.4);
+}
+
+.score-badge.badge-silver {
+    background: rgba(0, 206, 201, 0.15);
+    color: var(--secondary);
+    border: 1px solid rgba(0, 206, 201, 0.3);
+}
+
+.score-badge.badge-bronze {
+    background: rgba(214, 48, 49, 0.15);
+    color: var(--danger);
+    border: 1px solid rgba(214, 48, 49, 0.3);
+}
+
 .theme-quiz-section {
     text-align: center;
     margin-top: 10px;

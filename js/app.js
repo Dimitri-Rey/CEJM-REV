@@ -10,6 +10,47 @@ let quizChapter = '';
 // All quiz data registry
 const quizData = {};
 
+// ========== PROGRESS (localStorage) ==========
+
+function getAllProgress() {
+    try {
+        return JSON.parse(localStorage.getItem('cejm_progress') || '{}');
+    } catch { return {}; }
+}
+
+function saveProgress(chapter, type, correctCount, total) {
+    const progress = getAllProgress();
+    const key = `${chapter}_${type}`;
+    const pct = Math.round((correctCount / total) * 100);
+    const prev = progress[key] || { best: 0, attempts: 0, lastDate: null };
+
+    progress[key] = {
+        best: Math.max(prev.best, pct),
+        last: pct,
+        attempts: prev.attempts + 1,
+        lastDate: new Date().toISOString()
+    };
+
+    localStorage.setItem('cejm_progress', JSON.stringify(progress));
+    updateAllProgressBadges();
+}
+
+function updateAllProgressBadges() {
+    const progress = getAllProgress();
+    document.querySelectorAll('.btn[data-quiz]').forEach(btn => {
+        const key = btn.getAttribute('data-quiz');
+        const badge = btn.querySelector('.score-badge');
+        const p = progress[key];
+        if (p && badge) {
+            badge.textContent = `Record: ${p.best}%`;
+            badge.classList.add('visible');
+            if (p.best >= 80) badge.className = 'score-badge visible badge-gold';
+            else if (p.best >= 60) badge.className = 'score-badge visible badge-silver';
+            else badge.className = 'score-badge visible badge-bronze';
+        }
+    });
+}
+
 function registerQuiz(chapter, type, data) {
     const key = `${chapter}_${type}`;
     quizData[key] = data;
@@ -208,6 +249,9 @@ function showResults() {
         </div>
     `;
 
+    // Save progress
+    saveProgress(quizChapter, quizType, score, total);
+
     showPage('results-page');
 }
 
@@ -257,6 +301,7 @@ function shuffleArray(arr) {
 // Init
 document.addEventListener('DOMContentLoaded', () => {
     showPage('home-page');
+    updateAllProgressBadges();
 
     // Register Service Worker for PWA
     if ('serviceWorker' in navigator) {

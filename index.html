@@ -77,13 +77,15 @@
                         <h3>Approche economique</h3>
                         <p>Fondements de l'economie, relations economiques, financement</p>
                         <div class="chapter-actions">
-                            <button class="btn btn-knowledge" onclick="startQuiz('ch1', 'knowledge')">
+                            <button class="btn btn-knowledge" data-quiz="ch1_knowledge" onclick="startQuiz('ch1', 'knowledge')">
                                 Quiz Connaissances
                                 <span class="q-count" id="ch1-knowledge-count"></span>
+                                <span class="score-badge"></span>
                             </button>
-                            <button class="btn btn-practical" onclick="startQuiz('ch1', 'practical')">
+                            <button class="btn btn-practical" data-quiz="ch1_practical" onclick="startQuiz('ch1', 'practical')">
                                 Cas Pratiques / BTS
                                 <span class="q-count" id="ch1-practical-count"></span>
+                                <span class="score-badge"></span>
                             </button>
                         </div>
                     </div>
@@ -95,13 +97,15 @@
                         <h3>Le fonctionnement des marches</h3>
                         <p>Concept de marche, fixation des prix, autoregulation</p>
                         <div class="chapter-actions">
-                            <button class="btn btn-knowledge" onclick="startQuiz('ch2', 'knowledge')">
+                            <button class="btn btn-knowledge" data-quiz="ch2_knowledge" onclick="startQuiz('ch2', 'knowledge')">
                                 Quiz Connaissances
                                 <span class="q-count" id="ch2-knowledge-count"></span>
+                                <span class="score-badge"></span>
                             </button>
-                            <button class="btn btn-practical" onclick="startQuiz('ch2', 'practical')">
+                            <button class="btn btn-practical" data-quiz="ch2_practical" onclick="startQuiz('ch2', 'practical')">
                                 Cas Pratiques / BTS
                                 <span class="q-count" id="ch2-practical-count"></span>
+                                <span class="score-badge"></span>
                             </button>
                         </div>
                     </div>
@@ -113,13 +117,15 @@
                         <h3>La formation du contrat</h3>
                         <p>Negociation, formation, validite des contrats</p>
                         <div class="chapter-actions">
-                            <button class="btn btn-knowledge" onclick="startQuiz('ch3', 'knowledge')">
+                            <button class="btn btn-knowledge" data-quiz="ch3_knowledge" onclick="startQuiz('ch3', 'knowledge')">
                                 Quiz Connaissances
                                 <span class="q-count" id="ch3-knowledge-count"></span>
+                                <span class="score-badge"></span>
                             </button>
-                            <button class="btn btn-practical" onclick="startQuiz('ch3', 'practical')">
+                            <button class="btn btn-practical" data-quiz="ch3_practical" onclick="startQuiz('ch3', 'practical')">
                                 Cas Pratiques / BTS
                                 <span class="q-count" id="ch3-practical-count"></span>
+                                <span class="score-badge"></span>
                             </button>
                         </div>
                     </div>
@@ -131,13 +137,15 @@
                         <h3>La mise en oeuvre du contrat</h3>
                         <p>Clauses, execution, sanctions de l'inexecution</p>
                         <div class="chapter-actions">
-                            <button class="btn btn-knowledge" onclick="startQuiz('ch4', 'knowledge')">
+                            <button class="btn btn-knowledge" data-quiz="ch4_knowledge" onclick="startQuiz('ch4', 'knowledge')">
                                 Quiz Connaissances
                                 <span class="q-count" id="ch4-knowledge-count"></span>
+                                <span class="score-badge"></span>
                             </button>
-                            <button class="btn btn-practical" onclick="startQuiz('ch4', 'practical')">
+                            <button class="btn btn-practical" data-quiz="ch4_practical" onclick="startQuiz('ch4', 'practical')">
                                 Cas Pratiques / BTS
                                 <span class="q-count" id="ch4-practical-count"></span>
+                                <span class="score-badge"></span>
                             </button>
                         </div>
                     </div>
@@ -149,13 +157,15 @@
                         <h3>L'environnement de l'entreprise</h3>
                         <p>Creation, gestion, performance de l'entreprise</p>
                         <div class="chapter-actions">
-                            <button class="btn btn-knowledge" onclick="startQuiz('ch5', 'knowledge')">
+                            <button class="btn btn-knowledge" data-quiz="ch5_knowledge" onclick="startQuiz('ch5', 'knowledge')">
                                 Quiz Connaissances
                                 <span class="q-count" id="ch5-knowledge-count"></span>
+                                <span class="score-badge"></span>
                             </button>
-                            <button class="btn btn-practical" onclick="startQuiz('ch5', 'practical')">
+                            <button class="btn btn-practical" data-quiz="ch5_practical" onclick="startQuiz('ch5', 'practical')">
                                 Cas Pratiques / BTS
                                 <span class="q-count" id="ch5-practical-count"></span>
+                                <span class="score-badge"></span>
                             </button>
                         </div>
                     </div>
@@ -163,9 +173,10 @@
 
                 <!-- Theme Quiz -->
                 <div class="theme-quiz-section">
-                    <button class="btn btn-theme-quiz" onclick="startQuiz('theme1', 'knowledge')">
+                    <button class="btn btn-theme-quiz" data-quiz="theme1_knowledge" onclick="startQuiz('theme1', 'knowledge')">
                         Grand Quiz Theme 1 - 100 Questions
                         <span class="q-count" id="theme1-knowledge-count"></span>
+                        <span class="score-badge"></span>
                     </button>
                 </div>
             </div>
