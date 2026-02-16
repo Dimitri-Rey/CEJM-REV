@@ -31,7 +31,7 @@
             <div class="nav-pills">
                 <a href="#" class="nav-pill active" data-theme="1">T1</a>
                 <a href="#" class="nav-pill" data-theme="2">T2</a>
-                <a href="#" class="nav-pill locked" data-theme="3">T3</a>
+                <a href="#" class="nav-pill" data-theme="3">T3</a>
                 <a href="#" class="nav-pill locked" data-theme="4">T4</a>
                 <a href="#" class="nav-pill locked" data-theme="5">T5</a>
             </div>
@@ -244,6 +244,146 @@
                     </button>
                 </div>
             </div>
+
+            <!-- THEME 3 -->
+            <div class="theme-card theme-section" id="theme-3" style="display:none">
+                <div class="theme-header">
+                    <span class="theme-badge">1re annee</span>
+                    <h2>Theme 3</h2>
+                    <p>L'organisation de l'activite de l'entreprise</p>
+                </div>
+
+                <div class="chapters-grid">
+                    <!-- Chapter 9 -->
+                    <div class="chapter-card chapter-eco" data-chapter="9">
+                        <span class="chapter-tag tag-eco">Economie</span>
+                        <div class="chapter-number">09</div>
+                        <h3>Les choix de production</h3>
+                        <p>Facteurs de production, productivite, couts, chaine de valeur, impartition</p>
+                        <div class="chapter-actions">
+                            <button class="btn btn-knowledge" data-quiz="ch9_knowledge" onclick="startQuiz('ch9', 'knowledge')">
+                                Quiz Connaissances
+                                <span class="q-count" id="ch9-knowledge-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                            <button class="btn btn-practical" data-quiz="ch9_practical" onclick="startQuiz('ch9', 'practical')">
+                                Cas Pratiques / BTS
+                                <span class="q-count" id="ch9-practical-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 10 -->
+                    <div class="chapter-card chapter-droit" data-chapter="10">
+                        <span class="chapter-tag tag-droit">Droit</span>
+                        <div class="chapter-number">10</div>
+                        <h3>Les choix de structure juridique</h3>
+                        <p>Entreprise individuelle, societes, regimes matrimoniaux, ESS, SCOP</p>
+                        <div class="chapter-actions">
+                            <button class="btn btn-knowledge" data-quiz="ch10_knowledge" onclick="startQuiz('ch10', 'knowledge')">
+                                Quiz Connaissances
+                                <span class="q-count" id="ch10-knowledge-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                            <button class="btn btn-practical" data-quiz="ch10_practical" onclick="startQuiz('ch10', 'practical')">
+                                Cas Pratiques / BTS
+                                <span class="q-count" id="ch10-practical-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 11 -->
+                    <div class="chapter-card chapter-droit" data-chapter="11">
+                        <span class="chapter-tag tag-droit">Droit</span>
+                        <div class="chapter-number">11</div>
+                        <h3>Les risques et la responsabilite</h3>
+                        <p>Risques, responsabilite civile, penale, produits defectueux</p>
+                        <div class="chapter-actions">
+                            <button class="btn btn-knowledge" data-quiz="ch11_knowledge" onclick="startQuiz('ch11', 'knowledge')">
+                                Quiz Connaissances
+                                <span class="q-count" id="ch11-knowledge-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                            <button class="btn btn-practical" data-quiz="ch11_practical" onclick="startQuiz('ch11', 'practical')">
+                                Cas Pratiques / BTS
+                                <span class="q-count" id="ch11-practical-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 12 -->
+                    <div class="chapter-card chapter-management" data-chapter="12">
+                        <span class="chapter-tag tag-management">Management</span>
+                        <div class="chapter-number">12</div>
+                        <h3>L'organisation des ressources</h3>
+                        <p>Processus, parties prenantes, ressources, competences, diagnostic interne</p>
+                        <div class="chapter-actions">
+                            <button class="btn btn-knowledge" data-quiz="ch12_knowledge" onclick="startQuiz('ch12', 'knowledge')">
+                                Quiz Connaissances
+                                <span class="q-count" id="ch12-knowledge-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                            <button class="btn btn-practical" data-quiz="ch12_practical" onclick="startQuiz('ch12', 'practical')">
+                                Cas Pratiques / BTS
+                                <span class="q-count" id="ch12-practical-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 13 -->
+                    <div class="chapter-card chapter-management" data-chapter="13">
+                        <span class="chapter-tag tag-management">Management</span>
+                        <div class="chapter-number">13</div>
+                        <h3>L'organisation interne</h3>
+                        <p>Management, styles de direction, structures, coordination (Mintzberg)</p>
+                        <div class="chapter-actions">
+                            <button class="btn btn-knowledge" data-quiz="ch13_knowledge" onclick="startQuiz('ch13', 'knowledge')">
+                                Quiz Connaissances
+                                <span class="q-count" id="ch13-knowledge-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                            <button class="btn btn-practical" data-quiz="ch13_practical" onclick="startQuiz('ch13', 'practical')">
+                                Cas Pratiques / BTS
+                                <span class="q-count" id="ch13-practical-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 14 -->
+                    <div class="chapter-card chapter-management" data-chapter="14">
+                        <span class="chapter-tag tag-management">Management</span>
+                        <div class="chapter-number">14</div>
+                        <h3>Le financement de l'entreprise</h3>
+                        <p>Cycle d'exploitation, investissement, modes de financement</p>
+                        <div class="chapter-actions">
+                            <button class="btn btn-knowledge" data-quiz="ch14_knowledge" onclick="startQuiz('ch14', 'knowledge')">
+                                Quiz Connaissances
+                                <span class="q-count" id="ch14-knowledge-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                            <button class="btn btn-practical" data-quiz="ch14_practical" onclick="startQuiz('ch14', 'practical')">
+                                Cas Pratiques / BTS
+                                <span class="q-count" id="ch14-practical-count"></span>
+                                <span class="score-badge"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme 3 Quiz -->
+                <div class="theme-quiz-section">
+                    <button class="btn btn-theme-quiz" data-quiz="theme3_knowledge" onclick="startQuiz('theme3', 'knowledge')">
+                        Grand Quiz Theme 3 - 100 Questions
+                        <span class="q-count" id="theme3-knowledge-count"></span>
+                        <span class="score-badge"></span>
+                    </button>
+                </div>
+            </div>
         </section>
 
         <!-- QUIZ PAGE -->
@@ -316,5 +456,12 @@
     <script src="js/data-ch7.js"></script>
     <script src="js/data-ch8.js"></script>
     <script src="js/data-theme2.js"></script>
+    <script src="js/data-ch9.js"></script>
+    <script src="js/data-ch10.js"></script>
+    <script src="js/data-ch11.js"></script>
+    <script src="js/data-ch12.js"></script>
+    <script src="js/data-ch13.js"></script>
+    <script src="js/data-ch14.js"></script>
+    <script src="js/data-theme3.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cejm-rev-v2';
+const CACHE_NAME = 'cejm-rev-v3';
 const ASSETS = [
     '/CEJM-REV/',
     '/CEJM-REV/index.html',
@@ -14,6 +14,13 @@ const ASSETS = [
     '/CEJM-REV/js/data-ch7.js',
     '/CEJM-REV/js/data-ch8.js',
     '/CEJM-REV/js/data-theme2.js',
+    '/CEJM-REV/js/data-ch9.js',
+    '/CEJM-REV/js/data-ch10.js',
+    '/CEJM-REV/js/data-ch11.js',
+    '/CEJM-REV/js/data-ch12.js',
+    '/CEJM-REV/js/data-ch13.js',
+    '/CEJM-REV/js/data-ch14.js',
+    '/CEJM-REV/js/data-theme3.js',
     '/CEJM-REV/icons/icon-192.png',
     '/CEJM-REV/icons/icon-512.png'
 ];

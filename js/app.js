@@ -87,7 +87,14 @@ function startQuiz(chapter, type) {
         'ch6': 'Chapitre 6 - Les fonctions economiques de l\'Etat',
         'ch7': 'Chapitre 7 - La regulation par le droit',
         'ch8': 'Chapitre 8 - L\'environnement et les decisions',
-        'theme2': 'Theme 2 - Grand Quiz 100 Questions'
+        'theme2': 'Theme 2 - Grand Quiz 100 Questions',
+        'ch9': 'Chapitre 9 - Les choix de production',
+        'ch10': 'Chapitre 10 - Les choix de structure juridique',
+        'ch11': 'Chapitre 11 - Les risques et la responsabilite',
+        'ch12': 'Chapitre 12 - L\'organisation des ressources',
+        'ch13': 'Chapitre 13 - L\'organisation interne',
+        'ch14': 'Chapitre 14 - Le financement de l\'entreprise',
+        'theme3': 'Theme 3 - Grand Quiz 100 Questions'
     };
 
     const typeLabels = {
