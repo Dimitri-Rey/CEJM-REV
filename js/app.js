@@ -257,4 +257,10 @@ function shuffleArray(arr) {
 // Init
 document.addEventListener('DOMContentLoaded', () => {
     showPage('home-page');
+
+    // Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/CEJM-REV/sw.js')
+            .catch(() => {});
+    }
 });

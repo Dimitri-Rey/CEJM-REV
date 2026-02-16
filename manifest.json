@@ -1,0 +1,27 @@
+{
+    "name": "CEJM REV - Revision BTS",
+    "short_name": "CEJM REV",
+    "description": "Plateforme de revision interactive CEJM pour BTS",
+    "start_url": "/CEJM-REV/",
+    "scope": "/CEJM-REV/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#0a0a1a",
+    "theme_color": "#6c5ce7",
+    "lang": "fr",
+    "categories": ["education"],
+    "icons": [
+        {
+            "src": "icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
