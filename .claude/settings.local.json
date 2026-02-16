@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \" import subprocess result = subprocess.run\\([''pdfinfo'', ''/home/xerox/Documents/GitHub/CEJM-REV/Document/CEJM BTS \\(1\\).pdf''], capture_output=True, text=True\\) print\\(result.stdout\\) print\\(result.stderr\\) \")",
+      "Bash(python3 -c \" from PyPDF2 import PdfReader reader = PdfReader\\(''/home/xerox/Documents/GitHub/CEJM-REV/Document/CEJM BTS \\(1\\).pdf''\\) print\\(f''Total pages: {len\\(reader.pages\\)}''\\) \")",
+      "Bash(python3 -c \" import fitz doc = fitz.open\\(''/home/xerox/Documents/GitHub/CEJM-REV/Document/CEJM BTS \\(1\\).pdf''\\) print\\(f''Total pages: {len\\(doc\\)}''\\) \")",
+      "Bash(pdfinfo:*)",
+      "Bash(qpdf:*)",
+      "Bash(python3 -m http.server:*)",
+      "Bash(node:*)"
+    ]
+  }
+}
