@@ -161,5 +161,95 @@ registerQuiz('maths-m3', 'knowledge', [
         answer: 1,
         explanation: "/32 = 32 bits à 1 = 255.255.255.255. Aucun bit d'hôte → une seule adresse. Utilisé pour les routes hôtes spécifiques (host routes) dans les tables de routage, ou pour les interfaces loopback des routeurs.",
         context: ""
+    },
+    {
+        question: "Qu'est-ce que le VLSM (Variable Length Subnet Masking) ?",
+        options: [
+            "Une technique qui impose un masque unique pour tout le réseau",
+            "Une technique permettant d'utiliser des masques de longueur différente dans un même réseau",
+            "Un protocole de routage dynamique",
+            "Une méthode de chiffrement des adresses IP"
+        ],
+        answer: 1,
+        explanation: "Le VLSM permet de découper un réseau en sous-réseaux de tailles différentes selon les besoins. Par exemple, un /30 pour un lien point-à-point (2 hôtes) et un /24 pour un LAN (254 hôtes), optimisant ainsi l'utilisation de l'espace d'adressage.",
+        context: ""
+    },
+    {
+        question: "Quelle est l'adresse réseau de 10.10.5.200/20 ?",
+        options: ["10.10.0.0", "10.10.4.0", "10.10.5.0", "10.10.5.192"],
+        answer: 0,
+        explanation: "/20 → masque = 255.255.240.0. Calcul sur le 3e octet : 5 AND 240 → 5 = 00000101, 240 = 11110000, AND = 00000000 = 0. Le 4e octet : 200 AND 0 = 0. Adresse réseau : 10.10.0.0/20.",
+        context: ""
+    },
+    {
+        question: "On dispose de quatre réseaux 192.168.4.0/24, 192.168.5.0/24, 192.168.6.0/24 et 192.168.7.0/24. Quel supernet (agrégation de routes) les résume ?",
+        options: ["192.168.4.0/21", "192.168.4.0/22", "192.168.0.0/22", "192.168.4.0/23"],
+        answer: 1,
+        explanation: "Les réseaux .4 .5 .6 .7 partagent les 22 premiers bits. En binaire : 4=00000100, 5=00000101, 6=00000110, 7=00000111. Les 6 bits de poids fort du 3e octet sont identiques (000001xx). Le supernet est donc 192.168.4.0/22, couvrant 4 × 256 = 1024 adresses.",
+        context: ""
+    },
+    {
+        question: "À quel préfixe CIDR correspond le masque 255.255.255.240 ?",
+        options: ["/26", "/27", "/28", "/29"],
+        answer: 2,
+        explanation: "240 en binaire = 11110000 = 4 bits à 1 dans le dernier octet. Le masque complet a 24 + 4 = 28 bits à 1 → /28. Un réseau /28 contient 2⁴ = 16 adresses, soit 14 hôtes utilisables.",
+        context: ""
+    },
+    {
+        question: "Combien de sous-réseaux /28 peut-on créer à partir d'un réseau /24 ?",
+        options: ["4", "8", "16", "32"],
+        answer: 2,
+        explanation: "On emprunte 28 - 24 = 4 bits supplémentaires pour le sous-réseau. 2⁴ = 16 sous-réseaux /28. Chaque /28 contient 2⁴ - 2 = 14 hôtes utilisables. 16 × 14 = 224 hôtes au total (contre 254 sans découpage).",
+        context: ""
+    },
+    {
+        question: "Quel est le masque wildcard (masque inversé) correspondant au masque 255.255.255.224 ?",
+        options: ["0.0.0.32", "0.0.0.31", "0.0.0.63", "0.0.0.15"],
+        answer: 1,
+        explanation: "Le masque wildcard = 255.255.255.255 - masque réseau. 255 - 255 = 0, 255 - 224 = 31. Wildcard : 0.0.0.31. Ce masque inversé est utilisé dans les ACL Cisco et la configuration OSPF pour identifier la partie hôte.",
+        context: ""
+    },
+    {
+        question: "Quelle est l'adresse de broadcast du réseau 172.16.45.128/26 ?",
+        options: ["172.16.45.192", "172.16.45.191", "172.16.45.255", "172.16.45.159"],
+        answer: 1,
+        explanation: "/26 = 6 bits d'hôtes → 2⁶ = 64 adresses par sous-réseau. Le réseau commence à .128. Broadcast = adresse réseau + taille du bloc - 1 = 128 + 64 - 1 = 191. Broadcast : 172.16.45.191.",
+        context: ""
+    },
+    {
+        question: "Les hôtes 192.168.1.100/25 et 192.168.1.200/25 sont-ils dans le même sous-réseau ?",
+        options: [
+            "Oui, ils sont tous les deux dans le réseau 192.168.1.0/25",
+            "Non : 192.168.1.100 est dans le réseau .0 et 192.168.1.200 dans le réseau .128",
+            "Oui, car ils partagent les 3 premiers octets",
+            "Impossible à déterminer sans connaître la passerelle"
+        ],
+        answer: 1,
+        explanation: "/25 → masque = 255.255.255.128. 100 AND 128 = 0 → réseau 192.168.1.0. 200 AND 128 = 128 → réseau 192.168.1.128. Adresses réseau différentes : ils sont dans deux sous-réseaux distincts et ont besoin d'un routeur pour communiquer.",
+        context: ""
+    },
+    {
+        question: "Qu'est-ce que le NAT (Network Address Translation) et pourquoi est-il nécessaire ?",
+        options: [
+            "Un protocole de chiffrement pour sécuriser les communications IP",
+            "Une technique traduisant des adresses IP privées en adresses publiques pour permettre l'accès à Internet",
+            "Un service DNS qui convertit les noms de domaine en adresses IP",
+            "Un protocole de routage dynamique entre réseaux autonomes"
+        ],
+        answer: 1,
+        explanation: "Le NAT traduit les adresses privées (10.x, 172.16-31.x, 192.168.x) en adresse(s) publique(s) routable(s) sur Internet. Il est indispensable car les adresses IPv4 publiques sont limitées (~4,3 milliards) et les adresses privées ne sont pas routables sur Internet.",
+        context: ""
+    },
+    {
+        question: "Quelle est la plage d'hôtes utilisables dans le réseau 10.0.0.0/30 ?",
+        options: [
+            "10.0.0.1 à 10.0.0.2",
+            "10.0.0.0 à 10.0.0.3",
+            "10.0.0.1 à 10.0.0.3",
+            "10.0.0.1 à 10.0.0.4"
+        ],
+        answer: 0,
+        explanation: "/30 = 2 bits d'hôtes → 2² = 4 adresses. Réseau : 10.0.0.0, broadcast : 10.0.0.3. Hôtes utilisables : 10.0.0.1 et 10.0.0.2 (seulement 2). Le /30 est le masque standard pour les liaisons point-à-point entre routeurs.",
+        context: ""
     }
 ]);

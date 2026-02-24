@@ -13,7 +13,8 @@
       "Bash(python3 -m json.tool:*)",
       "WebFetch(domain:dimitri-rey.github.io)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(gh api:*)"
     ]
   }
 }

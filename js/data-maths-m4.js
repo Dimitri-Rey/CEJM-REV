@@ -121,5 +121,85 @@ registerQuiz('maths-m4', 'knowledge', [
         answer: 1,
         explanation: "Moyenne = (2+4+4+4+5+5+7+9)/8 = 40/8 = 5. Variance = moyenne des carrés des écarts = [(2-5)²+(4-5)²+(4-5)²+(4-5)²+(5-5)²+(5-5)²+(7-5)²+(9-5)²]/8 = [9+1+1+1+0+0+4+16]/8 = 32/8 = 4.",
         context: ""
+    },
+    {
+        question: "Trois serveurs sont en parallèle (redondance active), chacun ayant une fiabilité de 0,9. Quelle est la fiabilité du système global ?",
+        options: ["0,999", "0,729", "0,99", "0,900"],
+        answer: 0,
+        explanation: "En parallèle avec 3 composants : P(système) = 1 - P(les 3 tombent) = 1 - (1-0,9)³ = 1 - (0,1)³ = 1 - 0,001 = 0,999. Plus on ajoute de serveurs en parallèle, plus la fiabilité augmente. C'est le principe du clustering haute disponibilité (HA).",
+        context: ""
+    },
+    {
+        question: "En statistiques, que représente le MODE d'un dataset ?",
+        options: [
+            "La valeur la plus fréquente dans la série",
+            "La valeur centrale de la série triée",
+            "La moyenne arithmétique des valeurs",
+            "La différence entre la plus grande et la plus petite valeur"
+        ],
+        answer: 0,
+        explanation: "Le mode est la valeur qui apparaît le plus souvent. Par exemple dans {3, 5, 5, 5, 8, 10}, le mode est 5. En analyse de logs, le mode des codes HTTP révèle le type de réponse le plus fréquent (ex : 200 OK).",
+        context: ""
+    },
+    {
+        question: "Un test de pénétration est réalisé 3 fois de manière indépendante. Chaque tentative a une probabilité de succès de 0,4. Quelle est la probabilité d'AU MOINS un succès ?",
+        options: ["0,784", "0,400", "0,216", "0,936"],
+        answer: 0,
+        explanation: "P(au moins 1 succès) = 1 - P(aucun succès) = 1 - (1-0,4)³ = 1 - (0,6)³ = 1 - 0,216 = 0,784 soit 78,4%. Il est plus simple de calculer le complément (aucun succès) puis de soustraire de 1.",
+        context: ""
+    },
+    {
+        question: "Un système RAID 1 utilise 2 disques identiques, chacun ayant une fiabilité de 0,95. Quelle est la fiabilité du système RAID 1 ?",
+        options: ["0,9025", "0,9975", "0,95", "0,90"],
+        answer: 1,
+        explanation: "En RAID 1 (mirroring), les 2 disques sont en parallèle : le système tombe uniquement si LES DEUX tombent. P(système) = 1 - (1-0,95)² = 1 - (0,05)² = 1 - 0,0025 = 0,9975. Le RAID 1 améliore significativement la fiabilité au prix de 50% de capacité perdue.",
+        context: ""
+    },
+    {
+        question: "Si la variance d'une série de mesures de latence réseau est de 9 ms², quelle est la valeur de l'écart-type σ ?",
+        options: ["3 ms", "9 ms", "81 ms", "4,5 ms"],
+        answer: 0,
+        explanation: "L'écart-type est la racine carrée de la variance : σ = √Variance = √9 = 3 ms. L'écart-type s'exprime dans la même unité que les données (ici en ms), ce qui le rend plus interprétable que la variance (en ms²).",
+        context: ""
+    },
+    {
+        question: "Si P(A) = 0,5 , P(B) = 0,3 et P(A∩B) = 0,1 , quelle est la valeur de P(A∪B) ?",
+        options: ["0,80", "0,70", "0,90", "0,60"],
+        answer: 1,
+        explanation: "Formule de l'union : P(A∪B) = P(A) + P(B) - P(A∩B) = 0,5 + 0,3 - 0,1 = 0,7. On soustrait l'intersection pour ne pas la compter deux fois. En sécurité, cela sert à calculer la probabilité qu'au moins un type d'incident survienne.",
+        context: ""
+    },
+    {
+        question: "Quelle est l'espérance mathématique E(X) du résultat obtenu en lançant un dé équilibré à 6 faces ?",
+        options: ["3", "3,5", "4", "6"],
+        answer: 1,
+        explanation: "E(X) = (1+2+3+4+5+6) / 6 = 21 / 6 = 3,5. L'espérance est la moyenne théorique sur un grand nombre de lancers. Bien que 3,5 ne soit pas un résultat possible, c'est la valeur « attendue » en moyenne (loi des grands nombres).",
+        context: ""
+    },
+    {
+        question: "Dans une loi binomiale B(n, p), quelle est la formule de la variance V(X) ?",
+        options: [
+            "V(X) = n × p × (1 - p)",
+            "V(X) = n × p",
+            "V(X) = n × (1 - p)",
+            "V(X) = p × (1 - p)"
+        ],
+        answer: 0,
+        explanation: "Pour une loi binomiale B(n,p) : V(X) = n × p × (1-p). L'espérance est E(X) = n×p et l'écart-type σ = √(n×p×(1-p)). Par exemple, pour B(100, 0,5) : V = 100×0,5×0,5 = 25, σ = 5.",
+        context: ""
+    },
+    {
+        question: "Un hébergeur garantit une disponibilité de 99,99% (four nines). Quel est le temps d'indisponibilité maximal autorisé par an ?",
+        options: ["~8,76 heures", "~5,26 minutes", "~52,6 minutes", "~3,65 jours"],
+        answer: 2,
+        explanation: "99,99% dispo → 0,01% d'indisponibilité. 0,0001 × 365,25 × 24 × 60 = 0,0001 × 525 960 ≈ 52,6 minutes/an. Rappel : 99,9% = 8,76h/an, 99,99% = 52,6 min/an, 99,999% (five nines) = 5,26 min/an.",
+        context: ""
+    },
+    {
+        question: "Un scanner de sécurité détecte 95% des vrais malwares (sensibilité) mais génère 3% de faux positifs. Si 1% des fichiers analysés sont réellement des malwares, quelle est approximativement la probabilité qu'un fichier signalé soit réellement un malware ?",
+        options: ["~24%", "~95%", "~75%", "~50%"],
+        answer: 0,
+        explanation: "Par le théorème de Bayes : P(malware|alerte) = P(alerte|malware)×P(malware) / P(alerte). P(alerte) = 0,95×0,01 + 0,03×0,99 = 0,0095 + 0,0297 = 0,0392. P(malware|alerte) = 0,0095/0,0392 ≈ 0,242 soit ~24%. Même avec un bon scanner, la majorité des alertes sont des faux positifs quand la prévalence est faible. C'est le paradoxe des faux positifs.",
+        context: ""
     }
 ]);

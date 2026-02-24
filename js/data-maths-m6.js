@@ -136,5 +136,175 @@ registerQuiz('maths-m6', 'knowledge', [
         answer: 1,
         explanation: "POUR i DE 1 À n parcourt i=1, 2, 3, ..., n et affiche chaque valeur. Résultat pour n=5 : 1, 2, 3, 4, 5. Cette boucle a O(n) itérations.",
         context: ""
+    },
+    {
+        question: "Quelle est la différence entre une fonction et une procédure en algorithmique ?",
+        options: [
+            "Une fonction est plus rapide qu'une procédure",
+            "Une fonction retourne une valeur, une procédure ne retourne rien",
+            "Une procédure peut avoir des paramètres, une fonction non",
+            "Il n'y a aucune différence, ce sont des synonymes"
+        ],
+        answer: 1,
+        explanation: "Une fonction retourne une valeur (via 'Retourner' en pseudo-code ou 'return' en C#) et peut être utilisée dans une expression. Une procédure (void en C#) exécute des instructions mais ne retourne rien.",
+        context: ""
+    },
+    {
+        question: "Quel type de données utilise-t-on en C# pour stocker une valeur vrai/faux ?",
+        options: ["int", "string", "bool", "char"],
+        answer: 2,
+        explanation: "En C#, le type 'bool' (Boolean) stocke uniquement true ou false. En pseudo-code algorithmique, on parle de type 'Booléen'. Utilisé pour les conditions, les flags et les tests logiques.",
+        context: ""
+    },
+    {
+        question: "En pseudo-code, que signifie l'instruction 'Retourner' dans une fonction ?",
+        options: [
+            "Elle relance la fonction depuis le début",
+            "Elle affiche une valeur à l'écran",
+            "Elle renvoie une valeur au programme appelant et termine la fonction",
+            "Elle enregistre une valeur dans un fichier"
+        ],
+        answer: 2,
+        explanation: "'Retourner' (return en C#) renvoie le résultat de la fonction au code qui l'a appelée et met fin à l'exécution de la fonction. Exemple : Fonction Carre(x) → Retourner x * x.",
+        context: ""
+    },
+    {
+        question: "Comment déclare-t-on un tableau de 5 entiers en C# ?",
+        options: [
+            "int Tab = new int(5);",
+            "int[] Tab = new int[5];",
+            "int Tab[5] = new int[];",
+            "array<int> Tab = new array(5);"
+        ],
+        answer: 1,
+        explanation: "En C#, la syntaxe est : int[] Tab = new int[5]; Cela crée un tableau de 5 cases (indices 0 à 4) initialisées à 0. 'int[]' déclare le type tableau d'entiers, 'new int[5]' alloue 5 cases en mémoire.",
+        context: ""
+    },
+    {
+        question: "Comment obtenir le nombre de lignes d'un tableau 2D (matrice) en C# ?",
+        options: [
+            "Mat.Length",
+            "Mat.GetLength(0)",
+            "Mat.GetLength(1)",
+            "Mat.Rows()"
+        ],
+        answer: 1,
+        explanation: "Mat.GetLength(0) retourne le nombre de lignes et Mat.GetLength(1) retourne le nombre de colonnes. Pour int[,] Mat = new int[3,4], GetLength(0) = 3 lignes, GetLength(1) = 4 colonnes. Mat.Length donnerait 12 (total).",
+        context: ""
+    },
+    {
+        question: "Qu'est-ce qu'une matrice d'adjacence pour un graphe ?",
+        options: [
+            "Un tableau qui liste les noms des sommets",
+            "Un tableau 2D où M[i,j] = 1 si une arête relie le sommet i au sommet j",
+            "Un algorithme de parcours en profondeur",
+            "Une liste chaînée reliant tous les sommets"
+        ],
+        answer: 1,
+        explanation: "La matrice d'adjacence est un tableau 2D de taille n×n (n = nombre de sommets). M[i,j] = 1 s'il existe une arête de i vers j, sinon 0. Pour un graphe pondéré, on met le poids au lieu de 1. Complexité mémoire : O(n²).",
+        context: ""
+    },
+    {
+        question: "Dans la méthode PERT, qu'est-ce que la 'date au plus tôt' d'une tâche ?",
+        options: [
+            "La date limite avant laquelle la tâche doit commencer",
+            "La date la plus précoce à laquelle une tâche peut commencer, en tenant compte de ses prédécesseurs",
+            "La date de début souhaitée par le chef de projet",
+            "La durée minimale de la tâche"
+        ],
+        answer: 1,
+        explanation: "La date au plus tôt est le moment le plus précoce où une tâche peut débuter, calculée de gauche à droite dans le réseau PERT. Elle dépend de la fin de tous les prédécesseurs de la tâche.",
+        context: ""
+    },
+    {
+        question: "En PERT, si une tâche a plusieurs prédécesseurs, comment calcule-t-on sa date au plus tôt ?",
+        options: [
+            "On prend le MINIMUM des dates de fin au plus tôt des prédécesseurs",
+            "On prend le MAXIMUM des dates de fin au plus tôt des prédécesseurs",
+            "On fait la MOYENNE des dates de fin au plus tôt des prédécesseurs",
+            "On additionne toutes les dates de fin au plus tôt des prédécesseurs"
+        ],
+        answer: 1,
+        explanation: "On prend le MAX car il faut attendre que TOUS les prédécesseurs soient terminés avant de commencer. Si les prédécesseurs finissent aux dates 5, 8 et 3, la tâche ne peut commencer qu'à la date 8 (le plus tard des trois).",
+        context: ""
+    },
+    {
+        question: "En PERT, si une tâche a plusieurs successeurs, comment calcule-t-on sa date au plus tard ?",
+        options: [
+            "On prend le MAXIMUM des dates de début au plus tard des successeurs",
+            "On prend la SOMME des dates de début au plus tard des successeurs",
+            "On prend le MINIMUM des dates de début au plus tard des successeurs",
+            "On prend la MOYENNE des dates de début au plus tard des successeurs"
+        ],
+        answer: 2,
+        explanation: "On prend le MIN car la tâche doit être terminée à temps pour le successeur le plus contraignant. Si les successeurs débutent au plus tard à 10, 7 et 12, la tâche doit finir au plus tard à 7 (le plus exigeant).",
+        context: ""
+    },
+    {
+        question: "Qu'est-ce qu'une tâche critique dans un réseau PERT ?",
+        options: [
+            "Une tâche dont la durée est la plus longue du projet",
+            "Une tâche dont la marge est égale à zéro",
+            "Une tâche qui n'a aucun prédécesseur",
+            "Une tâche qui coûte le plus cher"
+        ],
+        answer: 1,
+        explanation: "Une tâche critique a une marge de 0 : date au plus tard = date au plus tôt. Tout retard sur cette tâche retarde le projet entier. Elle ne dispose d'aucune flexibilité dans le planning.",
+        context: ""
+    },
+    {
+        question: "Qu'est-ce que le chemin critique dans un réseau PERT ?",
+        options: [
+            "Le chemin le plus court entre le début et la fin du projet",
+            "Le chemin qui traverse toutes les tâches du projet",
+            "Le chemin le plus long, composé de toutes les tâches de marge nulle",
+            "Le chemin qui contient le moins de tâches"
+        ],
+        answer: 2,
+        explanation: "Le chemin critique est le plus long chemin du début à la fin du projet. Il est composé uniquement de tâches critiques (marge = 0). Sa longueur détermine la durée minimale du projet. Tout retard sur ce chemin retarde le projet.",
+        context: ""
+    },
+    {
+        question: "Comment calcule-t-on la marge d'une tâche dans un réseau PERT ?",
+        options: [
+            "Marge = durée de la tâche - durée moyenne du projet",
+            "Marge = date au plus tôt - date au plus tard",
+            "Marge = date au plus tard - date au plus tôt",
+            "Marge = date de fin - date de début"
+        ],
+        answer: 2,
+        explanation: "Marge = date au plus tard - date au plus tôt. Elle représente le retard maximal que peut prendre une tâche sans retarder le projet. Si marge = 0, la tâche est critique. Plus la marge est grande, plus la tâche est flexible.",
+        context: ""
+    },
+    {
+        question: "Qu'est-ce qu'un tableau à deux dimensions (matrice) en programmation ?",
+        options: [
+            "Un tableau qui ne contient que deux éléments",
+            "Un tableau organisé en lignes et colonnes, accessible par deux indices [i,j]",
+            "Un tableau trié dans deux ordres différents",
+            "Un tableau qui stocke des coordonnées GPS"
+        ],
+        answer: 1,
+        explanation: "Un tableau 2D (matrice) est organisé en lignes et colonnes. En C# : int[,] Mat = new int[2,3] crée une matrice de 2 lignes et 3 colonnes. On accède à un élément par Mat[i,j] où i = ligne, j = colonne.",
+        context: ""
+    },
+    {
+        question: "Dans le contexte de la gestion de projet (ordonnancement), que signifie FIFO ?",
+        options: [
+            "First In, First Out : les tâches sont traitées dans leur ordre d'arrivée",
+            "Final Input, Final Output : les dernières tâches sont prioritaires",
+            "First Index, First Order : les tâches sont triées par index",
+            "File d'Inversion des Flux Opérationnels"
+        ],
+        answer: 0,
+        explanation: "FIFO = First In, First Out (premier arrivé, premier servi). En ordonnancement de tâches, les tâches prêtes sont traitées dans leur ordre d'arrivée dans la file. C'est le principe de base de la structure de données file (queue).",
+        context: ""
+    },
+    {
+        question: "Quelle est la complexité d'accès à un élément Mat[i,j] dans un tableau 2D ?",
+        options: ["O(n)", "O(n²)", "O(1)", "O(log n)"],
+        answer: 2,
+        explanation: "L'accès à un élément dans un tableau 2D par ses indices [i,j] est en O(1) (temps constant). Le calcul de l'adresse mémoire est direct : adresse = base + (i × nb_colonnes + j) × taille_élément. Pas de parcours nécessaire.",
+        context: ""
     }
 ]);

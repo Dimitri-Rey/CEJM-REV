@@ -142,5 +142,120 @@ registerQuiz('maths-m2', 'knowledge', [
         answer: 1,
         explanation: "NOT(0) = 1. La porte NOT (inverseur) transforme 0 en 1 et 1 en 0. En réseau, c'est utilisé pour calculer le wildcard à partir du masque : NOT(255.255.255.0) = 0.0.0.255.",
         context: ""
+    },
+    {
+        question: "En algèbre de Boole, que vaut a + a (propriété d'idempotence) ?",
+        options: ["a", "2a", "0", "1"],
+        answer: 0,
+        explanation: "Idempotence du OR : a + a = a. En logique booléenne, il n'y a pas de notion de '2a'. Soit a vaut 0 (0+0=0), soit a vaut 1 (1+1=1). Le résultat est toujours a.",
+        context: ""
+    },
+    {
+        question: "Que vaut a × 0 en algèbre de Boole (élément absorbant du AND) ?",
+        options: ["0", "a", "1", "NOT(a)"],
+        answer: 0,
+        explanation: "Élément absorbant du AND : a × 0 = 0, quelle que soit la valeur de a. Le 0 est absorbant pour le produit logique. Si l'une des entrées d'une porte AND est à 0, la sortie est toujours 0.",
+        context: ""
+    },
+    {
+        question: "Que vaut a + 0 en algèbre de Boole (élément neutre du OR) ?",
+        options: ["a", "0", "1", "NOT(a)"],
+        answer: 0,
+        explanation: "Élément neutre du OR : a + 0 = a. Le 0 est l'élément neutre de l'addition booléenne. Si a=0, 0+0=0. Si a=1, 1+0=1. Le résultat est toujours a.",
+        context: ""
+    },
+    {
+        question: "Que vaut a + 1 en algèbre de Boole (élément absorbant du OR) ?",
+        options: ["a", "0", "1", "NOT(a)"],
+        answer: 2,
+        explanation: "Élément absorbant du OR : a + 1 = 1, quelle que soit la valeur de a. Le 1 est absorbant pour la somme logique. Si l'une des entrées d'une porte OR est à 1, la sortie est toujours 1.",
+        context: ""
+    },
+    {
+        question: "Que vaut NOT(NOT(a)) en algèbre de Boole (propriété d'involution) ?",
+        options: ["a", "NOT(a)", "0", "1"],
+        answer: 0,
+        explanation: "Involution (double complémentation) : le complément du complément redonne la valeur initiale. NOT(NOT(a)) = a. Si a=1, NOT(1)=0, puis NOT(0)=1 = a. Même chose si a=0.",
+        context: ""
+    },
+    {
+        question: "En algèbre de Boole, que vaut a + b.c (distributivité du OR sur le AND) ?",
+        options: ["(a + b)(a + c)", "a.b + a.c", "a + b + c", "(a.b)(a.c)"],
+        answer: 0,
+        explanation: "Distributivité du OR sur le AND : a + b.c = (a + b)(a + c). C'est une propriété spécifique à l'algèbre de Boole qui n'existe PAS en arithmétique classique. On peut la vérifier avec une table de vérité.",
+        context: ""
+    },
+    {
+        question: "Que vaut la porte NOR (NON-OU) pour A=0, B=0 ?",
+        options: ["1", "0", "Indéfini", "Dépend du contexte"],
+        answer: 0,
+        explanation: "NOR = NOT(A OR B). Pour A=0, B=0 : OR(0,0) = 0, puis NOT(0) = 1. La porte NOR ne vaut 1 que lorsque TOUTES les entrées sont à 0. Comme NAND, la porte NOR est universelle.",
+        context: ""
+    },
+    {
+        question: "Que vaut la porte NOR (NON-OU) pour A=0, B=1 ?",
+        options: ["1", "0", "Indéfini", "Dépend du contexte"],
+        answer: 1,
+        explanation: "NOR = NOT(A OR B). Pour A=0, B=1 : OR(0,1) = 1, puis NOT(1) = 0. Dès qu'au moins une entrée est à 1, le OR donne 1, et le NOT l'inverse en 0. Le NOR est l'inverse exact du OR.",
+        context: ""
+    },
+    {
+        question: "Simplifie l'expression booléenne : a.ā.b + a.b",
+        options: ["a.b", "b", "a", "0"],
+        answer: 0,
+        explanation: "a.ā = 0 (complémentarité : une variable AND son complément = 0). Donc a.ā.b = 0.b = 0. Il reste 0 + a.b = a.b. Le terme a.ā.b est toujours nul et peut être supprimé.",
+        context: ""
+    },
+    {
+        question: "À quoi sert un tableau de Karnaugh en algèbre de Boole ?",
+        options: [
+            "Simplifier graphiquement une expression booléenne",
+            "Calculer la table de vérité d'un circuit",
+            "Convertir un nombre décimal en binaire",
+            "Dessiner le schéma d'un circuit logique"
+        ],
+        answer: 0,
+        explanation: "Le tableau de Karnaugh est une méthode graphique de simplification des expressions booléennes. On regroupe les 1 adjacents dans la table pour éliminer les variables qui changent, ce qui donne l'expression minimale.",
+        context: ""
+    },
+    {
+        question: "Combien de cases possède un tableau de Karnaugh à 3 variables ?",
+        options: ["8", "6", "4", "16"],
+        answer: 0,
+        explanation: "Un tableau de Karnaugh à n variables possède 2ⁿ cases. Pour 3 variables : 2³ = 8 cases. Chaque case correspond à une combinaison unique des 3 variables (000, 001, 010, 011, 100, 101, 110, 111).",
+        context: ""
+    },
+    {
+        question: "Combien de cases possède un tableau de Karnaugh à 4 variables ?",
+        options: ["8", "12", "16", "32"],
+        answer: 2,
+        explanation: "Un tableau de Karnaugh à n variables possède 2ⁿ cases. Pour 4 variables : 2⁴ = 16 cases. Le tableau est organisé en 4×4 avec un codage de Gray pour les lignes et les colonnes.",
+        context: ""
+    },
+    {
+        question: "Quel codage est utilisé pour numéroter les lignes et colonnes d'un tableau de Karnaugh ?",
+        options: ["Code Gray (code réfléchi)", "Code binaire naturel", "Code ASCII", "Code hexadécimal"],
+        answer: 0,
+        explanation: "Le code Gray (ou code réfléchi) est utilisé car deux cases adjacentes ne diffèrent que d'un seul bit. Cela permet de repérer facilement les regroupements où une variable change, et donc de l'éliminer lors de la simplification.",
+        context: ""
+    },
+    {
+        question: "Simplifie par absorption : a + a.b̄ = ?",
+        options: ["a", "a.b̄", "a + b̄", "b̄"],
+        answer: 0,
+        explanation: "Théorème d'absorption : x + x.y = x, quelle que soit la valeur de y. Ici a + a.b̄ = a (avec y = b̄). Intuition : si a=1, le résultat est 1. Si a=0, alors a.b̄ = 0 aussi. Donc le résultat ne dépend que de a.",
+        context: ""
+    },
+    {
+        question: "Qu'est-ce qu'un minterm en algèbre de Boole ?",
+        options: [
+            "Un produit (AND) de toutes les variables, chacune sous forme directe ou complémentée",
+            "Une somme (OR) de toutes les variables",
+            "Une expression simplifiée par Karnaugh",
+            "Le résultat d'une porte NOR"
+        ],
+        answer: 0,
+        explanation: "Un minterm est un produit logique (AND) dans lequel chaque variable de la fonction apparaît exactement une fois, sous forme directe (a) ou complémentée (ā). Pour n variables, il y a 2ⁿ minterms possibles. Chaque ligne de la table de vérité correspond à un minterm.",
+        context: ""
     }
 ]);

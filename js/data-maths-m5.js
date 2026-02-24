@@ -136,5 +136,85 @@ registerQuiz('maths-m5', 'knowledge', [
         answer: 0,
         explanation: "u(3) = u(0) + 3r → 20 = u(0) + 3×4 → 20 = u(0) + 12 → u(0) = 8. On remonte la suite : u(2)=16, u(1)=12, u(0)=8.",
         context: ""
+    },
+    {
+        question: "Quelle est la somme des 5 premiers termes de la suite géométrique u(0)=1, q=2 ? (Formule : S = u₀ × (1−qⁿ)/(1−q))",
+        options: ["30", "31", "32", "16"],
+        answer: 1,
+        explanation: "S = 1 × (1 − 2⁵) / (1 − 2) = (1 − 32) / (−1) = 31. Vérification terme à terme : 1 + 2 + 4 + 8 + 16 = 31. La formule de la somme d'une suite géométrique est essentielle pour calculer des cumuls (stockage, coûts récurrents).",
+        context: ""
+    },
+    {
+        question: "Une capacité de stockage double tous les 18 mois (loi de Moore). En partant de 1 To, quelle capacité après 6 ans ?",
+        options: ["8 To", "12 To", "16 To", "64 To"],
+        answer: 2,
+        explanation: "6 ans = 72 mois. Nombre de doublements : 72 / 18 = 4. Suite géométrique q=2 : u(4) = 1 × 2⁴ = 16 To. La loi de Moore modélise l'évolution exponentielle des capacités matérielles en informatique.",
+        context: ""
+    },
+    {
+        question: "La suite u(n) = (−1)ⁿ est-elle convergente ou divergente ?",
+        options: [
+            "Convergente vers 0",
+            "Convergente vers 1",
+            "Divergente (elle oscille entre −1 et 1)",
+            "Convergente vers −1"
+        ],
+        answer: 2,
+        explanation: "u(0)=1, u(1)=−1, u(2)=1, u(3)=−1... La suite oscille indéfiniment entre −1 et 1 sans tendre vers une limite unique : elle est donc divergente. Une suite qui ne se stabilise pas ne converge pas.",
+        context: ""
+    },
+    {
+        question: "Une suite arithmétique vérifie u(3)=14 et u(7)=30. Quelle est la raison r ?",
+        options: ["3", "4", "5", "8"],
+        answer: 1,
+        explanation: "r = (u(7) − u(3)) / (7 − 3) = (30 − 14) / 4 = 16 / 4 = 4. On utilise la relation u(n) = u(p) + (n−p)×r pour retrouver la raison à partir de deux termes quelconques.",
+        context: ""
+    },
+    {
+        question: "Suite géométrique u(0)=500, q=0,9. À partir de quel rang n a-t-on u(n) < 250 ?",
+        options: ["n = 5", "n = 6", "n = 7", "n = 8"],
+        answer: 2,
+        explanation: "u(n) = 500 × 0,9ⁿ < 250 → 0,9ⁿ < 0,5 → n > ln(0,5)/ln(0,9) ≈ 6,58. Le plus petit entier est n = 7. Vérification : u(6) = 500 × 0,9⁶ ≈ 265,7 (> 250) et u(7) = 500 × 0,9⁷ ≈ 239,1 (< 250). ✓",
+        context: ""
+    },
+    {
+        question: "Quelle est la somme des 100 premiers entiers naturels (de 1 à 100), selon la formule de Gauss ?",
+        options: ["5 000", "5 050", "5 100", "10 000"],
+        answer: 1,
+        explanation: "Formule de Gauss : S = n × (n+1) / 2 = 100 × 101 / 2 = 5 050. C'est la somme d'une suite arithmétique de raison 1 avec u(1)=1 et u(100)=100. Gauss aurait trouvé cette formule à l'âge de 9 ans !",
+        context: ""
+    },
+    {
+        question: "Une suite géométrique vérifie u(2)=12 et u(5)=96. Quelle est la raison q ?",
+        options: ["2", "3", "4", "8"],
+        answer: 0,
+        explanation: "u(5) = u(2) × q³ → q³ = u(5)/u(2) = 96/12 = 8 → q = ∛8 = 2. Vérification : u(2)=12, u(3)=24, u(4)=48, u(5)=96. ✓ On utilise le rapport de deux termes pour retrouver q.",
+        context: ""
+    },
+    {
+        question: "Un serveur vaut 10 000€ à l'achat. Sa valeur résiduelle après 5 ans est de 2 000€ (amortissement linéaire). Quel est le montant de l'amortissement annuel ?",
+        options: ["1 200€", "1 400€", "1 600€", "2 000€"],
+        answer: 2,
+        explanation: "Amortissement annuel = (Valeur initiale − Valeur résiduelle) / Durée = (10 000 − 2 000) / 5 = 8 000 / 5 = 1 600€ par an. C'est une suite arithmétique de raison r = −1 600 : la valeur du serveur diminue de 1 600€ chaque année.",
+        context: ""
+    },
+    {
+        question: "Que se passe-t-il pour une suite géométrique u(n) = u(0) × qⁿ lorsque |q| > 1 ?",
+        options: [
+            "La suite converge vers 0",
+            "La suite converge vers u(0)",
+            "La suite diverge (les termes tendent vers l'infini en valeur absolue)",
+            "La suite oscille autour de 0"
+        ],
+        answer: 2,
+        explanation: "Si |q| > 1, les puissances qⁿ croissent sans limite → la suite diverge vers +∞ (si q > 1) ou oscille en divergeant (si q < −1). Seul |q| < 1 assure la convergence vers 0. Cela explique pourquoi une croissance exponentielle non maîtrisée (virus, trafic) est dangereuse.",
+        context: ""
+    },
+    {
+        question: "Dans la suite de Fibonacci (1, 1, 2, 3, 5, 8, …), quel est le terme suivant ?",
+        options: ["10", "11", "12", "13"],
+        answer: 3,
+        explanation: "Suite de Fibonacci : chaque terme est la somme des deux précédents. 5 + 8 = 13. La suite continue : 1, 1, 2, 3, 5, 8, 13, 21, 34... Elle est utilisée en informatique dans les algorithmes de recherche, les estimations agiles (story points) et l'analyse de complexité.",
+        context: ""
     }
 ]);

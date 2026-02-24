@@ -1,5 +1,6 @@
-// ========== MATHS M1 — BASES NUMÉRIQUES ==========
+// ========== MATHS M1 — BASES NUMÉRIQUES & ARITHMÉTIQUE ==========
 // Binaire, Hexadécimal, Octal, Division euclidienne, Modulo
+// Divisibilité, Nombres premiers, Décomposition, PGCD/PPCM, Congruences
 
 registerQuiz('maths-m1', 'knowledge', [
     {
@@ -140,6 +141,112 @@ registerQuiz('maths-m1', 'knowledge', [
         options: ["128", "256", "512", "64"],
         answer: 1,
         explanation: "2⁸ = 256. Retenir les puissances de 2 est essentiel en réseau : 2⁴=16, 2⁸=256, 2¹⁰=1024 (≈1K), 2²⁰=1 048 576 (≈1M), 2³²=4 294 967 296 (~4 milliards, max IPv4).",
+        context: ""
+    },
+    // ========== ARITHMÉTIQUE : Divisibilité, Nombres premiers, PGCD/PPCM, Congruences ==========
+    {
+        question: "Le nombre 51 est-il un nombre premier ?",
+        options: ["Oui, il n'est divisible que par 1 et lui-même", "Non, car 51 = 3 × 17", "Oui, car il est impair", "Non, car 51 = 7 × 7 + 2"],
+        answer: 1,
+        explanation: "51 n'est pas premier car 51 = 3 × 17. Astuce : la somme des chiffres 5+1=6 est divisible par 3, donc 51 est divisible par 3. En cryptographie (RSA), on a besoin de vrais nombres premiers — une erreur ici compromettrait toute la sécurité du chiffrement.",
+        context: ""
+    },
+    {
+        question: "Quelle est la décomposition en facteurs premiers de 360 ?",
+        options: ["2² × 3² × 10", "2³ × 3² × 5", "2³ × 3 × 5²", "2² × 3³ × 5"],
+        answer: 1,
+        explanation: "360 = 2 × 180 = 2² × 90 = 2³ × 45 = 2³ × 9 × 5 = 2³ × 3² × 5. Vérification : 8 × 9 × 5 = 360. Le théorème fondamental de l'arithmétique garantit l'unicité de cette décomposition, c'est la base de la sécurité RSA.",
+        context: ""
+    },
+    {
+        question: "Quel est le PGCD de 72 et 44 ?",
+        options: ["2", "4", "8", "12"],
+        answer: 1,
+        explanation: "Décompositions : 72 = 2³ × 3² et 44 = 2² × 11. Le PGCD prend le minimum des exposants des facteurs communs : seul 2 est commun, min(3,2) = 2, donc PGCD = 2² = 4. Le PGCD sert par exemple à simplifier des fractions ou à déterminer la taille maximale de blocs identiques sur un disque.",
+        context: ""
+    },
+    {
+        question: "Quel est le PPCM de 24 et 36 ?",
+        options: ["48", "72", "108", "144"],
+        answer: 1,
+        explanation: "Décompositions : 24 = 2³ × 3 et 36 = 2² × 3². Le PPCM prend le maximum des exposants : 2^max(3,2) × 3^max(1,2) = 2³ × 3² = 8 × 9 = 72. Le PPCM est utile pour synchroniser des processus cycliques (ex : deux tâches cron de périodes 24 et 36 secondes se recoupent toutes les 72 secondes).",
+        context: ""
+    },
+    {
+        question: "Quelle est la division euclidienne de 725 par 17 ?",
+        options: ["725 = 17 × 43 + 4", "725 = 17 × 42 + 11", "725 = 17 × 41 + 18", "725 = 17 × 40 + 45"],
+        answer: 1,
+        explanation: "17 × 42 = 714, et 725 − 714 = 11. Donc 725 = 17 × 42 + 11 avec 0 ≤ 11 < 17. L'option C est impossible car le reste 18 ≥ 17. La division euclidienne est au cœur de l'algorithme d'Euclide utilisé pour calculer le PGCD.",
+        context: ""
+    },
+    {
+        question: "Que signifie « deux nombres sont premiers entre eux » ?",
+        options: ["Les deux nombres sont des nombres premiers", "Leur PGCD vaut 1", "Leur PPCM vaut 1", "Leur différence est un nombre premier"],
+        answer: 1,
+        explanation: "Deux nombres a et b sont premiers entre eux si PGCD(a, b) = 1, c'est-à-dire qu'ils n'ont aucun facteur commun autre que 1. Exemple : 8 et 15 ne sont pas premiers mais sont premiers entre eux (PGCD=1). En RSA, on choisit e tel que e et φ(n) soient premiers entre eux.",
+        context: ""
+    },
+    {
+        question: "Quel est le PGCD de 120 et 23 ?",
+        options: ["1", "23", "3", "5"],
+        answer: 0,
+        explanation: "23 est un nombre premier et 23 ne divise pas 120 (120 = 5 × 23 + 5). Donc PGCD(120, 23) = 1 : ils sont premiers entre eux. En cryptographie RSA, on a besoin que l'exposant e soit premier avec φ(n), ce qu'on vérifie avec le PGCD.",
+        context: ""
+    },
+    {
+        question: "À combien est congru 17 modulo 3 ? (17 ≡ ? [3])",
+        options: ["0", "1", "2", "3"],
+        answer: 2,
+        explanation: "17 = 3 × 5 + 2, donc 17 ≡ 2 [3]. Autrement dit, 17 − 2 = 15 est bien un multiple de 3. Les congruences sont essentielles pour les fonctions de hachage et les codes correcteurs d'erreurs en réseau.",
+        context: ""
+    },
+    {
+        question: "Si a ≡ b [p] et a' ≡ b' [p], alors a + a' est congru à quoi modulo p ?",
+        options: ["b − b' [p]", "b + b' [p]", "b × b' [p]", "On ne peut pas conclure"],
+        answer: 1,
+        explanation: "La congruence est compatible avec l'addition : si a ≡ b [p] et a' ≡ b' [p], alors a + a' ≡ b + b' [p]. Elle est aussi compatible avec la multiplication et les puissances. Cette propriété est utilisée dans les calculs modulaires du chiffrement RSA.",
+        context: ""
+    },
+    {
+        question: "Division euclidienne à la calculatrice : 72 371 ÷ 23. Quel est le reste ?",
+        options: ["11", "12", "13", "14"],
+        answer: 2,
+        explanation: "72 371 ÷ 23 = 3146,565... La partie entière du quotient est 3146. Partie décimale × diviseur : 0,565... × 23 = 13. Vérification : 23 × 3146 = 72 358, et 72 371 − 72 358 = 13. Donc 72 371 = 23 × 3 146 + 13.",
+        context: ""
+    },
+    {
+        question: "Quelle est la décomposition en facteurs premiers de 6 468 ?",
+        options: ["2² × 3 × 7² × 11", "2² × 3² × 7 × 11", "2³ × 3 × 7 × 11", "2² × 3 × 7 × 11²"],
+        answer: 0,
+        explanation: "6 468 ÷ 2 = 3 234, 3 234 ÷ 2 = 1 617, 1 617 ÷ 3 = 539, 539 ÷ 7 = 77, 77 ÷ 7 = 11. Donc 6 468 = 2² × 3 × 7² × 11. Vérification : 4 × 3 × 49 × 11 = 12 × 539 = 6 468.",
+        context: ""
+    },
+    {
+        question: "Lequel de ces nombres n'est PAS un nombre premier ?",
+        options: ["37", "41", "49", "53"],
+        answer: 2,
+        explanation: "49 = 7 × 7 = 7² n'est pas premier. Les autres sont bien premiers : 37, 41 et 53 ne sont divisibles que par 1 et eux-mêmes. Astuce : pour vérifier si n est premier, il suffit de tester les diviseurs premiers jusqu'à √n. √49 = 7, et justement 7 divise 49.",
+        context: ""
+    },
+    {
+        question: "Pour deux entiers a et b, que vaut PGCD(a, b) × PPCM(a, b) ?",
+        options: ["a + b", "a × b", "a² + b²", "(a + b)²"],
+        answer: 1,
+        explanation: "Propriété fondamentale : PGCD(a, b) × PPCM(a, b) = a × b. Exemple : PGCD(12, 18) = 6 et PPCM(12, 18) = 36. Vérification : 6 × 36 = 216 = 12 × 18. Cette formule permet de calculer le PPCM rapidement quand on connaît le PGCD.",
+        context: ""
+    },
+    {
+        question: "Quel est le résultat de 23 mod 7 ?",
+        options: ["1", "2", "3", "4"],
+        answer: 1,
+        explanation: "23 = 7 × 3 + 2, donc 23 mod 7 = 2. En programmation, l'opérateur modulo (% en C, Python, Java) est omniprésent : tables de hachage (hash % taille), round-robin (i % n_serveurs), vérification de parité (n % 2).",
+        context: ""
+    },
+    {
+        question: "Pour convertir le binaire 10110111 en hexadécimal, quelle méthode utilise-t-on ?",
+        options: ["Diviser par 16 successivement", "Regrouper les bits par paquets de 4 (nibbles) depuis la droite", "Convertir d'abord en octal puis en hexa", "Additionner chaque bit individuellement"],
+        answer: 1,
+        explanation: "On découpe en groupes de 4 bits (nibbles) depuis la droite : 1011 | 0111. Puis on convertit chaque nibble : 1011 = B (11 en décimal), 0111 = 7. Résultat : 0xB7. Cette méthode est rapide car 16 = 2⁴, chaque chiffre hexa correspond exactement à 4 bits. C'est ainsi qu'on lit les dumps mémoire et les trames réseau.",
         context: ""
     }
 ]);
