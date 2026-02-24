@@ -1,9 +1,10 @@
-const CACHE_NAME = 'cejm-rev-v3';
+const CACHE_NAME = 'sio-rev-v1';
 const ASSETS = [
     '/CEJM-REV/',
     '/CEJM-REV/index.html',
     '/CEJM-REV/css/style.css',
     '/CEJM-REV/js/app.js',
+    // CEJM
     '/CEJM-REV/js/data-ch1.js',
     '/CEJM-REV/js/data-ch2.js',
     '/CEJM-REV/js/data-ch3.js',
@@ -21,6 +22,20 @@ const ASSETS = [
     '/CEJM-REV/js/data-ch13.js',
     '/CEJM-REV/js/data-ch14.js',
     '/CEJM-REV/js/data-theme3.js',
+    // Maths
+    '/CEJM-REV/js/data-maths-m1.js',
+    '/CEJM-REV/js/data-maths-m2.js',
+    '/CEJM-REV/js/data-maths-m3.js',
+    '/CEJM-REV/js/data-maths-m4.js',
+    '/CEJM-REV/js/data-maths-m5.js',
+    '/CEJM-REV/js/data-maths-m6.js',
+    // Français
+    '/CEJM-REV/js/data-francais-f1.js',
+    '/CEJM-REV/js/data-francais-f2.js',
+    // Anglais
+    '/CEJM-REV/js/data-anglais-a1.js',
+    '/CEJM-REV/js/data-anglais-a2.js',
+    // Icons
     '/CEJM-REV/icons/icon-192.png',
     '/CEJM-REV/icons/icon-512.png'
 ];

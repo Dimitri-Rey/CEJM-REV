@@ -1,7 +1,7 @@
 {
-    "name": "CEJM REV - Revision BTS",
-    "short_name": "CEJM REV",
-    "description": "Plateforme de revision interactive CEJM pour BTS",
+    "name": "SIO REV - Révision BTS SIO",
+    "short_name": "SIO REV",
+    "description": "Plateforme de révision BTS SIO : CEJM, Maths, Français, Anglais",
     "start_url": "/CEJM-REV/",
     "scope": "/CEJM-REV/",
     "display": "standalone",

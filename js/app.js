@@ -6,6 +6,7 @@ let score = 0;
 let answers = [];
 let quizType = '';
 let quizChapter = '';
+let activeSubject = 'cejm';
 
 // All quiz data registry
 const quizData = {};
@@ -37,12 +38,11 @@ function saveProgress(chapter, type, correctCount, total) {
 
 function updateAllProgressBadges() {
     const progress = getAllProgress();
-    document.querySelectorAll('.btn[data-quiz]').forEach(btn => {
-        const key = btn.getAttribute('data-quiz');
-        const badge = btn.querySelector('.score-badge');
+    document.querySelectorAll('.score-badge[data-key]').forEach(badge => {
+        const key = badge.getAttribute('data-key');
         const p = progress[key];
-        if (p && badge) {
-            badge.textContent = `Record: ${p.best}%`;
+        if (p) {
+            badge.textContent = `${p.best}%`;
             badge.classList.add('visible');
             if (p.best >= 80) badge.className = 'score-badge visible badge-gold';
             else if (p.best >= 60) badge.className = 'score-badge visible badge-silver';
@@ -65,7 +65,7 @@ function startQuiz(chapter, type) {
     const key = `${chapter}_${type}`;
     const data = quizData[key];
     if (!data || data.length === 0) {
-        alert('Ce quiz n\'est pas encore disponible.');
+        alert('Ce quiz n\'est pas encore disponible. Reviens bientôt !');
         return;
     }
 
@@ -78,32 +78,48 @@ function startQuiz(chapter, type) {
 
     // Set quiz title
     const titles = {
-        'ch1': 'Chapitre 1 - Approche economique',
-        'ch2': 'Chapitre 2 - Le fonctionnement des marches',
-        'ch3': 'Chapitre 3 - La formation du contrat',
-        'ch4': 'Chapitre 4 - La mise en oeuvre du contrat',
-        'ch5': 'Chapitre 5 - L\'environnement de l\'entreprise',
-        'theme1': 'Theme 1 - Grand Quiz 100 Questions',
-        'ch6': 'Chapitre 6 - Les fonctions economiques de l\'Etat',
-        'ch7': 'Chapitre 7 - La regulation par le droit',
-        'ch8': 'Chapitre 8 - L\'environnement et les decisions',
-        'theme2': 'Theme 2 - Grand Quiz 100 Questions',
-        'ch9': 'Chapitre 9 - Les choix de production',
-        'ch10': 'Chapitre 10 - Les choix de structure juridique',
-        'ch11': 'Chapitre 11 - Les risques et la responsabilite',
-        'ch12': 'Chapitre 12 - L\'organisation des ressources',
-        'ch13': 'Chapitre 13 - L\'organisation interne',
-        'ch14': 'Chapitre 14 - Le financement de l\'entreprise',
-        'theme3': 'Theme 3 - Grand Quiz 100 Questions'
+        // CEJM
+        'ch1': 'Ch. 1 — Approche économique',
+        'ch2': 'Ch. 2 — Le fonctionnement des marchés',
+        'ch3': 'Ch. 3 — La formation du contrat',
+        'ch4': 'Ch. 4 — La mise en œuvre du contrat',
+        'ch5': 'Ch. 5 — L\'environnement de l\'entreprise',
+        'theme1': 'Thème 1 — Grand Quiz 100 Questions',
+        'ch6': 'Ch. 6 — Les fonctions économiques de l\'État',
+        'ch7': 'Ch. 7 — La régulation par le droit',
+        'ch8': 'Ch. 8 — L\'environnement et les décisions',
+        'theme2': 'Thème 2 — Grand Quiz 100 Questions',
+        'ch9': 'Ch. 9 — Les choix de production',
+        'ch10': 'Ch. 10 — Les choix de structure juridique',
+        'ch11': 'Ch. 11 — Les risques et la responsabilité',
+        'ch12': 'Ch. 12 — L\'organisation des ressources',
+        'ch13': 'Ch. 13 — L\'organisation interne',
+        'ch14': 'Ch. 14 — Le financement de l\'entreprise',
+        'theme3': 'Thème 3 — Grand Quiz 100 Questions',
+        // Maths
+        'maths-m1': 'M1 — Bases numériques',
+        'maths-m2': 'M2 — Logique booléenne',
+        'maths-m3': 'M3 — Subnetting & Masques réseau',
+        'maths-m4': 'M4 — Probabilités & Statistiques',
+        'maths-m5': 'M5 — Suites numériques',
+        'maths-m6': 'M6 — Algorithmique & Complexité',
+        // Français
+        'francais-f1': 'F1 — Synthèse de documents',
+        'francais-f2': 'F2 — Écriture personnelle',
+        // Anglais
+        'anglais-a1': 'A1 — Vocabulaire IT',
+        'anglais-a2': 'A2 — Expression professionnelle'
     };
 
     const typeLabels = {
-        'knowledge': ' - Quiz Connaissances',
-        'practical': ' - Cas Pratiques / BTS'
+        'knowledge': ' — Quiz Connaissances',
+        'practical': ' — Cas Pratiques / BTS',
+        'exercises': ' — Exercices'
     };
 
-    document.getElementById('quiz-title').textContent =
-        (titles[chapter] || chapter) + (!chapter.startsWith('theme') ? (typeLabels[type] || '') : '');
+    const isTheme = chapter.startsWith('theme');
+    const suffix = isTheme ? '' : (typeLabels[type] || '');
+    document.getElementById('quiz-title').textContent = (titles[chapter] || chapter) + suffix;
 
     document.getElementById('score-total').textContent = currentQuiz.length;
     document.getElementById('score-correct').textContent = '0';
@@ -309,21 +325,49 @@ function shuffleArray(arr) {
     return arr;
 }
 
-// ========== THEME SWITCHING ==========
+// ========== SUBJECT SWITCHING ==========
+
+function switchSubject(subject) {
+    activeSubject = subject;
+
+    // Show/hide subject sections
+    document.querySelectorAll('.subject-section').forEach(s => s.classList.remove('active'));
+    const section = document.getElementById(`subject-${subject}`);
+    if (section) section.classList.add('active');
+
+    // Update subject tabs
+    document.querySelectorAll('.subject-tab').forEach(t => t.classList.remove('active'));
+    const tab = document.querySelector(`.subject-tab[data-subject="${subject}"]`);
+    if (tab) tab.classList.add('active');
+
+    // Show CEJM theme nav only for CEJM
+    const themeNav = document.getElementById('cejm-theme-nav');
+    if (subject === 'cejm') {
+        themeNav.classList.remove('hidden');
+    } else {
+        themeNav.classList.add('hidden');
+    }
+
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+
+// ========== CEJM THEME SWITCHING ==========
 
 function switchTheme(themeNum) {
-    // Hide all theme sections
-    document.querySelectorAll('.theme-card').forEach(el => el.style.display = 'none');
+    // Hide all CEJM theme cards
+    document.querySelectorAll('#subject-cejm .theme-card').forEach(el => el.style.display = 'none');
 
     // Show selected theme
     if (themeNum === 1) {
-        document.querySelector('.theme-card:not(.theme-section)').style.display = '';
+        const t1 = document.getElementById('theme-1');
+        if (t1) t1.style.display = '';
     } else {
         const section = document.getElementById(`theme-${themeNum}`);
         if (section) section.style.display = '';
     }
 
-    // Update nav pills
+    // Update theme nav pills
     document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
     const pill = document.querySelector(`.nav-pill[data-theme="${themeNum}"]`);
     if (pill) pill.classList.add('active');
@@ -376,7 +420,16 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAllProgressBadges();
     checkIOSInstall();
 
-    // Nav pill theme switching
+    // Subject tabs
+    document.querySelectorAll('.subject-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const subject = tab.getAttribute('data-subject');
+            switchSubject(subject);
+            showPage('home-page');
+        });
+    });
+
+    // CEJM theme pills
     document.querySelectorAll('.nav-pill:not(.locked)').forEach(pill => {
         pill.addEventListener('click', (e) => {
             e.preventDefault();

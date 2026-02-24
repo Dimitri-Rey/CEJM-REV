@@ -21,7 +21,7 @@
     --radius: 16px;
     --radius-sm: 10px;
     --shadow: 0 8px 32px rgba(0,0,0,0.3);
-    /* Chapter type colors */
+    /* CEJM Chapter type colors */
     --eco: #0984e3;
     --eco-light: rgba(9, 132, 227, 0.15);
     --eco-border: rgba(9, 132, 227, 0.4);
@@ -31,6 +31,22 @@
     --mgmt: #00b894;
     --mgmt-light: rgba(0, 184, 148, 0.15);
     --mgmt-border: rgba(0, 184, 148, 0.4);
+    /* Subject colors */
+    --maths: #f39c12;
+    --maths-dark: #d68910;
+    --maths-light: rgba(243, 156, 18, 0.15);
+    --maths-border: rgba(243, 156, 18, 0.4);
+    --francais: #a29bfe;
+    --francais-dark: #8b81fc;
+    --francais-light: rgba(162, 155, 254, 0.15);
+    --francais-border: rgba(162, 155, 254, 0.4);
+    --anglais: #00cec9;
+    --anglais-dark: #00b5b0;
+    --anglais-light: rgba(0, 206, 201, 0.15);
+    --anglais-border: rgba(0, 206, 201, 0.4);
+    /* Nav heights */
+    --main-nav-h: 54px;
+    --theme-nav-h: 44px;
 }
 
 body {
@@ -48,22 +64,19 @@ body {
     overflow-x: hidden;
 }
 
-/* NAV MENU */
-.theme-nav {
+/* ===== NAVIGATION PRINCIPALE (matières) ===== */
+.main-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 0 16px;
+    height: var(--main-nav-h);
     background: var(--bg-card);
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
     z-index: 200;
-    gap: 16px;
-}
-
-.nav-left {
-    flex-shrink: 0;
+    gap: 12px;
 }
 
 .nav-brand {
@@ -71,6 +84,7 @@ body {
     font-weight: 800;
     letter-spacing: -0.5px;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .nav-brand span {
@@ -80,44 +94,60 @@ body {
     background-clip: text;
 }
 
-.nav-pills {
+/* Subject tabs */
+.subject-tabs {
     display: flex;
     gap: 4px;
     background: rgba(255,255,255,0.04);
     border-radius: 12px;
     padding: 4px;
     border: 1px solid var(--border);
+    flex: 1;
+    max-width: 380px;
 }
 
-.nav-pill {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 32px;
+.subject-tab {
+    flex: 1;
+    padding: 6px 8px;
     border-radius: 8px;
-    text-decoration: none;
+    border: none;
+    background: transparent;
     color: var(--text-muted);
     font-size: 0.8rem;
     font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
     transition: all 0.2s ease;
+    white-space: nowrap;
 }
 
-.nav-pill:hover:not(.locked) {
+.subject-tab:hover {
     color: var(--text);
     background: rgba(255,255,255,0.06);
 }
 
-.nav-pill.active {
-    color: white;
+.subject-tab.active[data-subject="cejm"] {
     background: var(--primary);
+    color: white;
     box-shadow: 0 2px 8px rgba(108, 92, 231, 0.4);
 }
 
-.nav-pill.locked {
-    opacity: 0.3;
-    cursor: not-allowed;
-    pointer-events: none;
+.subject-tab.active[data-subject="maths"] {
+    background: var(--maths);
+    color: #1a0a00;
+    box-shadow: 0 2px 8px rgba(243, 156, 18, 0.4);
+}
+
+.subject-tab.active[data-subject="francais"] {
+    background: var(--francais);
+    color: #0a0a1a;
+    box-shadow: 0 2px 8px rgba(162, 155, 254, 0.4);
+}
+
+.subject-tab.active[data-subject="anglais"] {
+    background: var(--anglais);
+    color: #0a1a1a;
+    box-shadow: 0 2px 8px rgba(0, 206, 201, 0.4);
 }
 
 .nav-install {
@@ -139,20 +169,96 @@ body {
     box-shadow: 0 4px 12px rgba(108, 92, 231, 0.4);
 }
 
+/* ===== NAVIGATION SECONDAIRE (thèmes CEJM) ===== */
+.theme-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 16px;
+    background: rgba(12, 12, 30, 0.95);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: var(--main-nav-h);
+    z-index: 199;
+    gap: 16px;
+}
+
+.theme-nav.hidden {
+    display: none;
+}
+
+.nav-pills {
+    display: flex;
+    gap: 4px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    padding: 4px;
+    border: 1px solid var(--border);
+}
+
+.nav-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.nav-pill:hover:not(.locked) {
+    color: var(--text);
+    background: rgba(255,255,255,0.06);
+}
+
+.nav-pill.active {
+    color: white;
+    background: var(--primary);
+    box-shadow: 0 2px 8px rgba(108, 92, 231, 0.4);
+}
+
+.nav-pill.locked {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Subject sections */
+.subject-section {
+    display: none;
+}
+
+.subject-section.active {
+    display: block;
+}
+
 @media (max-width: 768px) {
-    .theme-nav {
-        padding: 8px 12px;
-        gap: 10px;
+    .main-nav {
+        padding: 0 10px;
+        gap: 8px;
     }
 
     .nav-brand {
         font-size: 1rem;
     }
 
+    .subject-tab {
+        font-size: 0.72rem;
+        padding: 5px 4px;
+    }
+
+    .subject-tabs {
+        max-width: none;
+    }
+
     .nav-pill {
         width: 34px;
         height: 28px;
-        font-size: 0.75rem;
+        font-size: 0.72rem;
     }
 
     .nav-pills {
@@ -178,13 +284,60 @@ body {
 /* HERO */
 .hero {
     text-align: center;
-    padding: 60px 20px 40px;
-    background: linear-gradient(135deg, #1a1a3e 0%, #0a0a1a 50%, #1a0a2e 100%);
+    padding: 50px 20px 36px;
     border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+.hero-cejm {
+    background: linear-gradient(135deg, #1a1a3e 0%, #0a0a1a 50%, #1a0a2e 100%);
+}
+
+.hero-maths {
+    background: linear-gradient(135deg, #1a1200 0%, #0a0a1a 50%, #1a0f00 100%);
+}
+
+.hero-francais {
+    background: linear-gradient(135deg, #160a2e 0%, #0a0a1a 50%, #1a0a28 100%);
+}
+
+.hero-anglais {
+    background: linear-gradient(135deg, #001a1a 0%, #0a0a1a 50%, #001818 100%);
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(108, 92, 231, 0.2);
+    border: 1px solid rgba(108, 92, 231, 0.4);
+    color: var(--primary);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: 0.3px;
+}
+
+.hero-badge-maths {
+    background: rgba(243, 156, 18, 0.15);
+    border-color: rgba(243, 156, 18, 0.4);
+    color: var(--maths);
+}
+
+.hero-badge-francais {
+    background: rgba(162, 155, 254, 0.15);
+    border-color: rgba(162, 155, 254, 0.4);
+    color: var(--francais);
+}
+
+.hero-badge-anglais {
+    background: rgba(0, 206, 201, 0.15);
+    border-color: rgba(0, 206, 201, 0.4);
+    color: var(--anglais);
 }
 
 .hero h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 800;
     letter-spacing: -1px;
     margin-bottom: 8px;
@@ -197,17 +350,42 @@ body {
     background-clip: text;
 }
 
+.span-maths {
+    background: linear-gradient(135deg, var(--maths), #ffeaa7) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+.span-francais {
+    background: linear-gradient(135deg, var(--francais), #dfe6e9) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+.span-anglais {
+    background: linear-gradient(135deg, var(--anglais), #81ecec) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
 .subtitle {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--text-muted);
     margin-bottom: 4px;
 }
 
 .description {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--primary);
     font-weight: 600;
 }
+
+.description-maths { color: var(--maths); }
+.description-francais { color: var(--francais); }
+.description-anglais { color: var(--anglais); }
 
 /* THEME CARD */
 .theme-card {
@@ -944,4 +1122,183 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary);
+}
+
+/* ===== MATHS CHAPTER CARDS ===== */
+.chapter-maths {
+    border-color: var(--maths-border);
+}
+
+.chapter-maths::before {
+    background: linear-gradient(90deg, var(--maths), #ffeaa7);
+    opacity: 1;
+}
+
+.chapter-maths:hover {
+    border-color: var(--maths);
+    box-shadow: 0 8px 32px rgba(243, 156, 18, 0.2);
+}
+
+.chapter-number-maths {
+    background: linear-gradient(135deg, var(--maths), #ffeaa7) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+.tag-maths {
+    background: var(--maths-light);
+    color: var(--maths);
+    border: 1px solid var(--maths-border);
+}
+
+.btn-maths-primary {
+    background: var(--maths-light);
+    color: var(--maths);
+    border: 1px solid var(--maths-border);
+}
+
+.btn-maths-primary:hover {
+    background: rgba(243, 156, 18, 0.25);
+    border-color: var(--maths);
+}
+
+/* ===== FRANÇAIS CHAPTER CARDS ===== */
+.chapter-francais {
+    border-color: var(--francais-border);
+}
+
+.chapter-francais::before {
+    background: linear-gradient(90deg, var(--francais), #dfe6e9);
+    opacity: 1;
+}
+
+.chapter-francais:hover {
+    border-color: var(--francais);
+    box-shadow: 0 8px 32px rgba(162, 155, 254, 0.2);
+}
+
+.chapter-number-francais {
+    background: linear-gradient(135deg, var(--francais), #dfe6e9) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+.tag-francais {
+    background: var(--francais-light);
+    color: var(--francais);
+    border: 1px solid var(--francais-border);
+}
+
+.btn-francais-primary {
+    background: var(--francais-light);
+    color: var(--francais);
+    border: 1px solid var(--francais-border);
+}
+
+.btn-francais-primary:hover {
+    background: rgba(162, 155, 254, 0.25);
+    border-color: var(--francais);
+}
+
+/* ===== ANGLAIS CHAPTER CARDS ===== */
+.chapter-anglais {
+    border-color: var(--anglais-border);
+}
+
+.chapter-anglais::before {
+    background: linear-gradient(90deg, var(--anglais), #81ecec);
+    opacity: 1;
+}
+
+.chapter-anglais:hover {
+    border-color: var(--anglais);
+    box-shadow: 0 8px 32px rgba(0, 206, 201, 0.2);
+}
+
+.chapter-number-anglais {
+    background: linear-gradient(135deg, var(--anglais), #81ecec) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+.tag-anglais {
+    background: var(--anglais-light);
+    color: var(--anglais);
+    border: 1px solid var(--anglais-border);
+}
+
+.btn-anglais-primary {
+    background: var(--anglais-light);
+    color: var(--anglais);
+    border: 1px solid var(--anglais-border);
+}
+
+.btn-anglais-primary:hover {
+    background: rgba(0, 206, 201, 0.25);
+    border-color: var(--anglais);
+}
+
+/* ===== INFO BOX ===== */
+.info-box {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 16px 20px;
+    border-radius: var(--radius);
+    margin-top: 10px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.info-box-francais {
+    background: var(--francais-light);
+    border: 1px solid var(--francais-border);
+    color: var(--text);
+}
+
+.info-box-anglais {
+    background: var(--anglais-light);
+    border: 1px solid var(--anglais-border);
+    color: var(--text);
+}
+
+.info-box-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+/* ===== LOCKED SECTION (T4, T5) ===== */
+.locked-section {
+    opacity: 0.6;
+}
+
+.locked-notice {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.theme-badge-locked {
+    background: rgba(255,255,255,0.08) !important;
+}
+
+/* Mobile hero */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero {
+        padding: 36px 16px 28px;
+    }
+
+    .hero-badge {
+        font-size: 0.72rem;
+        padding: 3px 10px;
+    }
 }

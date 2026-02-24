@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>CEJM REV - Revision BTS</title>
+    <title>SIO REV - Revision BTS SIO</title>
 
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
@@ -13,21 +13,29 @@
     <!-- iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="CEJM REV">
+    <meta name="apple-mobile-web-app-title" content="SIO REV">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
 
-    <!-- Splash / description -->
-    <meta name="description" content="Plateforme de revision interactive CEJM pour BTS">
+    <meta name="description" content="Plateforme de revision interactive BTS SIO - CEJM, Maths, Français, Anglais">
 
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div id="app">
-        <!-- NAV MENU -->
-        <nav class="theme-nav">
-            <div class="nav-left">
-                <div class="nav-brand">CEJM <span>REV</span></div>
+        <!-- NAV PRINCIPALE : MATIÈRES -->
+        <nav class="main-nav">
+            <div class="nav-brand">SIO <span>REV</span></div>
+            <div class="subject-tabs" id="subject-tabs">
+                <button class="subject-tab active" data-subject="cejm">CEJM</button>
+                <button class="subject-tab" data-subject="maths">Maths</button>
+                <button class="subject-tab" data-subject="francais">Français</button>
+                <button class="subject-tab" data-subject="anglais">Anglais</button>
             </div>
+            <button class="nav-install" id="install-btn" style="display:none" onclick="installApp()">Installer</button>
+        </nav>
+
+        <!-- NAV SECONDAIRE : THÈMES CEJM (masquée pour les autres matières) -->
+        <div class="theme-nav" id="cejm-theme-nav">
             <div class="nav-pills">
                 <a href="#" class="nav-pill active" data-theme="1">T1</a>
                 <a href="#" class="nav-pill" data-theme="2">T2</a>
@@ -35,356 +43,553 @@
                 <a href="#" class="nav-pill locked" data-theme="4">T4</a>
                 <a href="#" class="nav-pill locked" data-theme="5">T5</a>
             </div>
-            <button class="nav-install" id="install-btn" style="display:none" onclick="installApp()">Installer</button>
-        </nav>
+        </div>
 
         <!-- HOME PAGE -->
         <section id="home-page" class="page active">
-            <header class="hero">
-                <h1>CEJM <span>BTS</span></h1>
-                <p class="subtitle">Culture Economique, Juridique et Manageriale</p>
-                <p class="description" id="hero-description">Plateforme de revision interactive</p>
-            </header>
 
-            <div class="theme-card">
-                <div class="theme-header">
-                    <span class="theme-badge">1re annee</span>
-                    <h2>Theme 1</h2>
-                    <p>L'integration de l'entreprise dans son environnement</p>
+            <!-- ============================== CEJM ============================== -->
+            <div id="subject-cejm" class="subject-section active">
+                <header class="hero hero-cejm">
+                    <div class="hero-badge">Coef 3 · Épreuve 4h · E4</div>
+                    <h1>CEJM <span>BTS</span></h1>
+                    <p class="subtitle">Culture Économique, Juridique et Managériale</p>
+                    <p class="description">6 Thèmes · Étude de cas · Analogies IT</p>
+                </header>
+
+                <!-- THEME 1 -->
+                <div class="theme-card" id="theme-1">
+                    <div class="theme-header">
+                        <span class="theme-badge">1re année</span>
+                        <h2>Thème 1</h2>
+                        <p>L'intégration de l'entreprise dans son environnement</p>
+                    </div>
+                    <div class="chapters-grid">
+                        <div class="chapter-card chapter-eco" data-chapter="1">
+                            <span class="chapter-tag tag-eco">Économie</span>
+                            <div class="chapter-number">01</div>
+                            <h3>Approche économique</h3>
+                            <p>Fondements de l'économie, relations économiques, financement</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch1', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch1-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch1_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch1', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch1-practical-count"></span>
+                                    <span class="score-badge" data-key="ch1_practical"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chapter-card chapter-eco" data-chapter="2">
+                            <span class="chapter-tag tag-eco">Économie</span>
+                            <div class="chapter-number">02</div>
+                            <h3>Le fonctionnement des marchés</h3>
+                            <p>Concept de marché, fixation des prix, autorégulation</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch2', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch2-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch2_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch2', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch2-practical-count"></span>
+                                    <span class="score-badge" data-key="ch2_practical"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chapter-card chapter-droit" data-chapter="3">
+                            <span class="chapter-tag tag-droit">Droit</span>
+                            <div class="chapter-number">03</div>
+                            <h3>La formation du contrat</h3>
+                            <p>Négociation, formation, validité des contrats</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch3', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch3-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch3_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch3', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch3-practical-count"></span>
+                                    <span class="score-badge" data-key="ch3_practical"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chapter-card chapter-droit" data-chapter="4">
+                            <span class="chapter-tag tag-droit">Droit</span>
+                            <div class="chapter-number">04</div>
+                            <h3>La mise en œuvre du contrat</h3>
+                            <p>Clauses, exécution, sanctions de l'inexécution</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch4', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch4-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch4_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch4', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch4-practical-count"></span>
+                                    <span class="score-badge" data-key="ch4_practical"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chapter-card chapter-management" data-chapter="5">
+                            <span class="chapter-tag tag-management">Management</span>
+                            <div class="chapter-number">05</div>
+                            <h3>L'environnement de l'entreprise</h3>
+                            <p>Création, gestion, performance de l'entreprise</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch5', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch5-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch5_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch5', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch5-practical-count"></span>
+                                    <span class="score-badge" data-key="ch5_practical"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="theme-quiz-section">
+                        <button class="btn btn-theme-quiz" onclick="startQuiz('theme1', 'knowledge')">
+                            Grand Quiz Thème 1 — 100 Questions
+                            <span class="q-count" id="theme1-knowledge-count"></span>
+                            <span class="score-badge" data-key="theme1_knowledge"></span>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="chapters-grid">
-                    <!-- Chapter 1 -->
-                    <div class="chapter-card chapter-eco" data-chapter="1">
-                        <span class="chapter-tag tag-eco">Economie</span>
-                        <div class="chapter-number">01</div>
-                        <h3>Approche economique</h3>
-                        <p>Fondements de l'economie, relations economiques, financement</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch1_knowledge" onclick="startQuiz('ch1', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch1-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch1_practical" onclick="startQuiz('ch1', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch1-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
+                <!-- THEME 2 -->
+                <div class="theme-card theme-section" id="theme-2" style="display:none">
+                    <div class="theme-header">
+                        <span class="theme-badge">1re année</span>
+                        <h2>Thème 2</h2>
+                        <p>La régulation de l'activité économique</p>
+                    </div>
+                    <div class="chapters-grid">
+                        <div class="chapter-card chapter-eco" data-chapter="6">
+                            <span class="chapter-tag tag-eco">Économie</span>
+                            <div class="chapter-number">06</div>
+                            <h3>Les fonctions économiques de l'État</h3>
+                            <p>Fonctions de l'État, croissance, politiques économiques</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch6', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch6-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch6_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch6', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch6-practical-count"></span>
+                                    <span class="score-badge" data-key="ch6_practical"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chapter-card chapter-droit" data-chapter="7">
+                            <span class="chapter-tag tag-droit">Droit</span>
+                            <div class="chapter-number">07</div>
+                            <h3>La régulation par le droit</h3>
+                            <p>Liberté d'entreprendre, concurrence, propriété industrielle</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch7', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch7-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch7_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch7', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch7-practical-count"></span>
+                                    <span class="score-badge" data-key="ch7_practical"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chapter-card chapter-management" data-chapter="8">
+                            <span class="chapter-tag tag-management">Management</span>
+                            <div class="chapter-number">08</div>
+                            <h3>L'environnement et les décisions</h3>
+                            <p>Macro/micro-environnement, PESTEL, Porter, innovation</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch8', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch8-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch8_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch8', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch8-practical-count"></span>
+                                    <span class="score-badge" data-key="ch8_practical"></span>
+                                </button>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Chapter 2 -->
-                    <div class="chapter-card chapter-eco" data-chapter="2">
-                        <span class="chapter-tag tag-eco">Economie</span>
-                        <div class="chapter-number">02</div>
-                        <h3>Le fonctionnement des marches</h3>
-                        <p>Concept de marche, fixation des prix, autoregulation</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch2_knowledge" onclick="startQuiz('ch2', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch2-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch2_practical" onclick="startQuiz('ch2', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch2-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Chapter 3 -->
-                    <div class="chapter-card chapter-droit" data-chapter="3">
-                        <span class="chapter-tag tag-droit">Droit</span>
-                        <div class="chapter-number">03</div>
-                        <h3>La formation du contrat</h3>
-                        <p>Negociation, formation, validite des contrats</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch3_knowledge" onclick="startQuiz('ch3', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch3-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch3_practical" onclick="startQuiz('ch3', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch3-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Chapter 4 -->
-                    <div class="chapter-card chapter-droit" data-chapter="4">
-                        <span class="chapter-tag tag-droit">Droit</span>
-                        <div class="chapter-number">04</div>
-                        <h3>La mise en oeuvre du contrat</h3>
-                        <p>Clauses, execution, sanctions de l'inexecution</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch4_knowledge" onclick="startQuiz('ch4', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch4-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch4_practical" onclick="startQuiz('ch4', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch4-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Chapter 5 -->
-                    <div class="chapter-card chapter-management" data-chapter="5">
-                        <span class="chapter-tag tag-management">Management</span>
-                        <div class="chapter-number">05</div>
-                        <h3>L'environnement de l'entreprise</h3>
-                        <p>Creation, gestion, performance de l'entreprise</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch5_knowledge" onclick="startQuiz('ch5', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch5-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch5_practical" onclick="startQuiz('ch5', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch5-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                        </div>
+                    <div class="theme-quiz-section">
+                        <button class="btn btn-theme-quiz" onclick="startQuiz('theme2', 'knowledge')">
+                            Grand Quiz Thème 2 — 100 Questions
+                            <span class="q-count" id="theme2-knowledge-count"></span>
+                            <span class="score-badge" data-key="theme2_knowledge"></span>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Theme Quiz -->
-                <div class="theme-quiz-section">
-                    <button class="btn btn-theme-quiz" data-quiz="theme1_knowledge" onclick="startQuiz('theme1', 'knowledge')">
-                        Grand Quiz Theme 1 - 100 Questions
-                        <span class="q-count" id="theme1-knowledge-count"></span>
-                        <span class="score-badge"></span>
-                    </button>
+                <!-- THEME 3 -->
+                <div class="theme-card theme-section" id="theme-3" style="display:none">
+                    <div class="theme-header">
+                        <span class="theme-badge">1re année</span>
+                        <h2>Thème 3</h2>
+                        <p>L'organisation de l'activité de l'entreprise</p>
+                    </div>
+                    <div class="chapters-grid">
+                        <div class="chapter-card chapter-eco" data-chapter="9">
+                            <span class="chapter-tag tag-eco">Économie</span>
+                            <div class="chapter-number">09</div>
+                            <h3>Les choix de production</h3>
+                            <p>Facteurs de production, productivité, coûts, chaîne de valeur, impartition</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch9', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch9-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch9_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch9', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch9-practical-count"></span>
+                                    <span class="score-badge" data-key="ch9_practical"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chapter-card chapter-droit" data-chapter="10">
+                            <span class="chapter-tag tag-droit">Droit</span>
+                            <div class="chapter-number">10</div>
+                            <h3>Les choix de structure juridique</h3>
+                            <p>Entreprise individuelle, sociétés, régimes matrimoniaux, ESS, SCOP</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch10', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch10-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch10_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch10', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch10-practical-count"></span>
+                                    <span class="score-badge" data-key="ch10_practical"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chapter-card chapter-droit" data-chapter="11">
+                            <span class="chapter-tag tag-droit">Droit</span>
+                            <div class="chapter-number">11</div>
+                            <h3>Les risques et la responsabilité</h3>
+                            <p>Risques, responsabilité civile, pénale, produits défectueux</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch11', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch11-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch11_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch11', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch11-practical-count"></span>
+                                    <span class="score-badge" data-key="ch11_practical"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chapter-card chapter-management" data-chapter="12">
+                            <span class="chapter-tag tag-management">Management</span>
+                            <div class="chapter-number">12</div>
+                            <h3>L'organisation des ressources</h3>
+                            <p>Processus, parties prenantes, ressources, compétences, diagnostic interne</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch12', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch12-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch12_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch12', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch12-practical-count"></span>
+                                    <span class="score-badge" data-key="ch12_practical"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chapter-card chapter-management" data-chapter="13">
+                            <span class="chapter-tag tag-management">Management</span>
+                            <div class="chapter-number">13</div>
+                            <h3>L'organisation interne</h3>
+                            <p>Management, styles de direction, structures, coordination (Mintzberg)</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch13', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch13-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch13_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch13', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch13-practical-count"></span>
+                                    <span class="score-badge" data-key="ch13_practical"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chapter-card chapter-management" data-chapter="14">
+                            <span class="chapter-tag tag-management">Management</span>
+                            <div class="chapter-number">14</div>
+                            <h3>Le financement de l'entreprise</h3>
+                            <p>Cycle d'exploitation, investissement, modes de financement</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-knowledge" onclick="startQuiz('ch14', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="ch14-knowledge-count"></span>
+                                    <span class="score-badge" data-key="ch14_knowledge"></span>
+                                </button>
+                                <button class="btn btn-practical" onclick="startQuiz('ch14', 'practical')">
+                                    Cas Pratiques / BTS
+                                    <span class="q-count" id="ch14-practical-count"></span>
+                                    <span class="score-badge" data-key="ch14_practical"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="theme-quiz-section">
+                        <button class="btn btn-theme-quiz" onclick="startQuiz('theme3', 'knowledge')">
+                            Grand Quiz Thème 3 — 100 Questions
+                            <span class="q-count" id="theme3-knowledge-count"></span>
+                            <span class="score-badge" data-key="theme3_knowledge"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- THEME 4 - Locked -->
+                <div class="theme-card theme-section locked-section" id="theme-4" style="display:none">
+                    <div class="theme-header">
+                        <span class="theme-badge theme-badge-locked">2e année</span>
+                        <h2>Thème 4</h2>
+                        <p>L'impact du numérique sur la vie de l'entreprise</p>
+                        <div class="locked-notice">🔒 Contenu en cours de rédaction — RGPD, NIS2, contrats informatiques</div>
+                    </div>
+                </div>
+
+                <!-- THEME 5 - Locked -->
+                <div class="theme-card theme-section locked-section" id="theme-5" style="display:none">
+                    <div class="theme-header">
+                        <span class="theme-badge theme-badge-locked">2e année</span>
+                        <h2>Thème 5</h2>
+                        <p>Les mutations du travail</p>
+                        <div class="locked-notice">🔒 Contenu en cours de rédaction — Télétravail, dialogue social, emploi numérique</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================== MATHS ============================== -->
+            <div id="subject-maths" class="subject-section">
+                <header class="hero hero-maths">
+                    <div class="hero-badge hero-badge-maths">Coef 3 · E3 · CCF — Exam 18/05</div>
+                    <h1>Maths <span class="span-maths">BTS</span></h1>
+                    <p class="subtitle">Mathématiques pour l'informatique</p>
+                    <p class="description description-maths">Bases numériques · Logique · Subnetting · Probabilités · Algorithmes</p>
+                </header>
+
+                <div class="theme-card">
+                    <div class="chapters-grid">
+                        <!-- M1 -->
+                        <div class="chapter-card chapter-maths" data-chapter="maths-m1">
+                            <span class="chapter-tag tag-maths">Arithmétique</span>
+                            <div class="chapter-number chapter-number-maths">M1</div>
+                            <h3>Bases numériques</h3>
+                            <p>Binaire, hexadécimal, octal · Conversions · Division euclidienne · Modulo</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-maths-primary" onclick="startQuiz('maths-m1', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="maths-m1-knowledge-count"></span>
+                                    <span class="score-badge" data-key="maths-m1_knowledge"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- M2 -->
+                        <div class="chapter-card chapter-maths" data-chapter="maths-m2">
+                            <span class="chapter-tag tag-maths">Logique</span>
+                            <div class="chapter-number chapter-number-maths">M2</div>
+                            <h3>Logique booléenne</h3>
+                            <p>Tables de vérité · AND/OR/NOT/XOR · Lois De Morgan · Applications ACL</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-maths-primary" onclick="startQuiz('maths-m2', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="maths-m2-knowledge-count"></span>
+                                    <span class="score-badge" data-key="maths-m2_knowledge"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- M3 -->
+                        <div class="chapter-card chapter-maths" data-chapter="maths-m3">
+                            <span class="chapter-tag tag-maths">Réseaux</span>
+                            <div class="chapter-number chapter-number-maths">M3</div>
+                            <h3>Subnetting & Masques</h3>
+                            <p>CIDR · Adresse réseau (AND) · Nombre d'hôtes · Broadcast · Classes IP</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-maths-primary" onclick="startQuiz('maths-m3', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="maths-m3-knowledge-count"></span>
+                                    <span class="score-badge" data-key="maths-m3_knowledge"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- M4 -->
+                        <div class="chapter-card chapter-maths" data-chapter="maths-m4">
+                            <span class="chapter-tag tag-maths">Stats</span>
+                            <div class="chapter-number chapter-number-maths">M4</div>
+                            <h3>Probabilités & Statistiques</h3>
+                            <p>Probabilité conditionnelle · Loi binomiale · Fiabilité des systèmes</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-maths-primary" onclick="startQuiz('maths-m4', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="maths-m4-knowledge-count"></span>
+                                    <span class="score-badge" data-key="maths-m4_knowledge"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- M5 -->
+                        <div class="chapter-card chapter-maths" data-chapter="maths-m5">
+                            <span class="chapter-tag tag-maths">Suites</span>
+                            <div class="chapter-number chapter-number-maths">M5</div>
+                            <h3>Suites numériques</h3>
+                            <p>Suites arithmétiques & géométriques · Terme général · Applications DDoS</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-maths-primary" onclick="startQuiz('maths-m5', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="maths-m5-knowledge-count"></span>
+                                    <span class="score-badge" data-key="maths-m5_knowledge"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- M6 -->
+                        <div class="chapter-card chapter-maths" data-chapter="maths-m6">
+                            <span class="chapter-tag tag-maths">Algo</span>
+                            <div class="chapter-number chapter-number-maths">M6</div>
+                            <h3>Algorithmique & Complexité</h3>
+                            <p>Complexité O(n) · Tris · Structures de données · Pseudo-code</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-maths-primary" onclick="startQuiz('maths-m6', 'knowledge')">
+                                    Quiz Connaissances
+                                    <span class="q-count" id="maths-m6-knowledge-count"></span>
+                                    <span class="score-badge" data-key="maths-m6_knowledge"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- THEME 2 -->
-            <div class="theme-card theme-section" id="theme-2" style="display:none">
-                <div class="theme-header">
-                    <span class="theme-badge">1re annee</span>
-                    <h2>Theme 2</h2>
-                    <p>La regulation de l'activite economique</p>
-                </div>
+            <!-- ============================== FRANÇAIS ============================== -->
+            <div id="subject-francais" class="subject-section">
+                <header class="hero hero-francais">
+                    <div class="hero-badge hero-badge-francais">Coef 2 · E1 · Écrit 3h — Exam 19/05</div>
+                    <h1>Français <span class="span-francais">BTS</span></h1>
+                    <p class="subtitle">Culture générale et expression</p>
+                    <p class="description description-francais">Synthèse ~400 mots · Écriture personnelle · Méthode ETL</p>
+                </header>
 
-                <div class="chapters-grid">
-                    <!-- Chapter 6 -->
-                    <div class="chapter-card chapter-eco" data-chapter="6">
-                        <span class="chapter-tag tag-eco">Economie</span>
-                        <div class="chapter-number">06</div>
-                        <h3>Les fonctions economiques de l'Etat</h3>
-                        <p>Fonctions de l'Etat, croissance, politiques economiques</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch6_knowledge" onclick="startQuiz('ch6', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch6-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch6_practical" onclick="startQuiz('ch6', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch6-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
+                <div class="theme-card">
+                    <div class="chapters-grid">
+                        <!-- F1 -->
+                        <div class="chapter-card chapter-francais" data-chapter="francais-f1">
+                            <span class="chapter-tag tag-francais">Méthode</span>
+                            <div class="chapter-number chapter-number-francais">F1</div>
+                            <h3>Synthèse de documents</h3>
+                            <p>Plan thématique · Reformulation · Neutralité · ~400 mots · ETL de l'info</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-francais-primary" onclick="startQuiz('francais-f1', 'knowledge')">
+                                    Quiz Méthodologie
+                                    <span class="q-count" id="francais-f1-knowledge-count"></span>
+                                    <span class="score-badge" data-key="francais-f1_knowledge"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- F2 -->
+                        <div class="chapter-card chapter-francais" data-chapter="francais-f2">
+                            <span class="chapter-tag tag-francais">Argumentation</span>
+                            <div class="chapter-number chapter-number-francais">F2</div>
+                            <h3>Écriture personnelle</h3>
+                            <p>Thèse · Antithèse · Synthèse · Arguments · Connecteurs · ~200 mots</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-francais-primary" onclick="startQuiz('francais-f2', 'knowledge')">
+                                    Quiz Méthodologie
+                                    <span class="q-count" id="francais-f2-knowledge-count"></span>
+                                    <span class="score-badge" data-key="francais-f2_knowledge"></span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Chapter 7 -->
-                    <div class="chapter-card chapter-droit" data-chapter="7">
-                        <span class="chapter-tag tag-droit">Droit</span>
-                        <div class="chapter-number">07</div>
-                        <h3>La regulation par le droit</h3>
-                        <p>Liberte d'entreprendre, concurrence, propriete industrielle</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch7_knowledge" onclick="startQuiz('ch7', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch7-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch7_practical" onclick="startQuiz('ch7', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch7-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
+                    <!-- Info box méthode -->
+                    <div class="info-box info-box-francais">
+                        <div class="info-box-icon">💡</div>
+                        <div>
+                            <strong>Analogie IT :</strong> La synthèse de documents = ETL (Extract, Transform, Load).
+                            Tu extrais les infos clés de chaque document, tu les transformes en reformulations neutres,
+                            tu les charges dans un plan thématique structuré.
                         </div>
                     </div>
-
-                    <!-- Chapter 8 -->
-                    <div class="chapter-card chapter-management" data-chapter="8">
-                        <span class="chapter-tag tag-management">Management</span>
-                        <div class="chapter-number">08</div>
-                        <h3>L'environnement et les decisions</h3>
-                        <p>Macro/micro-environnement, PESTEL, Porter, innovation</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch8_knowledge" onclick="startQuiz('ch8', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch8-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch8_practical" onclick="startQuiz('ch8', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch8-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Theme 2 Quiz -->
-                <div class="theme-quiz-section">
-                    <button class="btn btn-theme-quiz" data-quiz="theme2_knowledge" onclick="startQuiz('theme2', 'knowledge')">
-                        Grand Quiz Theme 2 - 100 Questions
-                        <span class="q-count" id="theme2-knowledge-count"></span>
-                        <span class="score-badge"></span>
-                    </button>
                 </div>
             </div>
 
-            <!-- THEME 3 -->
-            <div class="theme-card theme-section" id="theme-3" style="display:none">
-                <div class="theme-header">
-                    <span class="theme-badge">1re annee</span>
-                    <h2>Theme 3</h2>
-                    <p>L'organisation de l'activite de l'entreprise</p>
-                </div>
+            <!-- ============================== ANGLAIS ============================== -->
+            <div id="subject-anglais" class="subject-section">
+                <header class="hero hero-anglais">
+                    <div class="hero-badge hero-badge-anglais">Coef 2 · E2 · Écrit 2h + Oral 20mn — Exam 19/05</div>
+                    <h1>Anglais <span class="span-anglais">IT</span></h1>
+                    <p class="subtitle">Expression et communication en langue anglaise</p>
+                    <p class="description description-anglais">Vocabulaire technique · Documentation · B2 CECRL · Niveau natif pour un dev</p>
+                </header>
 
-                <div class="chapters-grid">
-                    <!-- Chapter 9 -->
-                    <div class="chapter-card chapter-eco" data-chapter="9">
-                        <span class="chapter-tag tag-eco">Economie</span>
-                        <div class="chapter-number">09</div>
-                        <h3>Les choix de production</h3>
-                        <p>Facteurs de production, productivite, couts, chaine de valeur, impartition</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch9_knowledge" onclick="startQuiz('ch9', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch9-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch9_practical" onclick="startQuiz('ch9', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch9-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
+                <div class="theme-card">
+                    <div class="chapters-grid">
+                        <!-- A1 -->
+                        <div class="chapter-card chapter-anglais" data-chapter="anglais-a1">
+                            <span class="chapter-tag tag-anglais">Vocabulaire</span>
+                            <div class="chapter-number chapter-number-anglais">A1</div>
+                            <h3>Vocabulaire IT en anglais</h3>
+                            <p>Networking · Security · Cloud · Dev · Sysadmin · Termes techniques courants</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-anglais-primary" onclick="startQuiz('anglais-a1', 'knowledge')">
+                                    Quiz Vocabulaire
+                                    <span class="q-count" id="anglais-a1-knowledge-count"></span>
+                                    <span class="score-badge" data-key="anglais-a1_knowledge"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- A2 -->
+                        <div class="chapter-card chapter-anglais" data-chapter="anglais-a2">
+                            <span class="chapter-tag tag-anglais">Expression</span>
+                            <div class="chapter-number chapter-number-anglais">A2</div>
+                            <h3>Expression professionnelle</h3>
+                            <p>Incident reports · Post-mortems · Emails pro · Présentations · README</p>
+                            <div class="chapter-actions">
+                                <button class="btn btn-anglais-primary" onclick="startQuiz('anglais-a2', 'knowledge')">
+                                    Quiz Expression
+                                    <span class="q-count" id="anglais-a2-knowledge-count"></span>
+                                    <span class="score-badge" data-key="anglais-a2_knowledge"></span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Chapter 10 -->
-                    <div class="chapter-card chapter-droit" data-chapter="10">
-                        <span class="chapter-tag tag-droit">Droit</span>
-                        <div class="chapter-number">10</div>
-                        <h3>Les choix de structure juridique</h3>
-                        <p>Entreprise individuelle, societes, regimes matrimoniaux, ESS, SCOP</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch10_knowledge" onclick="startQuiz('ch10', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch10-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch10_practical" onclick="startQuiz('ch10', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch10-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
+                    <!-- Info box anglais -->
+                    <div class="info-box info-box-anglais">
+                        <div class="info-box-icon">💡</div>
+                        <div>
+                            <strong>Analogie IT :</strong> L'anglais IT, c'est ton langage natif.
+                            Tu lis déjà des man pages, des Stack Overflow, des changelogs en anglais.
+                            L'examen c'est formaliser ce que tu fais déjà au quotidien.
                         </div>
                     </div>
-
-                    <!-- Chapter 11 -->
-                    <div class="chapter-card chapter-droit" data-chapter="11">
-                        <span class="chapter-tag tag-droit">Droit</span>
-                        <div class="chapter-number">11</div>
-                        <h3>Les risques et la responsabilite</h3>
-                        <p>Risques, responsabilite civile, penale, produits defectueux</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch11_knowledge" onclick="startQuiz('ch11', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch11-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch11_practical" onclick="startQuiz('ch11', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch11-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Chapter 12 -->
-                    <div class="chapter-card chapter-management" data-chapter="12">
-                        <span class="chapter-tag tag-management">Management</span>
-                        <div class="chapter-number">12</div>
-                        <h3>L'organisation des ressources</h3>
-                        <p>Processus, parties prenantes, ressources, competences, diagnostic interne</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch12_knowledge" onclick="startQuiz('ch12', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch12-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch12_practical" onclick="startQuiz('ch12', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch12-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Chapter 13 -->
-                    <div class="chapter-card chapter-management" data-chapter="13">
-                        <span class="chapter-tag tag-management">Management</span>
-                        <div class="chapter-number">13</div>
-                        <h3>L'organisation interne</h3>
-                        <p>Management, styles de direction, structures, coordination (Mintzberg)</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch13_knowledge" onclick="startQuiz('ch13', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch13-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch13_practical" onclick="startQuiz('ch13', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch13-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Chapter 14 -->
-                    <div class="chapter-card chapter-management" data-chapter="14">
-                        <span class="chapter-tag tag-management">Management</span>
-                        <div class="chapter-number">14</div>
-                        <h3>Le financement de l'entreprise</h3>
-                        <p>Cycle d'exploitation, investissement, modes de financement</p>
-                        <div class="chapter-actions">
-                            <button class="btn btn-knowledge" data-quiz="ch14_knowledge" onclick="startQuiz('ch14', 'knowledge')">
-                                Quiz Connaissances
-                                <span class="q-count" id="ch14-knowledge-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                            <button class="btn btn-practical" data-quiz="ch14_practical" onclick="startQuiz('ch14', 'practical')">
-                                Cas Pratiques / BTS
-                                <span class="q-count" id="ch14-practical-count"></span>
-                                <span class="score-badge"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Theme 3 Quiz -->
-                <div class="theme-quiz-section">
-                    <button class="btn btn-theme-quiz" data-quiz="theme3_knowledge" onclick="startQuiz('theme3', 'knowledge')">
-                        Grand Quiz Theme 3 - 100 Questions
-                        <span class="q-count" id="theme3-knowledge-count"></span>
-                        <span class="score-badge"></span>
-                    </button>
                 </div>
             </div>
-        </section>
+
+        </section><!-- END HOME PAGE -->
 
         <!-- QUIZ PAGE -->
         <section id="quiz-page" class="page">
@@ -401,7 +606,6 @@
                     <span class="score-correct" id="score-correct">0</span> / <span id="score-total">0</span>
                 </div>
             </div>
-
             <div class="quiz-content" id="quiz-content">
                 <div class="question-card" id="question-card">
                     <div class="question-number" id="question-number"></div>
@@ -424,7 +628,7 @@
                 <h2 id="results-title"></h2>
                 <div class="results-score">
                     <span class="score-big" id="results-score-value"></span>
-                    <span class="score-label">de bonnes reponses</span>
+                    <span class="score-label">de bonnes réponses</span>
                 </div>
                 <div class="results-details" id="results-details"></div>
                 <div class="results-actions">
@@ -439,13 +643,14 @@
         <section id="review-page" class="page">
             <div class="review-header">
                 <button class="btn-back" onclick="goHome()">Accueil</button>
-                <h2>Revision des erreurs</h2>
+                <h2>Révision des erreurs</h2>
             </div>
             <div class="review-content" id="review-content"></div>
         </section>
     </div>
 
     <script src="js/app.js"></script>
+    <!-- CEJM -->
     <script src="js/data-ch1.js"></script>
     <script src="js/data-ch2.js"></script>
     <script src="js/data-ch3.js"></script>
@@ -463,5 +668,18 @@
     <script src="js/data-ch13.js"></script>
     <script src="js/data-ch14.js"></script>
     <script src="js/data-theme3.js"></script>
+    <!-- MATHS -->
+    <script src="js/data-maths-m1.js"></script>
+    <script src="js/data-maths-m2.js"></script>
+    <script src="js/data-maths-m3.js"></script>
+    <script src="js/data-maths-m4.js"></script>
+    <script src="js/data-maths-m5.js"></script>
+    <script src="js/data-maths-m6.js"></script>
+    <!-- FRANÇAIS -->
+    <script src="js/data-francais-f1.js"></script>
+    <script src="js/data-francais-f2.js"></script>
+    <!-- ANGLAIS -->
+    <script src="js/data-anglais-a1.js"></script>
+    <script src="js/data-anglais-a2.js"></script>
 </body>
 </html>
