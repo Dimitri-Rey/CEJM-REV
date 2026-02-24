@@ -11,7 +11,9 @@
       "Bash(convert:*)",
       "Bash(ls:*)",
       "Bash(python3 -m json.tool:*)",
-      "WebFetch(domain:dimitri-rey.github.io)"
+      "WebFetch(domain:dimitri-rey.github.io)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
