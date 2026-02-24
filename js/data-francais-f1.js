@@ -207,5 +207,89 @@ registerQuiz('francais-f1', 'knowledge', [
         answer: 1,
         explanation: "Synthèse = plusieurs documents, plan thématique, reformulation croisée, neutralité. Résumé = UN seul document, même plan que l'original, objectivité. La synthèse est une compétence de niveau supérieur.",
         context: ""
+    },
+    {
+        question: "En synthèse, que signifient la 'confrontation' et le 'rapprochement' des documents ?",
+        options: [
+            "Confrontation = comparer les couvertures des livres ; rapprochement = les ranger ensemble",
+            "Confrontation = montrer les divergences entre les documents ; rapprochement = montrer leurs convergences (idées communes)",
+            "Confrontation = critiquer les documents ; rapprochement = les résumer ensemble",
+            "Confrontation = opposer auteur par auteur ; rapprochement = copier les mêmes passages"
+        ],
+        answer: 1,
+        explanation: "Confronter = identifier les points de DÉSACCORD ou de tension entre les documents. Rapprocher = identifier les points de CONVERGENCE (idées partagées). C'est le cœur de la synthèse : croiser les documents, pas les juxtaposer.",
+        context: ""
+    },
+    {
+        question: "Combien de documents composent généralement le corpus d'une synthèse BTS ?",
+        options: [
+            "1 à 2 documents",
+            "3 à 4 documents",
+            "5 à 6 documents",
+            "7 à 8 documents"
+        ],
+        answer: 1,
+        explanation: "Le corpus BTS comprend en général 3 à 4 documents de natures variées (texte littéraire, article de presse, essai, image, graphique...). Chaque document doit être pris en compte dans la synthèse : aucun ne doit être oublié.",
+        context: ""
+    },
+    {
+        question: "Quels types de documents peuvent figurer dans un corpus de synthèse BTS ?",
+        options: [
+            "Uniquement des textes littéraires (romans, poèmes)",
+            "Uniquement des articles de presse et des essais",
+            "Des textes variés (article, essai, poème, extrait littéraire) mais aussi des images, graphiques ou photographies",
+            "Uniquement des documents scientifiques et statistiques"
+        ],
+        answer: 2,
+        explanation: "Le corpus peut mêler des textes (article de presse, essai philosophique, extrait de roman, poème, texte de loi) ET des documents iconographiques (photographie, dessin, affiche, graphique, tableau statistique). La diversité est une caractéristique du BTS.",
+        context: ""
+    },
+    {
+        question: "Comment intégrer un document iconographique (image, photographie) dans une synthèse ?",
+        options: [
+            "On l'ignore car seuls les textes comptent",
+            "On se contente de le décrire en détail sans l'analyser",
+            "On identifie son message, son intention et on le confronte aux idées des autres documents comme n'importe quel texte",
+            "On le place en annexe et on le mentionne en conclusion"
+        ],
+        answer: 2,
+        explanation: "Un document iconographique = un document à part entière. On analyse son MESSAGE (que montre-t-il ? quelle thèse illustre-t-il ?), pas seulement sa description. On le confronte et le rapproche des autres documents, exactement comme un texte.",
+        context: ""
+    },
+    {
+        question: "Qu'est-ce que la 'reformulation' en synthèse et pourquoi est-elle essentielle ?",
+        options: [
+            "C'est le fait de traduire les documents en anglais pour vérifier sa compréhension",
+            "C'est le fait de reprendre les idées des documents avec ses propres mots, sans copier les formulations originales",
+            "C'est le fait de résumer chaque document en une seule phrase",
+            "C'est le fait de reformuler la consigne de l'examen pour mieux la comprendre"
+        ],
+        answer: 1,
+        explanation: "Reformuler = exprimer les idées des auteurs avec SES PROPRES MOTS. C'est une compétence clé évaluée au BTS : elle prouve qu'on a compris le texte et qu'on sait restituer une idée sans plagier. Le copier-coller, même partiel, est sanctionné.",
+        context: ""
+    },
+    {
+        question: "Comment répartir idéalement le temps lors de l'épreuve de 4 heures (synthèse + écriture personnelle) ?",
+        options: [
+            "Synthèse : 1h — Écriture personnelle : 3h",
+            "Synthèse : 2h — Écriture personnelle : 2h",
+            "Synthèse : 2h30 — Écriture personnelle : 1h30",
+            "Synthèse : 3h30 — Écriture personnelle : 30 min"
+        ],
+        answer: 2,
+        explanation: "Répartition recommandée : synthèse ~2h30 (lecture approfondie + tableau de confrontation + rédaction + relecture) et écriture personnelle ~1h30 (réflexion + plan + rédaction + relecture). La synthèse est plus longue car elle vaut plus de points et demande un travail préparatoire conséquent.",
+        context: ""
+    },
+    {
+        question: "Quelles sont les erreurs fréquentes qui font perdre des points en synthèse de documents ?",
+        options: [
+            "Utiliser des connecteurs logiques et faire un plan thématique",
+            "Donner son avis personnel, oublier un document, faire du résumé document par document, dépasser le nombre de mots",
+            "Citer les numéros des documents et reformuler les idées",
+            "Rédiger une introduction avec présentation du corpus et problématique"
+        ],
+        answer: 1,
+        explanation: "Erreurs sanctionnées : (1) avis personnel (interdit), (2) oublier un document du corpus, (3) résumer les documents un par un au lieu de croiser, (4) copier des phrases sans reformuler, (5) dépasser largement le nombre de mots, (6) absence de plan ou de transitions. Ces erreurs montrent une méconnaissance de la méthode.",
+        context: ""
     }
 ]);

@@ -106,6 +106,7 @@ function startQuiz(chapter, type) {
         // Français
         'francais-f1': 'F1 — Synthèse de documents',
         'francais-f2': 'F2 — Écriture personnelle',
+        'francais-f3': 'F3 — Les animaux et nous (Thème 2026)',
         // Anglais
         'anglais-a1': 'A1 — Vocabulaire IT',
         'anglais-a2': 'A2 — Expression professionnelle'

@@ -176,5 +176,65 @@ registerQuiz('francais-f2', 'knowledge', [
         answer: 0,
         explanation: "Analogie = rapprocher deux réalités similaires. Ex : 'De même que nous reconnaissons la sensibilité des humains handicapés ne pouvant s'exprimer verbalement, nous pourrions reconnaître celle des animaux.' Très utile dans le thème animaux/humains.",
         context: ""
+    },
+    {
+        question: "En écriture personnelle, peut-on utiliser des exemples qui ne proviennent PAS des documents du corpus ?",
+        options: [
+            "Non, il faut se limiter strictement aux documents fournis",
+            "Oui, c'est même encouragé : films, livres, expériences personnelles, actualité enrichissent l'argumentation",
+            "Seulement si on a fini de citer tous les documents du corpus",
+            "Non, utiliser des exemples extérieurs est considéré comme du hors-sujet"
+        ],
+        answer: 1,
+        explanation: "En écriture personnelle, les exemples extérieurs au corpus sont ENCOURAGÉS et valorisés ! Films, romans, actualité, expériences vécues, références culturelles montrent une culture générale riche. C'est ce qui distingue une bonne copie d'une copie moyenne.",
+        context: ""
+    },
+    {
+        question: "Qu'est-ce qu'une 'concession' dans une argumentation ?",
+        options: [
+            "Le fait d'abandonner son point de vue face à un argument adverse",
+            "Une figure de style pour embellir le texte",
+            "Le fait d'admettre la validité d'un argument adverse avant de le dépasser ('Certes... mais...')",
+            "Un résumé de la thèse opposée sans y répondre"
+        ],
+        answer: 2,
+        explanation: "La concession = reconnaître qu'un argument adverse a du mérite AVANT de le nuancer ou le dépasser. Structure type : 'Certes, [argument adverse]. Cependant / Néanmoins, [votre position].' C'est une marque de maturité intellectuelle très valorisée au BTS.",
+        context: ""
+    },
+    {
+        question: "Pour le thème 'Les animaux et nous', quels types de références culturelles sont les plus pertinents en écriture personnelle ?",
+        options: [
+            "Uniquement des références scientifiques et des statistiques",
+            "Des références variées : littérature (La Fontaine, Kafka, Orwell), philosophie (Descartes, Singer), cinéma (documentaires animaliers), actualité (bien-être animal)",
+            "Uniquement des anecdotes personnelles sur ses animaux de compagnie",
+            "Uniquement des citations de philosophes antiques"
+        ],
+        answer: 1,
+        explanation: "Le thème 'Les animaux et nous' se prête à des références très variées : fables de La Fontaine, 'La Métamorphose' de Kafka, 'La Ferme des animaux' d'Orwell, philosophie (Descartes, Peter Singer), éthologie (Jane Goodall), cinéma, actualité sur l'élevage ou les droits des animaux. La diversité des références est un critère de qualité.",
+        context: ""
+    },
+    {
+        question: "Comment rédiger une phrase d'accroche ('amorce') efficace pour l'introduction d'une écriture personnelle ?",
+        options: [
+            "Commencer par 'Depuis la nuit des temps...' ou 'De tout temps...'",
+            "Recopier la question posée par le sujet mot pour mot",
+            "Partir d'un fait marquant, d'une citation pertinente ou d'un constat concret lié au sujet",
+            "Commencer directement par 'Je pense que...' et donner sa thèse"
+        ],
+        answer: 2,
+        explanation: "Une bonne accroche capte l'attention : fait d'actualité ('En 2024, une loi reconnaît les animaux comme êtres sensibles...'), citation ('Montaigne écrivait déjà...'), constat frappant ('80% des Français possèdent un animal'). Éviter les formules creuses ('Depuis toujours...') et ne pas recopier le sujet.",
+        context: ""
+    },
+    {
+        question: "Quelle est la différence entre 'illustrer' et 'argumenter' en écriture personnelle ?",
+        options: [
+            "Aucune différence, les deux mots sont synonymes",
+            "Illustrer = donner un exemple concret ; argumenter = développer un raisonnement logique qui prouve une idée",
+            "Illustrer = utiliser des images ; argumenter = utiliser des mots",
+            "Illustrer = citer un auteur ; argumenter = donner son avis"
+        ],
+        answer: 1,
+        explanation: "Argumenter = construire un RAISONNEMENT logique (cause/conséquence, comparaison, déduction) qui défend une idée. Illustrer = donner un EXEMPLE concret qui rend l'argument plus vivant. Les deux sont complémentaires : un argument sans exemple reste abstrait, un exemple sans argument reste anecdotique.",
+        context: ""
     }
 ]);
