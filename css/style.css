@@ -1349,6 +1349,30 @@ body {
     border-color: var(--maths);
 }
 
+.btn-calculator-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 10px 24px;
+    background: rgba(243, 156, 18, 0.2);
+    color: var(--maths);
+    border: 1px solid rgba(243, 156, 18, 0.4);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.btn-calculator-home:hover {
+    background: rgba(243, 156, 18, 0.3);
+    border-color: var(--maths);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(243, 156, 18, 0.3);
+}
+
 /* ===== COURSE SECTIONS (MATHS) ===== */
 .course-toggle {
     margin-bottom: 14px;
