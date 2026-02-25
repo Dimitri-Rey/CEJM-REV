@@ -7,6 +7,7 @@ let answers = [];
 let quizType = '';
 let quizChapter = '';
 let activeSubject = 'cejm';
+let hintTimerId = null;
 
 // All quiz data registry
 const quizData = {};
@@ -125,6 +126,12 @@ function startQuiz(chapter, type) {
     document.getElementById('score-total').textContent = currentQuiz.length;
     document.getElementById('score-correct').textContent = '0';
 
+    // Show/hide calculator button for maths quizzes
+    const calcBtn = document.getElementById('btn-calculator');
+    if (calcBtn) calcBtn.classList.toggle('hidden', !chapter.startsWith('maths-'));
+    const calcWidget = document.getElementById('calculator-widget');
+    if (calcWidget) calcWidget.classList.add('hidden');
+
     showPage('quiz-page');
     showQuestion();
 }
@@ -188,12 +195,20 @@ function showQuestion() {
     document.getElementById('explanation').classList.add('hidden');
     document.getElementById('explanation').className = 'explanation hidden';
     document.getElementById('btn-next').classList.add('hidden');
+
+    // Hint system for maths quizzes
+    clearHintTimer();
+    if (quizChapter.startsWith('maths-') && q.hint) {
+        startHintTimer(q.hint);
+    }
 }
 
 function selectAnswer(btn, selectedIndex, question) {
     // Prevent double click
     const allBtns = document.querySelectorAll('.option-btn');
     if (btn.classList.contains('disabled')) return;
+
+    clearHintTimer();
 
     const isCorrect = selectedIndex === question.answer;
 
@@ -374,6 +389,202 @@ function switchTheme(themeNum) {
     if (pill) pill.classList.add('active');
 }
 
+// ========== HINT TIMER (MATHS) ==========
+
+function startHintTimer(hintText) {
+    clearHintTimer();
+    const hintSection = document.getElementById('hint-section');
+    const timerEl = document.getElementById('hint-timer');
+    const hintEl = document.getElementById('hint-content');
+    if (!hintSection) return;
+
+    hintSection.classList.remove('hidden');
+    timerEl.classList.remove('hidden');
+    hintEl.classList.add('hidden');
+
+    let seconds = 30;
+    document.getElementById('hint-seconds').textContent = seconds;
+    const progressFill = document.getElementById('hint-progress-fill');
+    progressFill.style.transition = 'none';
+    progressFill.style.width = '100%';
+    // Force reflow then animate
+    progressFill.offsetWidth;
+    progressFill.style.transition = 'width 1s linear';
+
+    hintTimerId = setInterval(() => {
+        seconds--;
+        document.getElementById('hint-seconds').textContent = seconds;
+        progressFill.style.width = ((seconds / 30) * 100) + '%';
+
+        if (seconds <= 0) {
+            clearInterval(hintTimerId);
+            hintTimerId = null;
+            timerEl.classList.add('hidden');
+            hintEl.classList.remove('hidden');
+            document.getElementById('hint-text-content').textContent = hintText;
+        }
+    }, 1000);
+}
+
+function clearHintTimer() {
+    if (hintTimerId) {
+        clearInterval(hintTimerId);
+        hintTimerId = null;
+    }
+    const hintSection = document.getElementById('hint-section');
+    if (hintSection) hintSection.classList.add('hidden');
+}
+
+// ========== CALCULATOR ==========
+
+let calcExpression = '';
+
+function toggleCalculator() {
+    document.getElementById('calculator-widget').classList.toggle('hidden');
+}
+
+function calcInput(val) {
+    if (calcExpression === 'Erreur') calcExpression = '';
+    calcExpression += val;
+    document.getElementById('calc-display').textContent = calcExpression || '0';
+}
+
+function calcClear() {
+    calcExpression = '';
+    document.getElementById('calc-display').textContent = '0';
+    document.getElementById('calc-history').textContent = '';
+}
+
+function calcBackspace() {
+    if (calcExpression === 'Erreur') { calcClear(); return; }
+    calcExpression = calcExpression.slice(0, -1);
+    document.getElementById('calc-display').textContent = calcExpression || '0';
+}
+
+function calcEquals() {
+    try {
+        let expr = calcExpression.replace(/\^/g, '**');
+        const result = new Function('return ' + expr)();
+        document.getElementById('calc-history').textContent = calcExpression + ' =';
+        calcExpression = String(result);
+        document.getElementById('calc-display').textContent = calcExpression;
+    } catch {
+        document.getElementById('calc-display').textContent = 'Erreur';
+        calcExpression = 'Erreur';
+    }
+}
+
+function calcConvert(base) {
+    const str = calcExpression.trim();
+    let num;
+    if (str.startsWith('0x') || str.startsWith('0X')) num = parseInt(str, 16);
+    else if (str.startsWith('0b') || str.startsWith('0B')) num = parseInt(str.slice(2), 2);
+    else if (str.startsWith('0o') || str.startsWith('0O')) num = parseInt(str.slice(2), 8);
+    else num = parseInt(str);
+
+    if (isNaN(num)) {
+        document.getElementById('calc-display').textContent = 'Erreur';
+        calcExpression = 'Erreur';
+        return;
+    }
+    document.getElementById('calc-history').textContent = calcExpression + ' → ' + base;
+    switch (base) {
+        case 'BIN': calcExpression = '0b' + num.toString(2); break;
+        case 'HEX': calcExpression = '0x' + num.toString(16).toUpperCase(); break;
+        case 'OCT': calcExpression = '0o' + num.toString(8); break;
+        case 'DEC': calcExpression = String(num); break;
+    }
+    document.getElementById('calc-display').textContent = calcExpression;
+}
+
+// ========== COURSE TOGGLE ==========
+
+function toggleCourse(moduleId) {
+    const content = document.getElementById('course-content-' + moduleId);
+    const btn = document.getElementById('course-btn-' + moduleId);
+    if (!content) return;
+    const isHidden = content.classList.toggle('hidden');
+    if (btn) btn.textContent = isHidden ? 'Voir le cours' : 'Masquer le cours';
+}
+
+// ========== OEUVRES CATALOG ==========
+
+function renderOeuvresCatalog() {
+    const container = document.getElementById('oeuvres-grid');
+    const countEl = document.getElementById('oeuvres-count');
+    if (!container || typeof OEUVRES === 'undefined') return;
+
+    const activeCat = document.querySelector('.oeuvre-cat-pill.active');
+    const activeDiff = document.querySelector('.oeuvre-diff-pill.active');
+    const category = activeCat ? activeCat.dataset.category : 'all';
+    const difficulty = activeDiff ? activeDiff.dataset.difficulty : 'all';
+
+    let filtered = OEUVRES;
+    if (category !== 'all') filtered = filtered.filter(o => o.category === category);
+    if (difficulty !== 'all') filtered = filtered.filter(o => o.difficulty === difficulty);
+
+    if (countEl) countEl.textContent = filtered.length + ' oeuvre' + (filtered.length > 1 ? 's' : '');
+
+    container.innerHTML = filtered.map(o => `
+        <div class="oeuvre-card" onclick="openOeuvreModal('${o.id}')">
+            <div class="oeuvre-cover" style="background:${o.coverGradient}">
+                <span class="oeuvre-icon">${o.icon}</span>
+                <span class="oeuvre-cover-cat">${o.categoryLabel}</span>
+            </div>
+            <div class="oeuvre-info">
+                <span class="oeuvre-diff-badge diff-${o.difficulty}">${o.diffLabel}</span>
+                <h4 class="oeuvre-title">${o.title}</h4>
+                <p class="oeuvre-author">${o.author}</p>
+            </div>
+        </div>
+    `).join('');
+}
+
+function openOeuvreModal(id) {
+    const o = OEUVRES.find(x => x.id === id);
+    if (!o) return;
+    const modal = document.getElementById('oeuvre-modal');
+    modal.innerHTML = `
+        <div class="oeuvre-modal-overlay" onclick="closeOeuvreModal()">
+            <div class="oeuvre-modal-content" onclick="event.stopPropagation()">
+                <button class="oeuvre-modal-close" onclick="closeOeuvreModal()">&times;</button>
+                <div class="oeuvre-modal-cover" style="background:${o.coverGradient}">
+                    <span class="oeuvre-icon-large">${o.icon}</span>
+                </div>
+                <div class="oeuvre-modal-badges">
+                    <span class="oeuvre-diff-badge diff-${o.difficulty}">${o.diffLabel}</span>
+                    <span class="oeuvre-cat-badge">${o.categoryLabel}</span>
+                    ${o.year ? '<span class="oeuvre-year-badge">' + o.year + '</span>' : ''}
+                </div>
+                <h3 class="oeuvre-modal-title">${o.title}</h3>
+                <p class="oeuvre-modal-author">${o.author}</p>
+                <div class="oeuvre-modal-summary">${o.summary}</div>
+                ${o.examTip ? '<div class="oeuvre-modal-exam"><strong>Pour l\'examen :</strong> ' + o.examTip + '</div>' : ''}
+                ${o.keyQuote ? '<blockquote class="oeuvre-modal-quote">' + o.keyQuote + '</blockquote>' : ''}
+            </div>
+        </div>
+    `;
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeOeuvreModal() {
+    document.getElementById('oeuvre-modal').classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+function filterOeuvresCategory(category, btn) {
+    document.querySelectorAll('.oeuvre-cat-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    renderOeuvresCatalog();
+}
+
+function filterOeuvresDifficulty(difficulty, btn) {
+    document.querySelectorAll('.oeuvre-diff-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    renderOeuvresCatalog();
+}
+
 // ========== PWA INSTALL ==========
 
 let deferredPrompt = null;
@@ -438,6 +649,14 @@ document.addEventListener('DOMContentLoaded', () => {
             switchTheme(themeNum);
             showPage('home-page');
         });
+    });
+
+    // Render oeuvres catalog if available
+    if (typeof OEUVRES !== 'undefined') renderOeuvresCatalog();
+
+    // Close modal on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeOeuvreModal();
     });
 
     // Register Service Worker for PWA

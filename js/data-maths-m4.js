@@ -7,28 +7,32 @@ registerQuiz('maths-m4', 'knowledge', [
         options: ["0,02", "0,98", "0,80", "0,50"],
         answer: 1,
         explanation: "P(pas de panne) = 1 - P(panne) = 1 - 0,02 = 0,98 = 98%. C'est le principe du complément. En RAID, la tolérance aux pannes repose sur ce calcul.",
-        context: ""
+        context: "",
+        hint: "Pense au complement : P(contraire) = 1 - P(evenement)."
     },
     {
         question: "Un serveur a une disponibilité de 99,9% (three nines). Sur 365 jours, combien d'heures d'indisponibilité cela représente ?",
         options: ["0,876 heure (~52 minutes)", "8,76 heures", "87,6 heures", "876 heures"],
         answer: 0,
         explanation: "0,1% d'indisponibilité × 365 × 24h = 0,001 × 8760h = 8,76h... Correction : 99,9% dispo → 0,1% indispo = 0,001 × 8760h = 8,76h. Pour 99,99% (four nines) : 52,6 minutes/an.",
-        context: "Les SLA définissent la disponibilité : 99% = 87,6h/an, 99,9% = 8,76h/an, 99,99% = 52,6min/an, 99,999% = 5,26min/an."
+        context: "Les SLA définissent la disponibilité : 99% = 87,6h/an, 99,9% = 8,76h/an, 99,99% = 52,6min/an, 99,999% = 5,26min/an.",
+        hint: "Calcule le % d'indisponibilite puis multiplie par le nombre total d'heures dans l'annee (365 x 24)."
     },
     {
         question: "Deux serveurs en parallèle (redondance active) ont chacun une fiabilité de 0,9. Quelle est la fiabilité du système ?",
         options: ["0,81", "0,90", "0,99", "1,00"],
         answer: 2,
         explanation: "En parallèle (redondance) : P(système fonctionne) = 1 - P(les deux tombent) = 1 - (1-0,9)×(1-0,9) = 1 - 0,01 = 0,99. C'est le principe du clustering actif-actif.",
-        context: ""
+        context: "",
+        hint: "En parallele, le systeme tombe seulement si TOUS les composants tombent. Calcule P(tous en panne)."
     },
     {
         question: "Deux composants en série ont des fiabilités de 0,95 et 0,98. Quelle est la fiabilité totale ?",
         options: ["0,931", "0,965", "0,98", "0,95"],
         answer: 0,
         explanation: "En série : P(total) = P(A) × P(B) = 0,95 × 0,98 = 0,931. En série, le système tombe si N'IMPORTE QUEL composant tombe. La fiabilité totale est toujours inférieure au composant le moins fiable.",
-        context: ""
+        context: "",
+        hint: "En serie, on multiplie les fiabilites entre elles. Le resultat est toujours inferieur a chaque composant."
     },
     {
         question: "Quelle est la formule de la probabilité conditionnelle P(A|B) ?",
@@ -40,28 +44,32 @@ registerQuiz('maths-m4', 'knowledge', [
         ],
         answer: 1,
         explanation: "P(A|B) = P(A et B) / P(B). En cybersécurité : P(attaque réussit | vulnérabilité existe) est utilisé pour calculer le risque résiduel après un patch.",
-        context: ""
+        context: "",
+        hint: "La proba conditionnelle utilise l'intersection divisee par la proba de la condition."
     },
     {
         question: "Quelle est la moyenne des valeurs suivantes : 80, 90, 75, 95, 60 ?",
         options: ["80", "82", "85", "90"],
         answer: 1,
         explanation: "(80+90+75+95+60) / 5 = 400 / 5 = 80. Attention : 80+90+75+95+60 = 400. 400/5 = 80. En monitoring réseau, la moyenne des latences indique les performances.",
-        context: ""
+        context: "",
+        hint: "Additionne toutes les valeurs puis divise par le nombre de valeurs."
     },
     {
         question: "Quelle est la médiane de la série : 10, 20, 30, 40, 100 ?",
         options: ["40", "30", "100", "20"],
         answer: 1,
         explanation: "La médiane est la valeur centrale une fois les données triées. 5 valeurs → médiane = 3e valeur = 30. La médiane est plus robuste que la moyenne face aux valeurs extrêmes (outliers/anomalies).",
-        context: ""
+        context: "",
+        hint: "Trie les valeurs et prends celle du milieu. Avec 5 valeurs, c'est la 3e."
     },
     {
         question: "Un événement a une probabilité de 0,3. Si 4 essais indépendants ont lieu, quelle est la probabilité qu'il se produise EXACTEMENT 2 fois ?",
         options: ["0,2646", "0,30", "0,0900", "0,4116"],
         answer: 0,
         explanation: "Loi binomiale : P(X=k) = C(n,k) × p^k × (1-p)^(n-k). Ici n=4, k=2, p=0,3. C(4,2)=6, 0,3²=0,09, 0,7²=0,49. 6×0,09×0,49 = 0,2646.",
-        context: ""
+        context: "",
+        hint: "Applique la formule binomiale : C(n,k) x p^k x (1-p)^(n-k). Commence par calculer C(4,2)."
     },
     {
         question: "Que représente l'écart-type d'une série de mesures de latence réseau ?",
@@ -73,21 +81,24 @@ registerQuiz('maths-m4', 'knowledge', [
         ],
         answer: 2,
         explanation: "L'écart-type mesure la dispersion des données. Un faible écart-type = latences stables (bon réseau). Un grand écart-type = latences variables (jitter élevé, mauvais pour VoIP).",
-        context: ""
+        context: "",
+        hint: "Pense au jitter reseau : l'ecart-type mesure a quel point les valeurs s'eloignent de la moyenne."
     },
     {
         question: "Quelle est la valeur de C(5,2) (combinaison de 5 objets pris 2 à 2) ?",
         options: ["5", "10", "15", "20"],
         answer: 1,
         explanation: "C(5,2) = 5! / (2! × 3!) = (5×4) / (2×1) = 20/2 = 10. Les combinaisons sont utilisées dans la loi binomiale pour calculer les probabilités en cybersécurité et en test.",
-        context: ""
+        context: "",
+        hint: "C(n,k) = n! / (k! x (n-k)!). Simplifie : (5x4) / (2x1)."
     },
     {
         question: "Un switch a 24 ports. La probabilité qu'un port soit en état 'up' est 0,8. Quelle est l'espérance du nombre de ports actifs ?",
         options: ["19,2", "20", "24", "16"],
         answer: 0,
         explanation: "Espérance d'une loi binomiale : E(X) = n × p = 24 × 0,8 = 19,2 ports actifs en moyenne. L'espérance est la moyenne théorique d'un phénomène aléatoire.",
-        context: ""
+        context: "",
+        hint: "L'esperance d'une binomiale c'est simplement E(X) = n x p."
     },
     {
         question: "En statistiques, que signifie une valeur aberrante (outlier) dans un dataset de temps de réponse d'un serveur ?",
@@ -99,35 +110,40 @@ registerQuiz('maths-m4', 'knowledge', [
         ],
         answer: 1,
         explanation: "Un outlier est une valeur qui s'écarte fortement de la distribution normale. En monitoring : un temps de réponse de 5000ms quand la moyenne est 20ms signale un incident. Les outils de monitoring (Zabbix, Grafana) détectent les outliers automatiquement.",
-        context: ""
+        context: "",
+        hint: "Pense a une alerte Zabbix : une valeur qui sort completement de la norme habituelle."
     },
     {
         question: "Si P(A) = 0,4 et P(B) = 0,3 et A et B sont INDÉPENDANTS, que vaut P(A et B) ?",
         options: ["0,12", "0,70", "0,58", "0,28"],
         answer: 0,
         explanation: "Pour des événements indépendants : P(A∩B) = P(A) × P(B) = 0,4 × 0,3 = 0,12. L'indépendance signifie que la survenue de A ne modifie pas la probabilité de B.",
-        context: ""
+        context: "",
+        hint: "Quand deux evenements sont independants, P(A et B) = P(A) x P(B). Simple multiplication."
     },
     {
         question: "Une attaque par brute-force teste des mots de passe de 6 chiffres. Combien de combinaisons au maximum ?",
         options: ["600 000", "1 000 000", "720", "60 000"],
         answer: 1,
         explanation: "10 chiffres (0-9) × 6 positions = 10⁶ = 1 000 000 combinaisons. En probabilités, la probabilité de trouver au premier essai = 1/1 000 000 = 0,0001%. D'où l'intérêt des mots de passe longs avec caractères variés.",
-        context: ""
+        context: "",
+        hint: "Chaque position a 10 choix possibles (0-9). Multiplie les possibilites pour chaque position."
     },
     {
         question: "Quelle est la variance des valeurs 2, 4, 4, 4, 5, 5, 7, 9 ?",
         options: ["2", "4", "3", "5"],
         answer: 1,
         explanation: "Moyenne = (2+4+4+4+5+5+7+9)/8 = 40/8 = 5. Variance = moyenne des carrés des écarts = [(2-5)²+(4-5)²+(4-5)²+(4-5)²+(5-5)²+(5-5)²+(7-5)²+(9-5)²]/8 = [9+1+1+1+0+0+4+16]/8 = 32/8 = 4.",
-        context: ""
+        context: "",
+        hint: "Calcule d'abord la moyenne, puis la moyenne des carres des ecarts a cette moyenne."
     },
     {
         question: "Trois serveurs sont en parallèle (redondance active), chacun ayant une fiabilité de 0,9. Quelle est la fiabilité du système global ?",
         options: ["0,999", "0,729", "0,99", "0,900"],
         answer: 0,
         explanation: "En parallèle avec 3 composants : P(système) = 1 - P(les 3 tombent) = 1 - (1-0,9)³ = 1 - (0,1)³ = 1 - 0,001 = 0,999. Plus on ajoute de serveurs en parallèle, plus la fiabilité augmente. C'est le principe du clustering haute disponibilité (HA).",
-        context: ""
+        context: "",
+        hint: "Parallele = 1 - P(tous en panne). Ici : 1 - (0,1)^3. Plus de serveurs = plus fiable."
     },
     {
         question: "En statistiques, que représente le MODE d'un dataset ?",
@@ -139,42 +155,48 @@ registerQuiz('maths-m4', 'knowledge', [
         ],
         answer: 0,
         explanation: "Le mode est la valeur qui apparaît le plus souvent. Par exemple dans {3, 5, 5, 5, 8, 10}, le mode est 5. En analyse de logs, le mode des codes HTTP révèle le type de réponse le plus fréquent (ex : 200 OK).",
-        context: ""
+        context: "",
+        hint: "Pense au code HTTP le plus frequent dans tes logs : c'est la valeur qui revient le plus souvent."
     },
     {
         question: "Un test de pénétration est réalisé 3 fois de manière indépendante. Chaque tentative a une probabilité de succès de 0,4. Quelle est la probabilité d'AU MOINS un succès ?",
         options: ["0,784", "0,400", "0,216", "0,936"],
         answer: 0,
         explanation: "P(au moins 1 succès) = 1 - P(aucun succès) = 1 - (1-0,4)³ = 1 - (0,6)³ = 1 - 0,216 = 0,784 soit 78,4%. Il est plus simple de calculer le complément (aucun succès) puis de soustraire de 1.",
-        context: ""
+        context: "",
+        hint: "\"Au moins un\" = complement de \"aucun\". Calcule P(aucun succes) puis fais 1 - ce resultat."
     },
     {
         question: "Un système RAID 1 utilise 2 disques identiques, chacun ayant une fiabilité de 0,95. Quelle est la fiabilité du système RAID 1 ?",
         options: ["0,9025", "0,9975", "0,95", "0,90"],
         answer: 1,
         explanation: "En RAID 1 (mirroring), les 2 disques sont en parallèle : le système tombe uniquement si LES DEUX tombent. P(système) = 1 - (1-0,95)² = 1 - (0,05)² = 1 - 0,0025 = 0,9975. Le RAID 1 améliore significativement la fiabilité au prix de 50% de capacité perdue.",
-        context: ""
+        context: "",
+        hint: "RAID 1 = miroir = parallele. Le systeme tombe seulement si les 2 disques tombent en meme temps."
     },
     {
         question: "Si la variance d'une série de mesures de latence réseau est de 9 ms², quelle est la valeur de l'écart-type σ ?",
         options: ["3 ms", "9 ms", "81 ms", "4,5 ms"],
         answer: 0,
         explanation: "L'écart-type est la racine carrée de la variance : σ = √Variance = √9 = 3 ms. L'écart-type s'exprime dans la même unité que les données (ici en ms), ce qui le rend plus interprétable que la variance (en ms²).",
-        context: ""
+        context: "",
+        hint: "L'ecart-type est la racine carree de la variance : sigma = racine(V)."
     },
     {
         question: "Si P(A) = 0,5 , P(B) = 0,3 et P(A∩B) = 0,1 , quelle est la valeur de P(A∪B) ?",
         options: ["0,80", "0,70", "0,90", "0,60"],
         answer: 1,
         explanation: "Formule de l'union : P(A∪B) = P(A) + P(B) - P(A∩B) = 0,5 + 0,3 - 0,1 = 0,7. On soustrait l'intersection pour ne pas la compter deux fois. En sécurité, cela sert à calculer la probabilité qu'au moins un type d'incident survienne.",
-        context: ""
+        context: "",
+        hint: "Formule de l'union : P(A ou B) = P(A) + P(B) - P(A et B). On retire l'intersection pour eviter le double comptage."
     },
     {
         question: "Quelle est l'espérance mathématique E(X) du résultat obtenu en lançant un dé équilibré à 6 faces ?",
         options: ["3", "3,5", "4", "6"],
         answer: 1,
         explanation: "E(X) = (1+2+3+4+5+6) / 6 = 21 / 6 = 3,5. L'espérance est la moyenne théorique sur un grand nombre de lancers. Bien que 3,5 ne soit pas un résultat possible, c'est la valeur « attendue » en moyenne (loi des grands nombres).",
-        context: ""
+        context: "",
+        hint: "L'esperance d'un de equilibre = somme de toutes les faces divisee par le nombre de faces."
     },
     {
         question: "Dans une loi binomiale B(n, p), quelle est la formule de la variance V(X) ?",
@@ -186,20 +208,23 @@ registerQuiz('maths-m4', 'knowledge', [
         ],
         answer: 0,
         explanation: "Pour une loi binomiale B(n,p) : V(X) = n × p × (1-p). L'espérance est E(X) = n×p et l'écart-type σ = √(n×p×(1-p)). Par exemple, pour B(100, 0,5) : V = 100×0,5×0,5 = 25, σ = 5.",
-        context: ""
+        context: "",
+        hint: "La variance binomiale utilise les 3 termes : n, p et (1-p). L'esperance n'en utilise que 2."
     },
     {
         question: "Un hébergeur garantit une disponibilité de 99,99% (four nines). Quel est le temps d'indisponibilité maximal autorisé par an ?",
         options: ["~8,76 heures", "~5,26 minutes", "~52,6 minutes", "~3,65 jours"],
         answer: 2,
         explanation: "99,99% dispo → 0,01% d'indisponibilité. 0,0001 × 365,25 × 24 × 60 = 0,0001 × 525 960 ≈ 52,6 minutes/an. Rappel : 99,9% = 8,76h/an, 99,99% = 52,6 min/an, 99,999% (five nines) = 5,26 min/an.",
-        context: ""
+        context: "",
+        hint: "Convertis le % d'indisponibilite en minutes/an. Chaque \"nine\" supplementaire divise le downtime par ~10."
     },
     {
         question: "Un scanner de sécurité détecte 95% des vrais malwares (sensibilité) mais génère 3% de faux positifs. Si 1% des fichiers analysés sont réellement des malwares, quelle est approximativement la probabilité qu'un fichier signalé soit réellement un malware ?",
         options: ["~24%", "~95%", "~75%", "~50%"],
         answer: 0,
         explanation: "Par le théorème de Bayes : P(malware|alerte) = P(alerte|malware)×P(malware) / P(alerte). P(alerte) = 0,95×0,01 + 0,03×0,99 = 0,0095 + 0,0297 = 0,0392. P(malware|alerte) = 0,0095/0,0392 ≈ 0,242 soit ~24%. Même avec un bon scanner, la majorité des alertes sont des faux positifs quand la prévalence est faible. C'est le paradoxe des faux positifs.",
-        context: ""
+        context: "",
+        hint: "Theoreme de Bayes : calcule P(alerte) avec les probabilites totales, puis divise. Attention a la faible prevalence !"
     }
 ]);

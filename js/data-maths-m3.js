@@ -7,28 +7,32 @@ registerQuiz('maths-m3', 'knowledge', [
         options: ["254", "255", "256", "252"],
         answer: 0,
         explanation: "/24 = 8 bits d'hôtes → 2⁸ = 256 adresses total. On retire l'adresse réseau (x.x.x.0) et le broadcast (x.x.x.255). Reste 256 - 2 = 254 hôtes utilisables.",
-        context: ""
+        context: "",
+        hint: "Formule : 2^(32-CIDR) - 2. Pense a retirer l'adresse reseau et le broadcast."
     },
     {
         question: "Quel est le masque sous-réseau correspondant au CIDR /24 ?",
         options: ["255.255.0.0", "255.255.255.0", "255.0.0.0", "255.255.255.128"],
         answer: 1,
         explanation: "/24 = 24 bits à 1 suivi de 8 bits à 0. En binaire : 11111111.11111111.11111111.00000000 = 255.255.255.0. C'est le masque le plus courant en entreprise.",
-        context: ""
+        context: "",
+        hint: "24 bits a 1 = combien d'octets complets a 255 ? Un octet = 8 bits."
     },
     {
         question: "Calculer l'adresse réseau de 192.168.1.50/24",
         options: ["192.168.1.0", "192.168.1.50", "192.168.1.255", "192.168.0.0"],
         answer: 0,
         explanation: "Adresse réseau = IP AND Masque. 192.168.1.50 AND 255.255.255.0 : les 3 premiers octets restent (192.168.1), le dernier octet 50 AND 0 = 0. Résultat : 192.168.1.0",
-        context: ""
+        context: "",
+        hint: "Adresse reseau = IP AND masque. Tout octet AND 0 donne 0."
     },
     {
         question: "Quelle est l'adresse de broadcast du réseau 192.168.1.0/24 ?",
         options: ["192.168.1.0", "192.168.1.1", "192.168.1.254", "192.168.1.255"],
         answer: 3,
         explanation: "Broadcast = dernière adresse du réseau. Pour /24 (8 bits d'hôtes), le dernier octet est 11111111 = 255. Broadcast : 192.168.1.255. C'est l'adresse de diffusion vers tous les hôtes du réseau.",
-        context: ""
+        context: "",
+        hint: "Le broadcast, c'est la derniere adresse du bloc : tous les bits d'hotes a 1."
     },
     {
         question: "Les hôtes 10.0.0.5 et 10.0.0.200 sont-ils dans le même réseau /24 ?",
@@ -40,77 +44,88 @@ registerQuiz('maths-m3', 'knowledge', [
         ],
         answer: 0,
         explanation: "10.0.0.5 AND 255.255.255.0 = 10.0.0.0. 10.0.0.200 AND 255.255.255.0 = 10.0.0.0. Même adresse réseau → même réseau. Ils peuvent communiquer sans routeur.",
-        context: ""
+        context: "",
+        hint: "Fais le AND de chaque IP avec le masque. Si meme resultat = meme reseau."
     },
     {
         question: "Combien d'hôtes utilisables dans un /30 ?",
         options: ["2", "4", "6", "8"],
         answer: 0,
         explanation: "/30 = 2 bits d'hôtes. 2² = 4 adresses total - 2 (réseau + broadcast) = 2 hôtes utilisables. Le /30 est classiquement utilisé pour les liens point-à-point entre routeurs.",
-        context: ""
+        context: "",
+        hint: "32 - 30 = 2 bits d'hotes. Applique la formule 2^n - 2."
     },
     {
         question: "Quel est le masque correspondant à /16 ?",
         options: ["255.0.0.0", "255.255.0.0", "255.255.255.0", "255.255.255.128"],
         answer: 1,
         explanation: "/16 = 16 bits à 1. En octets : 11111111.11111111.00000000.00000000 = 255.255.0.0. Plage privée 172.16.0.0/12 utilise des masques proches. /16 donne 65534 hôtes.",
-        context: ""
+        context: "",
+        hint: "16 bits a 1 = 2 octets complets a 255, puis 2 octets a 0."
     },
     {
         question: "Combien d'hôtes utilisables dans un /16 ?",
         options: ["65 534", "65 536", "65 532", "32 768"],
         answer: 0,
         explanation: "/16 = 16 bits d'hôtes. 2¹⁶ = 65 536 adresses - 2 = 65 534 hôtes. Les 3 plages privées RFC 1918 : 10.0.0.0/8 (~16M), 172.16.0.0/12 (~1M), 192.168.0.0/16 (~65K).",
-        context: ""
+        context: "",
+        hint: "16 bits d'hotes = 2^16 adresses totales. N'oublie pas de retirer 2."
     },
     {
         question: "Une entreprise a besoin de 50 hôtes par sous-réseau. Quel préfixe CIDR choisir ?",
         options: ["/24", "/26", "/27", "/28"],
         answer: 1,
         explanation: "/26 = 6 bits d'hôtes → 2⁶ - 2 = 62 hôtes utilisables (≥50). /27 = 5 bits → 2⁵ - 2 = 30 (insuffisant). Il faut trouver la plus petite puissance de 2 qui dépasse 50+2=52, soit 2⁶=64.",
-        context: ""
+        context: "",
+        hint: "Cherche la plus petite puissance de 2 superieure a 50+2. Puis CIDR = 32 - n."
     },
     {
         question: "Quelle est la plage d'adresses privées de classe C ?",
         options: ["10.0.0.0 – 10.255.255.255", "172.16.0.0 – 172.31.255.255", "192.168.0.0 – 192.168.255.255", "169.254.0.0 – 169.254.255.255"],
         answer: 2,
         explanation: "Les 3 plages privées RFC 1918 : classe A : 10.0.0.0/8, classe B : 172.16.0.0/12, classe C : 192.168.0.0/16. Les adresses APIPA (169.254.x.x) sont auto-attribuées quand le DHCP échoue.",
-        context: ""
+        context: "",
+        hint: "RFC 1918 definit 3 plages : 10.x (classe A), 172.16-31.x (B), 192.168.x.x (C)."
     },
     {
         question: "Quel est le masque en notation décimale de /25 ?",
         options: ["255.255.255.0", "255.255.255.128", "255.255.255.192", "255.255.255.224"],
         answer: 1,
         explanation: "/25 = 25 bits à 1. Le dernier octet : 10000000 = 128. Donc masque = 255.255.255.128. Un /25 divise un /24 en 2 sous-réseaux de 126 hôtes chacun.",
-        context: ""
+        context: "",
+        hint: "25 - 24 = 1 bit supplementaire dans le dernier octet. 1 bit a 1 puis 7 a 0 = ?"
     },
     {
         question: "Le masque 255.255.255.192 correspond à quel préfixe CIDR ?",
         options: ["/24", "/25", "/26", "/27"],
         answer: 2,
         explanation: "192 en binaire = 11000000 = 2 bits à 1. Le masque complet a donc 24+2=26 bits à 1 → /26. 255.255.255.192 = /26, donnant 2⁶-2=62 hôtes par sous-réseau.",
-        context: ""
+        context: "",
+        hint: "Convertis 192 en binaire et compte les bits a 1. Ajoute-les aux 24 des 3 premiers octets."
     },
     {
         question: "Quelle est l'adresse réseau de 172.16.45.130/26 ?",
         options: ["172.16.45.0", "172.16.45.128", "172.16.45.64", "172.16.45.192"],
         answer: 1,
         explanation: "/26 → masque = 255.255.255.192. Dernier octet : 130 AND 192 = ? 130=10000010, 192=11000000. AND bit à bit = 10000000 = 128. Adresse réseau : 172.16.45.128/26.",
-        context: ""
+        context: "",
+        hint: "Fais le AND entre le dernier octet (130) et le masque du dernier octet (192) en binaire."
     },
     {
         question: "Combien de sous-réseaux /27 peut-on créer à partir d'un réseau /24 ?",
         options: ["4", "6", "8", "16"],
         answer: 2,
         explanation: "Un /27 emprunte 3 bits au /24 (27-24=3 bits de sous-réseau). 2³ = 8 sous-réseaux /27. Chaque /27 contient 2⁵-2 = 30 hôtes. 8 sous-réseaux × 30 hôtes = 240 hôtes au total.",
-        context: ""
+        context: "",
+        hint: "Nombre de sous-reseaux = 2^(difference entre les deux CIDR). Ici 27 - 24 = ?"
     },
     {
         question: "Qu'est-ce qu'une adresse de loopback IPv4 ?",
         options: ["192.168.0.1", "10.0.0.1", "127.0.0.1", "172.16.0.1"],
         answer: 2,
         explanation: "127.0.0.1 est l'adresse de loopback (localhost). Tout le réseau 127.0.0.0/8 est réservé. Ping 127.0.0.1 teste la pile réseau locale sans envoyer de paquet sur le réseau physique.",
-        context: ""
+        context: "",
+        hint: "Pense a 'localhost' — l'adresse qui boucle sur ta propre machine, dans le bloc 127.x.x.x."
     },
     {
         question: "Quelle est la plage d'hôtes utilisables dans 192.168.10.0/28 ?",
@@ -122,7 +137,8 @@ registerQuiz('maths-m3', 'knowledge', [
         ],
         answer: 0,
         explanation: "/28 = 4 bits d'hôtes → 2⁴=16 adresses. Réseau : .0, broadcast : .15. Hôtes utilisables : .1 à .14 = 14 hôtes. Utile pour les petits segments (DMZ avec peu de serveurs).",
-        context: ""
+        context: "",
+        hint: "La premiere adresse utilisable = reseau + 1, la derniere = broadcast - 1."
     },
     {
         question: "Que signifie la notation 0.0.0.0/0 ?",
@@ -134,21 +150,24 @@ registerQuiz('maths-m3', 'knowledge', [
         ],
         answer: 0,
         explanation: "0.0.0.0/0 = route par défaut (default route). Elle correspond à toutes les adresses possibles. Sur un routeur : 'ip route 0.0.0.0 0.0.0.0 [next-hop]' envoie tout le trafic inconnu vers la passerelle.",
-        context: ""
+        context: "",
+        hint: "/0 = zero bit de reseau. Ca matche donc toutes les adresses possibles."
     },
     {
         question: "Combien d'adresses IPv4 publiques existe-t-il en théorie ?",
         options: ["Environ 2 milliards", "Environ 4,3 milliards", "Environ 8,6 milliards", "Illimité"],
         answer: 1,
         explanation: "2³² = 4 294 967 296 ≈ 4,3 milliards. En pratique moins sont publiquement routables (plages privées, réservées). C'est pour cette raison qu'IPv6 (2¹²⁸ adresses) a été créé.",
-        context: ""
+        context: "",
+        hint: "Une adresse IPv4 = 32 bits. Combien de combinaisons possibles avec 32 bits ?"
     },
     {
         question: "Quel préfixe correspond au masque 255.0.0.0 ?",
         options: ["/8", "/16", "/24", "/32"],
         answer: 0,
         explanation: "255.0.0.0 = 11111111.00000000.00000000.00000000 = 8 bits à 1 → /8. La plage privée 10.0.0.0/8 utilise ce masque. Un /8 contient 2²⁴-2 ≈ 16,7 millions d'hôtes.",
-        context: ""
+        context: "",
+        hint: "Chaque octet a 255 = 8 bits a 1. Combien d'octets a 255 ici ?"
     },
     {
         question: "Que signifie /32 en CIDR ?",
@@ -160,7 +179,8 @@ registerQuiz('maths-m3', 'knowledge', [
         ],
         answer: 1,
         explanation: "/32 = 32 bits à 1 = 255.255.255.255. Aucun bit d'hôte → une seule adresse. Utilisé pour les routes hôtes spécifiques (host routes) dans les tables de routage, ou pour les interfaces loopback des routeurs.",
-        context: ""
+        context: "",
+        hint: "32 bits de reseau = 0 bit d'hote. Combien d'adresses avec 0 bits ?"
     },
     {
         question: "Qu'est-ce que le VLSM (Variable Length Subnet Masking) ?",
@@ -172,49 +192,56 @@ registerQuiz('maths-m3', 'knowledge', [
         ],
         answer: 1,
         explanation: "Le VLSM permet de découper un réseau en sous-réseaux de tailles différentes selon les besoins. Par exemple, un /30 pour un lien point-à-point (2 hôtes) et un /24 pour un LAN (254 hôtes), optimisant ainsi l'utilisation de l'espace d'adressage.",
-        context: ""
+        context: "",
+        hint: "Le mot-cle est 'Variable Length' — des masques de longueurs differentes dans un meme reseau."
     },
     {
         question: "Quelle est l'adresse réseau de 10.10.5.200/20 ?",
         options: ["10.10.0.0", "10.10.4.0", "10.10.5.0", "10.10.5.192"],
         answer: 0,
         explanation: "/20 → masque = 255.255.240.0. Calcul sur le 3e octet : 5 AND 240 → 5 = 00000101, 240 = 11110000, AND = 00000000 = 0. Le 4e octet : 200 AND 0 = 0. Adresse réseau : 10.10.0.0/20.",
-        context: ""
+        context: "",
+        hint: "/20 = masque 255.255.240.0. Fais le AND du 3e octet (5) avec 240 en binaire."
     },
     {
         question: "On dispose de quatre réseaux 192.168.4.0/24, 192.168.5.0/24, 192.168.6.0/24 et 192.168.7.0/24. Quel supernet (agrégation de routes) les résume ?",
         options: ["192.168.4.0/21", "192.168.4.0/22", "192.168.0.0/22", "192.168.4.0/23"],
         answer: 1,
         explanation: "Les réseaux .4 .5 .6 .7 partagent les 22 premiers bits. En binaire : 4=00000100, 5=00000101, 6=00000110, 7=00000111. Les 6 bits de poids fort du 3e octet sont identiques (000001xx). Le supernet est donc 192.168.4.0/22, couvrant 4 × 256 = 1024 adresses.",
-        context: ""
+        context: "",
+        hint: "Ecris 4, 5, 6, 7 en binaire et trouve combien de bits de poids fort sont communs."
     },
     {
         question: "À quel préfixe CIDR correspond le masque 255.255.255.240 ?",
         options: ["/26", "/27", "/28", "/29"],
         answer: 2,
         explanation: "240 en binaire = 11110000 = 4 bits à 1 dans le dernier octet. Le masque complet a 24 + 4 = 28 bits à 1 → /28. Un réseau /28 contient 2⁴ = 16 adresses, soit 14 hôtes utilisables.",
-        context: ""
+        context: "",
+        hint: "Convertis 240 en binaire, compte les bits a 1, et ajoute 24."
     },
     {
         question: "Combien de sous-réseaux /28 peut-on créer à partir d'un réseau /24 ?",
         options: ["4", "8", "16", "32"],
         answer: 2,
         explanation: "On emprunte 28 - 24 = 4 bits supplémentaires pour le sous-réseau. 2⁴ = 16 sous-réseaux /28. Chaque /28 contient 2⁴ - 2 = 14 hôtes utilisables. 16 × 14 = 224 hôtes au total (contre 254 sans découpage).",
-        context: ""
+        context: "",
+        hint: "Bits empruntes = 28 - 24 = 4. Nombre de sous-reseaux = 2^(bits empruntes)."
     },
     {
         question: "Quel est le masque wildcard (masque inversé) correspondant au masque 255.255.255.224 ?",
         options: ["0.0.0.32", "0.0.0.31", "0.0.0.63", "0.0.0.15"],
         answer: 1,
         explanation: "Le masque wildcard = 255.255.255.255 - masque réseau. 255 - 255 = 0, 255 - 224 = 31. Wildcard : 0.0.0.31. Ce masque inversé est utilisé dans les ACL Cisco et la configuration OSPF pour identifier la partie hôte.",
-        context: ""
+        context: "",
+        hint: "Wildcard = 255.255.255.255 - masque. Calcule 255 - 224 pour le dernier octet."
     },
     {
         question: "Quelle est l'adresse de broadcast du réseau 172.16.45.128/26 ?",
         options: ["172.16.45.192", "172.16.45.191", "172.16.45.255", "172.16.45.159"],
         answer: 1,
         explanation: "/26 = 6 bits d'hôtes → 2⁶ = 64 adresses par sous-réseau. Le réseau commence à .128. Broadcast = adresse réseau + taille du bloc - 1 = 128 + 64 - 1 = 191. Broadcast : 172.16.45.191.",
-        context: ""
+        context: "",
+        hint: "Broadcast = adresse reseau + taille du bloc - 1. Taille bloc /26 = 2^6 = 64."
     },
     {
         question: "Les hôtes 192.168.1.100/25 et 192.168.1.200/25 sont-ils dans le même sous-réseau ?",
@@ -226,7 +253,8 @@ registerQuiz('maths-m3', 'knowledge', [
         ],
         answer: 1,
         explanation: "/25 → masque = 255.255.255.128. 100 AND 128 = 0 → réseau 192.168.1.0. 200 AND 128 = 128 → réseau 192.168.1.128. Adresses réseau différentes : ils sont dans deux sous-réseaux distincts et ont besoin d'un routeur pour communiquer.",
-        context: ""
+        context: "",
+        hint: "Fais le AND du dernier octet de chaque IP avec 128. Meme resultat = meme sous-reseau."
     },
     {
         question: "Qu'est-ce que le NAT (Network Address Translation) et pourquoi est-il nécessaire ?",
@@ -238,7 +266,8 @@ registerQuiz('maths-m3', 'knowledge', [
         ],
         answer: 1,
         explanation: "Le NAT traduit les adresses privées (10.x, 172.16-31.x, 192.168.x) en adresse(s) publique(s) routable(s) sur Internet. Il est indispensable car les adresses IPv4 publiques sont limitées (~4,3 milliards) et les adresses privées ne sont pas routables sur Internet.",
-        context: ""
+        context: "",
+        hint: "Pense a la box internet : elle traduit ton IP privee (192.168.x.x) en IP publique pour sortir."
     },
     {
         question: "Quelle est la plage d'hôtes utilisables dans le réseau 10.0.0.0/30 ?",
@@ -250,6 +279,7 @@ registerQuiz('maths-m3', 'knowledge', [
         ],
         answer: 0,
         explanation: "/30 = 2 bits d'hôtes → 2² = 4 adresses. Réseau : 10.0.0.0, broadcast : 10.0.0.3. Hôtes utilisables : 10.0.0.1 et 10.0.0.2 (seulement 2). Le /30 est le masque standard pour les liaisons point-à-point entre routeurs.",
-        context: ""
+        context: "",
+        hint: "/30 = 4 adresses totales. Retire la premiere (reseau) et la derniere (broadcast)."
     }
 ]);

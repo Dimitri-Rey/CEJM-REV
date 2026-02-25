@@ -401,6 +401,38 @@
                             <div class="chapter-number chapter-number-maths">M1</div>
                             <h3>Bases numériques</h3>
                             <p>Binaire, hexadécimal, octal · Conversions · Division euclidienne · Modulo</p>
+                            <div class="course-toggle">
+                                <button class="btn-course" id="course-btn-maths-m1" onclick="toggleCourse('maths-m1')">Voir le cours</button>
+                                <div class="course-content hidden" id="course-content-maths-m1">
+                                    <h4>Systèmes de numération</h4>
+                                    <ul>
+                                        <li><strong>Binaire (base 2)</strong> : chiffres 0 et 1. Chaque position = puissance de 2</li>
+                                        <li><strong>Octal (base 8)</strong> : chiffres 0-7. Grouper les bits par 3</li>
+                                        <li><strong>Hexadécimal (base 16)</strong> : 0-9 puis A=10, B=11... F=15. Grouper par 4 bits</li>
+                                    </ul>
+                                    <h4>Conversions</h4>
+                                    <div class="course-formula-block">Décimal → Base b : divisions successives par b, lire les restes de bas en haut
+Base b → Décimal : somme des (chiffre × b^position)</div>
+                                    <ul>
+                                        <li>Exemple : <span class="course-formula">1010₂ = 1×8 + 0×4 + 1×2 + 0×1 = 10</span></li>
+                                        <li>Exemple : <span class="course-formula">0xFF = 15×16 + 15 = 255</span></li>
+                                    </ul>
+                                    <h4>Division euclidienne & Modulo</h4>
+                                    <div class="course-formula-block">a = b × q + r   (avec 0 ≤ r < b)
+a mod b = r (le reste)
+Exemple : 17 = 5 × 3 + 2 → 17 mod 5 = 2</div>
+                                    <h4>PGCD & PPCM</h4>
+                                    <ul>
+                                        <li><strong>PGCD</strong> (algorithme d'Euclide) : diviser le plus grand par le plus petit, recommencer avec le reste, jusqu'à reste = 0</li>
+                                        <li><span class="course-formula">PPCM(a,b) = (a × b) / PGCD(a,b)</span></li>
+                                    </ul>
+                                    <h4>Nombres premiers & Congruences</h4>
+                                    <ul>
+                                        <li>Premier = divisible uniquement par 1 et lui-même (2, 3, 5, 7, 11...)</li>
+                                        <li><span class="course-formula">a ≡ b [n]</span> signifie que n divise (a − b), ou a mod n = b mod n</li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="chapter-actions">
                                 <button class="btn btn-maths-primary" onclick="startQuiz('maths-m1', 'knowledge')">
                                     Quiz Connaissances
@@ -415,6 +447,37 @@
                             <div class="chapter-number chapter-number-maths">M2</div>
                             <h3>Logique booléenne</h3>
                             <p>Tables de vérité · AND/OR/NOT/XOR · Lois De Morgan · Applications ACL</p>
+                            <div class="course-toggle">
+                                <button class="btn-course" id="course-btn-maths-m2" onclick="toggleCourse('maths-m2')">Voir le cours</button>
+                                <div class="course-content hidden" id="course-content-maths-m2">
+                                    <h4>Opérations logiques</h4>
+                                    <div class="course-formula-block">AND (·)  : 1 seulement si les DEUX sont 1
+OR  (+)  : 1 si AU MOINS UN est 1
+NOT (¬)  : inverse (0→1, 1→0)
+XOR (⊕)  : 1 si UN SEUL est 1 (différent)
+NAND     : inverse de AND
+NOR      : inverse de OR</div>
+                                    <h4>Lois de De Morgan</h4>
+                                    <div class="course-formula-block">¬(A · B) = ¬A + ¬B  (NOT AND = OR des NOT)
+¬(A + B) = ¬A · ¬B  (NOT OR = AND des NOT)</div>
+                                    <ul>
+                                        <li>Astuce : on casse la barre, on change l'opérateur</li>
+                                    </ul>
+                                    <h4>Propriétés utiles</h4>
+                                    <ul>
+                                        <li><strong>Absorption</strong> : <span class="course-formula">A + A·B = A</span> et <span class="course-formula">A · (A+B) = A</span></li>
+                                        <li><strong>Idempotence</strong> : A + A = A, A · A = A</li>
+                                        <li><strong>Complémentarité</strong> : A + ¬A = 1, A · ¬A = 0</li>
+                                    </ul>
+                                    <h4>Tableau de Karnaugh</h4>
+                                    <ul>
+                                        <li>Outil graphique pour simplifier les expressions booléennes</li>
+                                        <li>Regrouper les 1 adjacents par paquets de 1, 2, 4, 8 (puissances de 2)</li>
+                                        <li>Les groupes s'enroulent (bords gauche/droite et haut/bas connectés)</li>
+                                        <li>Plus le groupe est grand, plus l'expression est simplifiée</li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="chapter-actions">
                                 <button class="btn btn-maths-primary" onclick="startQuiz('maths-m2', 'knowledge')">
                                     Quiz Connaissances
@@ -429,6 +492,35 @@
                             <div class="chapter-number chapter-number-maths">M3</div>
                             <h3>Subnetting & Masques</h3>
                             <p>CIDR · Adresse réseau (AND) · Nombre d'hôtes · Broadcast · Classes IP</p>
+                            <div class="course-toggle">
+                                <button class="btn-course" id="course-btn-maths-m3" onclick="toggleCourse('maths-m3')">Voir le cours</button>
+                                <div class="course-content hidden" id="course-content-maths-m3">
+                                    <h4>Adresse IP & Masque</h4>
+                                    <ul>
+                                        <li>IPv4 = 32 bits = 4 octets (ex: 192.168.1.100)</li>
+                                        <li>Masque = sépare partie réseau (bits à 1) et partie hôte (bits à 0)</li>
+                                        <li>CIDR /24 = 24 bits réseau = masque 255.255.255.0</li>
+                                    </ul>
+                                    <h4>Calculs fondamentaux</h4>
+                                    <div class="course-formula-block">Adresse réseau  = IP AND Masque
+Broadcast       = Adresse réseau OR (NOT Masque)
+Nb d'hôtes      = 2^(32−n) − 2  (n = préfixe CIDR)
+1re adresse     = adresse réseau + 1
+Dernière adresse = broadcast − 1</div>
+                                    <h4>VLSM (découpage en sous-réseaux)</h4>
+                                    <ul>
+                                        <li>Trier les sous-réseaux du plus grand au plus petit</li>
+                                        <li>Allouer le bon masque pour chaque besoin</li>
+                                        <li>Le sous-réseau suivant commence après le broadcast du précédent</li>
+                                    </ul>
+                                    <h4>Wildcard & Classes IP</h4>
+                                    <ul>
+                                        <li><span class="course-formula">Wildcard = 255.255.255.255 − Masque</span> (utilisé dans les ACL Cisco)</li>
+                                        <li>Classe A : 1.0.0.0 → 126.x.x.x (/8), Classe B : 128.0.0.0 → 191.x.x.x (/16), Classe C : 192.0.0.0 → 223.x.x.x (/24)</li>
+                                        <li>Privées : 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16</li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="chapter-actions">
                                 <button class="btn btn-maths-primary" onclick="startQuiz('maths-m3', 'knowledge')">
                                     Quiz Connaissances
@@ -443,6 +535,33 @@
                             <div class="chapter-number chapter-number-maths">M4</div>
                             <h3>Probabilités & Statistiques</h3>
                             <p>Probabilité conditionnelle · Loi binomiale · Fiabilité des systèmes</p>
+                            <div class="course-toggle">
+                                <button class="btn-course" id="course-btn-maths-m4" onclick="toggleCourse('maths-m4')">Voir le cours</button>
+                                <div class="course-content hidden" id="course-content-maths-m4">
+                                    <h4>Probabilités de base</h4>
+                                    <div class="course-formula-block">P(A) = nb cas favorables / nb cas total
+P(A ∪ B) = P(A) + P(B) − P(A ∩ B)
+P(contraire de A) = 1 − P(A)</div>
+                                    <h4>Probabilité conditionnelle & Bayes</h4>
+                                    <div class="course-formula-block">P(A|B) = P(A ∩ B) / P(B)
+P(A ∩ B) = P(A) × P(B|A)
+Bayes : P(A|B) = P(B|A) × P(A) / P(B)</div>
+                                    <ul>
+                                        <li>Utiliser un arbre de probabilités pour visualiser les branches</li>
+                                    </ul>
+                                    <h4>Loi binomiale</h4>
+                                    <div class="course-formula-block">P(X = k) = C(n,k) × p^k × (1−p)^(n−k)
+C(n,k) = n! / (k! × (n−k)!)
+Espérance E(X) = n × p
+Écart-type σ = √(n × p × (1−p))</div>
+                                    <h4>Fiabilité des systèmes (RAID, SLA)</h4>
+                                    <ul>
+                                        <li><strong>Série</strong> : <span class="course-formula">R = R1 × R2 × ... × Rn</span> (tout doit marcher)</li>
+                                        <li><strong>Parallèle</strong> : <span class="course-formula">R = 1 − (1−R1)(1−R2)...(1−Rn)</span> (un seul suffit)</li>
+                                        <li>SLA 99.9% = 8h45 d'arrêt/an, 99.99% = 52min/an</li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="chapter-actions">
                                 <button class="btn btn-maths-primary" onclick="startQuiz('maths-m4', 'knowledge')">
                                     Quiz Connaissances
@@ -457,6 +576,35 @@
                             <div class="chapter-number chapter-number-maths">M5</div>
                             <h3>Suites numériques</h3>
                             <p>Suites arithmétiques & géométriques · Terme général · Applications DDoS</p>
+                            <div class="course-toggle">
+                                <button class="btn-course" id="course-btn-maths-m5" onclick="toggleCourse('maths-m5')">Voir le cours</button>
+                                <div class="course-content hidden" id="course-content-maths-m5">
+                                    <h4>Suite arithmétique (raison r)</h4>
+                                    <div class="course-formula-block">u(n) = u(0) + n × r
+u(n) = u(p) + (n−p) × r
+Somme des n premiers termes :
+S = n × (u(1) + u(n)) / 2</div>
+                                    <ul>
+                                        <li>r > 0 : croissante, r < 0 : décroissante</li>
+                                        <li>Chaque terme = précédent + r (ajout constant)</li>
+                                    </ul>
+                                    <h4>Suite géométrique (raison q)</h4>
+                                    <div class="course-formula-block">u(n) = u(0) × q^n
+u(n) = u(p) × q^(n−p)
+Somme des n premiers termes :
+S = u(1) × (1 − q^n) / (1 − q)  si q ≠ 1</div>
+                                    <ul>
+                                        <li>q > 1 : croissance exponentielle (ex: propagation virus)</li>
+                                        <li>0 < q < 1 : décroissance (ex: dépréciation matériel)</li>
+                                    </ul>
+                                    <h4>Applications IT</h4>
+                                    <ul>
+                                        <li><strong>Dépréciation</strong> : valeur × 0.8 chaque année → suite géo q=0.8</li>
+                                        <li><strong>DDoS</strong> : chaque bot recrute 2 bots → suite géo q=2</li>
+                                        <li><strong>Intérêts composés</strong> : capital × (1+taux)^n</li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="chapter-actions">
                                 <button class="btn btn-maths-primary" onclick="startQuiz('maths-m5', 'knowledge')">
                                     Quiz Connaissances
@@ -471,6 +619,40 @@
                             <div class="chapter-number chapter-number-maths">M6</div>
                             <h3>Algorithmique & Complexité</h3>
                             <p>Complexité O(n) · Tris · Structures de données · Pseudo-code</p>
+                            <div class="course-toggle">
+                                <button class="btn-course" id="course-btn-maths-m6" onclick="toggleCourse('maths-m6')">Voir le cours</button>
+                                <div class="course-content hidden" id="course-content-maths-m6">
+                                    <h4>Types de données</h4>
+                                    <ul>
+                                        <li><strong>Entier</strong> (int), <strong>Réel</strong> (float/double), <strong>Booléen</strong> (bool), <strong>Caractère</strong> (char), <strong>Chaîne</strong> (string)</li>
+                                        <li><strong>Tableau</strong> : collection indexée (accès O(1) par indice)</li>
+                                    </ul>
+                                    <h4>Structures de contrôle</h4>
+                                    <div class="course-formula-block">SI condition ALORS ... SINON ... FINSI
+POUR i DE 0 A n FAIRE ... FINPOUR
+TANT QUE condition FAIRE ... FINTANTQUE</div>
+                                    <h4>Fonctions vs Procédures</h4>
+                                    <ul>
+                                        <li><strong>Fonction</strong> : retourne une valeur (return)</li>
+                                        <li><strong>Procédure</strong> : exécute une action, ne retourne rien (void)</li>
+                                        <li>Passage par valeur (copie) vs par référence (modifie l'original)</li>
+                                    </ul>
+                                    <h4>Complexité algorithmique</h4>
+                                    <div class="course-formula-block">O(1)       : constant (accès tableau)
+O(log n)   : logarithmique (recherche dichotomique)
+O(n)       : linéaire (parcours simple)
+O(n log n) : quasi-linéaire (tri fusion)
+O(n²)      : quadratique (tri bulle, tri insertion)
+O(2^n)     : exponentiel (brute force)</div>
+                                    <h4>PERT & Chemin critique</h4>
+                                    <ul>
+                                        <li><strong>Date au plus tôt</strong> : max des dates de fin des prédécesseurs</li>
+                                        <li><strong>Date au plus tard</strong> : min des dates de début des successeurs − durée</li>
+                                        <li><strong>Marge</strong> = date au plus tard − date au plus tôt</li>
+                                        <li><strong>Chemin critique</strong> = tâches avec marge = 0 (pas de retard possible)</li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="chapter-actions">
                                 <button class="btn btn-maths-primary" onclick="startQuiz('maths-m6', 'knowledge')">
                                     Quiz Connaissances
@@ -547,6 +729,41 @@
                             tu les charges dans un plan thématique structuré.
                         </div>
                     </div>
+
+                    <!-- Catalogue des oeuvres -->
+                    <div class="oeuvres-catalog">
+                        <div class="oeuvres-catalog-header">
+                            <h3>Catalogue des oeuvres</h3>
+                            <p>Toutes les oeuvres du programme "Les animaux et nous" — clique pour voir le résumé</p>
+                        </div>
+                        <div class="oeuvres-filters">
+                            <div class="oeuvres-filter-group">
+                                <span class="filter-label">Catégorie</span>
+                                <div class="oeuvre-pills-row">
+                                    <button class="oeuvre-cat-pill active" data-category="all" onclick="filterOeuvresCategory('all', this)">Tout</button>
+                                    <button class="oeuvre-cat-pill" data-category="litterature" onclick="filterOeuvresCategory('litterature', this)">Littérature</button>
+                                    <button class="oeuvre-cat-pill" data-category="essai" onclick="filterOeuvresCategory('essai', this)">Essais</button>
+                                    <button class="oeuvre-cat-pill" data-category="film" onclick="filterOeuvresCategory('film', this)">Films</button>
+                                    <button class="oeuvre-cat-pill" data-category="bd" onclick="filterOeuvresCategory('bd', this)">BD</button>
+                                    <button class="oeuvre-cat-pill" data-category="art" onclick="filterOeuvresCategory('art', this)">Arts</button>
+                                    <button class="oeuvre-cat-pill" data-category="podcast" onclick="filterOeuvresCategory('podcast', this)">Podcasts</button>
+                                </div>
+                            </div>
+                            <div class="oeuvres-filter-group">
+                                <span class="filter-label">Difficulté</span>
+                                <div class="oeuvre-pills-row">
+                                    <button class="oeuvre-diff-pill active" data-difficulty="all" onclick="filterOeuvresDifficulty('all', this)">Tout</button>
+                                    <button class="oeuvre-diff-pill diff-facile-pill" data-difficulty="facile" onclick="filterOeuvresDifficulty('facile', this)">Facile</button>
+                                    <button class="oeuvre-diff-pill diff-moyen-pill" data-difficulty="moyen" onclick="filterOeuvresDifficulty('moyen', this)">Moyen</button>
+                                    <button class="oeuvre-diff-pill diff-difficile-pill" data-difficulty="difficile" onclick="filterOeuvresDifficulty('difficile', this)">Difficile</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oeuvres-count" id="oeuvres-count"></div>
+                        <div class="oeuvres-grid" id="oeuvres-grid"></div>
+                    </div>
+                    <!-- Modal oeuvre -->
+                    <div id="oeuvre-modal" class="hidden"></div>
                 </div>
             </div>
 
@@ -616,6 +833,7 @@
                     </div>
                     <span class="progress-text" id="progress-text"></span>
                 </div>
+                <button class="btn-calculator hidden" id="btn-calculator" onclick="toggleCalculator()">Calc</button>
                 <div class="quiz-score">
                     <span class="score-correct" id="score-correct">0</span> / <span id="score-total">0</span>
                 </div>
@@ -625,6 +843,22 @@
                     <div class="question-number" id="question-number"></div>
                     <p class="question-text" id="question-text"></p>
                     <div class="question-context" id="question-context"></div>
+                    <!-- Hint timer for maths -->
+                    <div class="hint-section hidden" id="hint-section">
+                        <div class="hint-timer" id="hint-timer">
+                            <span class="hint-timer-icon">&#9201;</span>
+                            <span class="hint-timer-label">Astuce dans</span>
+                            <span class="hint-timer-seconds" id="hint-seconds">30</span>
+                            <span class="hint-timer-label">s</span>
+                            <div class="hint-progress" style="position:absolute;bottom:0;left:0;right:0;">
+                                <div class="hint-progress-fill" id="hint-progress-fill"></div>
+                            </div>
+                        </div>
+                        <div class="hint-content hidden" id="hint-content">
+                            <div class="hint-content-header">Astuce</div>
+                            <p id="hint-text-content"></p>
+                        </div>
+                    </div>
                     <div class="options" id="options-container"></div>
                     <div class="explanation hidden" id="explanation">
                         <div class="explanation-icon" id="explanation-icon"></div>
@@ -634,6 +868,46 @@
                 </div>
             </div>
         </section>
+
+        <!-- CALCULATOR WIDGET -->
+        <div id="calculator-widget" class="calculator hidden">
+            <div class="calc-header">
+                <span>Calculatrice BTS</span>
+                <button onclick="toggleCalculator()">&#10005;</button>
+            </div>
+            <div class="calc-screen">
+                <div class="calc-history" id="calc-history"></div>
+                <div class="calc-display" id="calc-display">0</div>
+            </div>
+            <div class="calc-buttons">
+                <button onclick="calcConvert('BIN')" class="calc-fn">BIN</button>
+                <button onclick="calcConvert('HEX')" class="calc-fn">HEX</button>
+                <button onclick="calcConvert('OCT')" class="calc-fn">OCT</button>
+                <button onclick="calcConvert('DEC')" class="calc-fn">DEC</button>
+                <button onclick="calcInput('7')">7</button>
+                <button onclick="calcInput('8')">8</button>
+                <button onclick="calcInput('9')">9</button>
+                <button onclick="calcInput('/')" class="calc-op">&divide;</button>
+                <button onclick="calcInput('4')">4</button>
+                <button onclick="calcInput('5')">5</button>
+                <button onclick="calcInput('6')">6</button>
+                <button onclick="calcInput('*')" class="calc-op">&times;</button>
+                <button onclick="calcInput('1')">1</button>
+                <button onclick="calcInput('2')">2</button>
+                <button onclick="calcInput('3')">3</button>
+                <button onclick="calcInput('-')" class="calc-op">&minus;</button>
+                <button onclick="calcInput('0')">0</button>
+                <button onclick="calcInput('.')">.</button>
+                <button onclick="calcInput('%')" class="calc-op">%</button>
+                <button onclick="calcInput('+')" class="calc-op">+</button>
+                <button onclick="calcInput('(')" class="calc-fn">(</button>
+                <button onclick="calcInput(')')" class="calc-fn">)</button>
+                <button onclick="calcBackspace()" class="calc-fn">&#9003;</button>
+                <button onclick="calcEquals()" class="calc-eq">=</button>
+                <button onclick="calcInput('^')" class="calc-fn">x^n</button>
+                <button onclick="calcClear()" class="calc-op" style="grid-column: span 3;">AC</button>
+            </div>
+        </div>
 
         <!-- RESULTS PAGE -->
         <section id="results-page" class="page">
@@ -690,6 +964,7 @@
     <script src="js/data-maths-m5.js"></script>
     <script src="js/data-maths-m6.js"></script>
     <!-- FRANÇAIS -->
+    <script src="js/oeuvres-catalog.js"></script>
     <script src="js/data-francais-f1.js"></script>
     <script src="js/data-francais-f2.js"></script>
     <script src="js/data-francais-f3.js"></script>
